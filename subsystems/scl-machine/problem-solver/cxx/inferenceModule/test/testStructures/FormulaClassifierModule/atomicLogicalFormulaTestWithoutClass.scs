@@ -1,7 +1,0 @@
-formula = [*
-    class1 _-> _res;;
-*];;
-
-formula_with_link = [*
-	class2 _-> _[content];;
-*];;
