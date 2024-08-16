@@ -13,7 +13,6 @@ nrel_short_solution
 	(* <- lang_en;; *);
 =>nrel_first_domain: concept_problem;
 =>nrel_second_domain: concept_problem_solution;
-=>nrel_definitional_domain: sc_arc_membership;
 <-rrel_key_sc_element:
 	...
 	(*
