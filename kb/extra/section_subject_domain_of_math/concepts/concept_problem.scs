@@ -1,0 +1,28 @@
+concept_problem
+<- sc_node_class;
+=> nrel_main_idtf:
+	[задача](* <- lang_ru;; *);
+	[problem](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (задача)](* <- lang_ru;; *);
+            [Def. (problem)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [задача - математическая задача по определенной теме.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [problem - mathematical problem on a specific topic.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_mathematics_theme
+            };;
+	*);;
