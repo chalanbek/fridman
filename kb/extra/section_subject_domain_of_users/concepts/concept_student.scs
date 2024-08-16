@@ -3,6 +3,7 @@ concept_student
 => nrel_main_idtf:
 	[ученик](* <- lang_ru;; *);
 	[student](* <- lang_en;; *);
+<= nrel_inclusion: concept_user;
 <- rrel_key_sc_element:
 	...
 	(*
@@ -14,7 +15,7 @@ concept_student
             ...
             (*
                 -> rrel_example:
-                    [ученик - пользователь, имеющий доступ к теории, а так к же к задачам и их решениям.](* <- lang_ru;; *);;
+                    [ученик - пользователь, имеющий доступ к теории, а также к задачам и их решениям.](* <- lang_ru;; *);;
             *);
             ...
             (*
