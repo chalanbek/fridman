@@ -14,8 +14,11 @@ section_subject_domain_of_math = [*
     -> rrel_not_maximum_studied_object_class:
         concept_problem_solution;
         concept_problem;
+        concept_hint;
+        concept_theory;
     -> rrel_explored_relation:
         nrel_complete_solution;
+        nrel_hint;
         nrel_short_solution;;
 *];;
 
@@ -39,6 +42,9 @@ rrel_key_sc_element -> (section_subject_domain_of_math -> subject_domain_of_math
 	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> nrel_complete_solution)
 (*
 	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> nrel_hint)
+(*
+	<- rrel_key_sc_element;;
 	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> nrel_short_solution)
 	(* <- rrel_key_sc_element;; *);;
-*);;*);;*);;*);;*);;
+*);;*);;*);;*);;*);;*);;
