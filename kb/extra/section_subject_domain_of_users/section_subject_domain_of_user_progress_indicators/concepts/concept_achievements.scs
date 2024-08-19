@@ -1,0 +1,29 @@
+concept_achievements
+<- sc_node_class;
+=> nrel_main_idtf:
+	[достижения](* <- lang_ru;; *);
+	[achievements](* <- lang_en;; *);
+<= nrel_inclusion: concept_statistical_indicator;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (достижения)](* <- lang_ru;; *);
+            [Def. (achievements)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [достижения - достижения, получаемые пользователем по мере пользования системой.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [achievements - the achievements a user gains as he or she uses the system.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_statistical_indicator
+            };;
+	*);;

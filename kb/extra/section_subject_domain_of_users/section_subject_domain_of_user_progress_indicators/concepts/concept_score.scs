@@ -1,0 +1,29 @@
+concept_score
+<- sc_node_class;
+=> nrel_main_idtf:
+	[балл](* <- lang_ru;; *);
+	[score](* <- lang_en;; *);
+//<= nrel_inclusion: concept_statistical_indicator;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (балл)](* <- lang_ru;; *);
+            [Def. (score)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [балл - балл, получаемый за задачу.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [score - task score.](* <- lang_en;; *);;
+            *);;
+        /*<= nrel_using_constants:
+            {
+                concept_statistical_indicator
+            };;*/
+	*);;
