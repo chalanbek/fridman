@@ -1,0 +1,28 @@
+concept_action
+<- sc_node_class;
+=> nrel_main_idtf:
+	[действие](* <- lang_ru;; *);
+	[action](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (действие)](* <- lang_ru;; *);
+            [Def. (action)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [действие - действие пользователя в системе.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [action - action of user in the system.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_user
+            };;
+	*);;

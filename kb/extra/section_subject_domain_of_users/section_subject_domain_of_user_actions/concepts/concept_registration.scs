@@ -1,0 +1,28 @@
+concept_registration
+<- sc_node_class;
+=> nrel_main_idtf:
+	[регистрация](* <- lang_ru;; *);
+	[registration](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (регистрация)](* <- lang_ru;; *);
+            [Def. (registration)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [регистрация - создание пользователем собственного профиля.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [registration - user creation of his own profile.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_user
+            };;
+	*);;
