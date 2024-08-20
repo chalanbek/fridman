@@ -19,7 +19,7 @@ concept_problem_solution
             ...
             (*
                 -> rrel_example:
-                    [problem solution - алгоритм решения задачи.](* <- lang_en;; *);;
+                    [problem solution - algorithm for solving the problem.](* <- lang_en;; *);;
             *);;
         <= nrel_using_constants:
             {
