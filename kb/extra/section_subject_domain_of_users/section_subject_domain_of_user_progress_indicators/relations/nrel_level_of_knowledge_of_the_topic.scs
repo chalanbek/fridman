@@ -1,0 +1,47 @@
+nrel_level_of_knowledge_of_the_topic
+<-sc_node_norole_relation;
+<-relation;
+<-ternary_relation;
+<-oriented_relation;
+
+=>nrel_main_idtf:
+  [уровень знаний по теме*]
+  (* <- lang_ru;; *);
+  [level of knowledge of the topic*]
+  (* <- lang_en;; *);
+=>nrel_first_domain: concept_user;
+=>nrel_second_domain: 
+ ...
+ (*
+  <= nrel_inclusion: pair_set_topic_level;;
+ *);
+
+<-rrel_key_sc_element:
+  ...
+  (*
+  => nrel_main_idtf:
+    [Опр. (уровень знаний по теме*)]
+    (* <- lang_ru;; *);
+    [Def. (level of knowledge of the topic*)]
+    (* <- lang_en;; *);;
+  <- definition;;
+  <= nrel_sc_text_translation:
+    ...
+    (*
+    -> rrel_example:
+      [уровень знаний по теме* - отношение, тему и уровень знаний пользователя в этой теме.]
+      (* <- lang_ru;; *);;
+    *);
+    ...
+    (*
+    -> rrel_example: 
+      [level of knowledge of the topic* is a relationship, that connects topic and users level of knowledge in this topic.]
+      (* <- lang_en;; *);;
+    *);;
+  <= nrel_using_constants:
+    {
+    concept_user;
+    concept_mathematics_theme;
+    concept_knowledge_level
+    };;
+  *);;
