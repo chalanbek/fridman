@@ -1,0 +1,9 @@
+example_problem
+<- concept_wit_entity;
+=> nrel_main_idtf:
+    [пример задачи]
+        (* <- lang_ru;; *);
+    [example problem]
+        (* <- lang_en;; *);
+
+=> nrel_problem_number: [2](* <- concept_problem_number;; *);;
