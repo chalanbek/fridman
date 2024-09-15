@@ -95,11 +95,30 @@ class AgentGetProblemText(ScAgentClassic):
             result = results[0]
             problem_addr = result.get('_problem')
 
+            nrel_problem_text = ScKeynodes.resolve('nrel_problem_text', sc_types.NODE_CONST_NOROLE)
+
+            template = ScTemplate()
+            template.triple_with_relation(
+                problem_addr,
+                sc_types.EDGE_D_COMMON_VAR,
+                (sc_types.LINK_VAR, '_problem_text'),
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_problem_text
+            )
+
+            results = template_search(template)
+            if len(results) == 0:
+                self.logger.error('AgentGetProblemText: there are no text problem with such problem number')
+                return ScResult.ERROR
+
+            result = results[0]
+            problem_text_addr = result.get('_problem_text')
+
         except Exception as e:
             self.logger.info(f"AgentGetProblemText: finished with an error {e}")
             return ScResult.ERROR
 
-        create_action_answer(action_node, problem_addr)
+        create_action_answer(action_node, problem_text_addr)
 
         return ScResult.OK
         
