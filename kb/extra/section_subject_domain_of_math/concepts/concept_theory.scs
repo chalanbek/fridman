@@ -23,6 +23,6 @@ concept_theory
             *);;
         <= nrel_using_constants:
             {
-                concept_mathematics_theme
+                concept_math_topic
             };;
 	*);;

@@ -1,4 +1,4 @@
-nrel_level_of_knowledge_of_the_topic
+nrel_level_of_knowledge_of_topic
 <-sc_node_norole_relation;
 <-relation;
 <-ternary_relation;
@@ -41,7 +41,7 @@ nrel_level_of_knowledge_of_the_topic
   <= nrel_using_constants:
     {
     concept_user;
-    concept_mathematics_theme;
+    concept_math_topic;
     concept_knowledge_level
     };;
   *);;

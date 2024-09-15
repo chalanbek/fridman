@@ -18,7 +18,7 @@ section_subject_domain_of_user_progress_indicators = [*
         concept_rating;
     -> rrel_explored_relation:
         nrel_activity;
-        nrel_level_of_knowledge_of_the_topic;
+        nrel_level_of_knowledge_of_topic;
         nrel_score_for_the_level_of_solved_problems;
         nrel_solution_scores;;
 *];;

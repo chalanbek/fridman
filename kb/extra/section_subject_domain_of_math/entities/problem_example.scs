@@ -1,4 +1,4 @@
-example_problem
+problem_example
 <- concept_wit_entity;
 => nrel_main_idtf:
     [пример задачи]
@@ -6,4 +6,6 @@ example_problem
     [example problem]
         (* <- lang_en;; *);
 
-=> nrel_problem_number: [2](* <- concept_problem_number;; *);;
+=> nrel_problem_number: [2](* <- concept_problem_number;; *);
+=> nrel_problem_text: [пример условия задачи](* <- concept_problem_text;; *);;
+
