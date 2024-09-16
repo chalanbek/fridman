@@ -27,6 +27,8 @@ section_subject_domain_of_users = [*
         nrel_task_archive;
         nrel_theorem_archive;
         nrel_theorem_archive;
+        nrel_solved_problems;
+        nrel_not_solved_problems;
         nrel_users;;
 *];;
 section_subject_domain_of_users <= nrel_section_decomposition:

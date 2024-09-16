@@ -18,6 +18,7 @@ section_subject_domain_of_math = [*
         concept_theory;
         concept_problem_number;
         concept_problem_text;
+        concept_attempts;
         concept_solution_answer;
     -> rrel_explored_relation:
         nrel_complete_solution;
@@ -25,6 +26,7 @@ section_subject_domain_of_math = [*
         nrel_problem_number;
         nrel_problem_text;
         nrel_solution_answer;
+        nrel_solution_attempts_number;
         nrel_short_solution;;
 *];;
 

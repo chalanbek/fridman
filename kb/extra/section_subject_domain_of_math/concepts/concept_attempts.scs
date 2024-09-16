@@ -1,0 +1,28 @@
+concept_attempts
+<- sc_node_class;
+=> nrel_main_idtf:
+	[попытки](* <- lang_ru;; *);
+	[attemps](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (попытки)](* <- lang_ru;; *);
+            [Def. (attemps)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [попытки - кол-во неудачных попыток при решении задачи.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [attemps - amount of unsuccesfull attemps of solving problem.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_problem
+            };;
+	*);;
