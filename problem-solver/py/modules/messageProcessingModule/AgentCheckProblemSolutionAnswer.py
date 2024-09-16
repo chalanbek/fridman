@@ -56,6 +56,32 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
             user_problem_solution_answer_addr = args[1]
             user_addr = args[2]
 
+            nrel_solved_problems = ScKeynodes.resolve('nrel_solved_problems', sc_types.NODE_CONST_NOROLE)
+            template = ScTemplate()
+            template.triple_with_relation(
+                user_addr,
+                sc_types.EDGE_D_COMMON_VAR,
+                (sc_types.NODE_VAR_TUPLE, '_solved'),
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_solved_problems
+            )
+            results = template_search(template)
+            result = results[0]
+            solved_problems_addr = result.get('_solved')
+
+            nrel_not_solved_problems = ScKeynodes.resolve('nrel_not_solved_problems', sc_types.NODE_CONST_NOROLE)
+            template = ScTemplate()
+            template.triple_with_relation(
+                user_addr,
+                sc_types.EDGE_D_COMMON_VAR,
+                (sc_types.NODE_VAR_TUPLE, '_not_solved'),
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_not_solved_problems
+            )
+            results = template_search(template)
+            result = results[0]
+            not_solved_problems_addr = result.get('_not_solved')
+            
             if not problem_addr.is_valid() or not user_problem_solution_answer_addr.is_valid() or not user_addr.is_valid(): 
                 self.logger.error('AgentCheckProblemSolutionAnswer: there are no one of argument')
                 return ScResult.ERROR
@@ -80,12 +106,15 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
 
             result = results[0]
             problem_solution_answer = str(get_link_content_data(result.get('_problem_solution_answer'))).split(',')
+            
+            nrel_solution_attempts_number = ScKeynodes.resolve('nrel_solution_attempts_number', sc_types.NODE_CONST_NOROLE)
 
             if problem_solution_answer == user_problem_solution_answer:
                 return ScResult.OK
             else:
                 self.logger.error('AgentCheckProblemSolutionAnswer: the answer is incorrect')
                 return ScResult.ERROR
+            
             '''[links_with_problem_number] = get_links_by_content(problem_number)
             if len(links_with_problem_number) == 0:
                 self.logger.error('AgentCheckProblemSolutionAnswer: there are no problems with such problem number')
