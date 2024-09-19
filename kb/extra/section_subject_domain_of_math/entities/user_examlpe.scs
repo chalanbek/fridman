@@ -8,6 +8,6 @@ user_example
 
 <- concept_user;
 => nrel_solved_problems: .solved_tuple;
-.solved_tuple <- sc_type_node_tuple;
-=> nrel_not_solved_problems: .not_solved_tuple;
+=> nrel_not_solved_problems: .not_solved_tuple;;
 .not_solved_tuple <- sc_type_node_tuple;;
+.solved_tuple <- sc_type_node_tuple;;
