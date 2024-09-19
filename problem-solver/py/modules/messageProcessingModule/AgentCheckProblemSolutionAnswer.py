@@ -3,9 +3,9 @@ This code creates some test agent and registers until the user stops the process
 For this we wait for SIGINT.
 """
 import logging
-from sc_client.models import ScAddr, ScLinkContentType, ScTemplate
+from sc_client.models import ScAddr, ScLinkContentType, ScTemplate, SCs, ScConstruction
 from sc_client.constants import sc_types
-from sc_client.client import template_search, get_links_by_content
+from sc_client.client import template_search, get_links_by_content, create_elements_by_scs, create_elements
 
 from sc_kpm import ScAgentClassic, ScModule, ScResult, ScServer
 from sc_kpm.sc_sets import ScSet
@@ -109,12 +109,79 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
             
             nrel_solution_attempts_number = ScKeynodes.resolve('nrel_solution_attempts_number', sc_types.NODE_CONST_NOROLE)
 
-            if problem_solution_answer == user_problem_solution_answer:
-                return ScResult.OK
+            template = ScTemplate()
+            template.triple(
+                not_solved_problems_addr,
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                (sc_types.EDGE_D_COMMON_VAR, '_pair_problem_attempts_not_solved'),
+            )
+
+            results = template_search(template)
+            if len(results) == 0:
+                template1 = ScTemplate()
+                template1.triple(
+                solved_problems_addr,
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                (sc_types.EDGE_D_COMMON_VAR, '_pair_problem_attempts_solved'),
+                )
+                results1 = template_search(template1)
+                if len(results1) == 0:
+                    if problem_solution_answer == user_problem_solution_answer:
+                        '''construction = ScConstruction()  # Create output_struct for example
+                        construction.create_link(sc_types.LINK_CONST)
+                        output_struct = create_elements(construction)[0]
+                        
+                        res = create_elements_by_scs([SCs("problem => total_attempts;;", problem_addr, output_struct)])
+                        assert results == [True, True]'''
+                        #add the problem to solved, make the value of attempts "1", call the 3rd agent
+                        return ScResult.OK
+                    else:
+                        #add the problem to not solved, make the value of attempts "1", call the 3rd agent
+                        return ScResult.ERROR
+                else:
+                    for edge in results1:
+                        template2 = ScTemplate()
+                        template2.triple_with_relation(
+                        problem_addr,
+                        edge,
+                        (sc_types.LINK_VAR, '_attempts'),
+                        sc_types.EDGE_ACCESS_VAR_POS_PERM
+                        nrel_solution_attempts_number
+                        )
+                        results2 = template_search(template1)
+                        if len(results2) == 1:
+                            result2 = results2[0]
+                            attempts_addr = result2.get('_attempts')
+                            break
+                if problem_solution_answer == user_problem_solution_answer:
+                    #plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
+                    return ScResult.OK
+                else:
+                    #plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
+                    return ScResult.ERROR
             else:
-                self.logger.error('AgentCheckProblemSolutionAnswer: the answer is incorrect')
-                return ScResult.ERROR
-            
+                for edge in results:
+                    template1 = ScTemplate()
+                    template1.triple_with_relation(
+                    problem_addr,
+                    edge,
+                    (sc_types.LINK_VAR, '_attempts'),
+                    sc_types.EDGE_ACCESS_VAR_POS_PERM
+                    nrel_solution_attempts_number
+                    )
+                    results1 = template_search(template1)
+                    if len(results2) == 1:
+                        result1 = results1[0]
+                        attempts_addr = result.get('_attempts')
+                        break
+                    if problem_solution_answer == user_problem_solution_answer:
+                        #add the problem to solved, remove from not, plus "1" the total value of attempts (our attempts_addr), call the 3rd agent with meaning, that user solved the problem this time
+                        return ScResult.OK
+                    else:
+                        #plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
+                        return ScResult.ERROR
+
+
             '''[links_with_problem_number] = get_links_by_content(problem_number)
             if len(links_with_problem_number) == 0:
                 self.logger.error('AgentCheckProblemSolutionAnswer: there are no problems with such problem number')
