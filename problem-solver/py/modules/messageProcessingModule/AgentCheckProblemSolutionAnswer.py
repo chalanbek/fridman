@@ -110,20 +110,24 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
             nrel_solution_attempts_number = ScKeynodes.resolve('nrel_solution_attempts_number', sc_types.NODE_CONST_NOROLE)
 
             template = ScTemplate()
-            template.triple(
-                not_solved_problems_addr,
-                sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                (sc_types.EDGE_D_COMMON_VAR, '_pair_problem_attempts_not_solved'),
+            template.triple_with_relation(
+                problem_addr,
+                (sc_types.EDGE_D_COMMON_VAR, '_pair_problem_link'),
+                (sc_types.LINK_VAR, '_attempts'),
+                (sc_types.EDGE_ACCESS_VAR_POS_PERM,'_pair_not_solved_edge_'),
+                not_solved_problems_addr
             )
-
             results = template_search(template)
             if len(results) == 0:
                 template1 = ScTemplate()
-                template1.triple(
-                solved_problems_addr,
-                sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                (sc_types.EDGE_D_COMMON_VAR, '_pair_problem_attempts_solved'),
+                template1.triple_with_relation(
+                    problem_addr,
+                    sc_types.EDGE_D_COMMON_VAR,
+                    (sc_types.LINK_VAR, '_attempts1'),
+                    sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                    solved_problems_addr
                 )
+
                 results1 = template_search(template1)
                 if len(results1) == 0:
                     #creating the structure
@@ -151,69 +155,30 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                         else:
                             raise
                 else:
-                    for edge in results1:
-                        template2 = ScTemplate()
-                        template2.triple_with_relation(
-                        problem_addr,
-                        edge.get('_pair_problem_attempts_solved'),
-                        (sc_types.LINK_VAR, '_attempts'),
-                        sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                        nrel_solution_attempts_number
-                        )
-                        results2 = template_search(template1)
-                        if len(results2) == 1:
-                            result2 = results2[0]
-                            attempts_addr = result2.get('_attempts')
-                            break
-
+                    result1 = results1[0]
+                    attempts_addr = result1.get('_attempts1')
                     if problem_solution_answer == user_problem_solution_answer:
                         #plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
-                        link_content = get_link_content(attempts_addr)[0]
-                        link_content2 = ScLinkContent(int(link_content.data)+1, ScLinkContentType.INT, attempts_addr)
-                        set_link_contents(link_content2)
-                        
+                        self.update_link(attempts_addr=attempts_addr)
                         return ScResult.OK
                     else:
                         #plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
-                        link_content = get_link_content(attempts_addr)[0]
-                        link_content2 = ScLinkContent(int(link_content.data)+1, ScLinkContentType.INT, attempts_addr)
-                        set_link_contents(link_content2)
+                        self.update_link(attempts_addr=attempts_addr)
                         return ScResult.ERROR
             else:
-                for edge in results:
-                    template1 = ScTemplate()
-                    template1.triple_with_relation(
-                    problem_addr,
-                    edge.get('_pair_problem_attempts_not_solved'),
-                    (sc_types.LINK_VAR, '_attempts'),
-                    sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                    nrel_solution_attempts_number
-                    )
-                    results1 = template_search(template1)
-                    if len(results1) == 1:
-                        result1 = results1[0]
-                        attempts_addr = result1.get('_attempts')
-                        edge_ = edge.get('_pair_problem_attempts_not_solved')
-                        break
+                result = results[0]
+                attempts_addr = result.get('_attempts')
                 if problem_solution_answer == user_problem_solution_answer:
                     #add the problem to solved, remove from not, plus "1" the total value of attempts (our attempts_addr), call the 3rd agent with meaning, that user solved the problem this time
-                    link_content = get_link_content(attempts_addr)[0]
-                    link_content2 = ScLinkContent(int(link_content.data)+1, ScLinkContentType.INT, attempts_addr)
-                    set_link_contents(link_content2)
+                    self.update_link(attempts_addr=attempts_addr)
 
-                    template3 = ScTemplate()
-                    template3.triple(
-                    not_solved_problems_addr,
-                    (sc_types.EDGE_ACCESS_VAR_POS_PERM, '_pair_not_solved_edge_'),
-                    edge_,
-                    )
-                    results3 = template_search(template3)
-                    result3 = results3[0]
-                    pair_not_solved_edge_ = result3.get('_pair_not_solved_edge_')
+                    pair_not_solved_edge_ = result.get('_pair_not_solved_edge_')
+                    pair_problem_link = result.get('_pair_problem_link')
+
                     delete_elements(pair_not_solved_edge_)
 
                     construction = ScConstruction()
-                    construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, solved_problems_addr, edge_)
+                    construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, solved_problems_addr, pair_problem_link)
                     addrs = create_elements(construction)
                     if len(addrs) == 1:
                         return ScResult.OK
@@ -221,15 +186,14 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                         raise
                 else:
                     #plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
-                    link_content = get_link_content(attempts_addr)[0]
-                    link_content2 = ScLinkContent(int(link_content.data)+1, ScLinkContentType.INT, attempts_addr)
-                    set_link_contents(link_content2)
-                    return ScResult.ERROR
+                    self.update_link(attempts_addr=attempts_addr)
                         
         except Exception as e:
             self.logger.info(f"AgentCheckProblemSolutionAnswer: finished with an error {e}")
             return ScResult.ERROR
-
-        #create_action_answer(action_node, problem_text_addr)
-        #return ScResult.OK
+        
+    def update_link(self, attempts_addr):
+        link_content = get_link_content(attempts_addr)[0]
+        link_content2 = ScLinkContent(int(link_content.data)+1, ScLinkContentType.INT, attempts_addr)
+        set_link_contents(link_content2)
         
