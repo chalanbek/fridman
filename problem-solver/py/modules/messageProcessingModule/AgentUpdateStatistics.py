@@ -161,3 +161,6 @@ class AgentUpdateStatistics(ScAgentClassic):
             return ScResult.ERROR
 
         return ScResult.OK
+    
+    """
+    """
