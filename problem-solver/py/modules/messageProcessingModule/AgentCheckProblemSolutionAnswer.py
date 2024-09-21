@@ -3,7 +3,7 @@ This code creates some test agent and registers until the user stops the process
 For this we wait for SIGINT.
 """
 import logging
-from sc_client.models import ScAddr, ScLinkContentType, ScTemplate, ScLinkContent, ScAddr, ScConstruction
+from sc_client.models import ScAddr, ScLinkContentType, ScTemplate, ScLinkContent, ScAddr, ScConstruction, 
 from sc_client.constants import sc_types
 from sc_client.client import template_search, get_links_by_content, create_elements_by_scs, create_elements, set_link_contents, get_link_content, delete_elements
 
@@ -143,6 +143,7 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                         construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, solved_problems_addr, 'problem_attempts_edge')
                         addrs = create_elements(construction)
                         if len(addrs) == 4:
+                            self.call_agent_update_user_kowledge_level(user_addr=user_addr, problem_addr=problem_addr)
                             return ScResult.OK
                         else:
                             raise
@@ -151,6 +152,7 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                         construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, not_solved_problems_addr, 'problem_attempts_edge')
                         addrs = create_elements(construction)
                         if len(addrs) == 4:
+                            self.call_agent_update_user_kowledge_level(user_addr=user_addr, problem_addr=problem_addr)
                             return ScResult.ERROR
                         else:
                             raise
@@ -158,18 +160,18 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                     result1 = results1[0]
                     attempts_addr = result1.get('_attempts1')
                     if problem_solution_answer == user_problem_solution_answer:
-                        #plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
+                        #plus "1" the total value of attempts (our attempts_addr)
                         self.update_link(attempts_addr=attempts_addr)
                         return ScResult.OK
                     else:
-                        #plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
+                        #plus "1" the total value of attempts (our attempts_addr)
                         self.update_link(attempts_addr=attempts_addr)
                         return ScResult.ERROR
             else:
                 result = results[0]
                 attempts_addr = result.get('_attempts')
                 if problem_solution_answer == user_problem_solution_answer:
-                    #add the problem to solved, remove from not, plus "1" the total value of attempts (our attempts_addr), call the 3rd agent with meaning, that user solved the problem this time
+                    #add the problem to solved, remove from not, plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
                     self.update_link(attempts_addr=attempts_addr)
 
                     pair_not_solved_edge_ = result.get('_pair_not_solved_edge_')
@@ -181,12 +183,14 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                     construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, solved_problems_addr, pair_problem_link)
                     addrs = create_elements(construction)
                     if len(addrs) == 1:
+                        self.call_agent_update_user_kowledge_level(user_addr=user_addr, problem_addr=problem_addr)
                         return ScResult.OK
                     else:
                         raise
                 else:
-                    #plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
+                    #plus "1" the total value of attempts (our attempts_addr)
                     self.update_link(attempts_addr=attempts_addr)
+                    return ScResult.ERROR
                         
         except Exception as e:
             self.logger.info(f"AgentCheckProblemSolutionAnswer: finished with an error {e}")
@@ -196,4 +200,22 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
         link_content = get_link_content(attempts_addr)[0]
         link_content2 = ScLinkContent(int(link_content.data)+1, ScLinkContentType.INT, attempts_addr)
         set_link_contents(link_content2)
-        
+    
+    def call_agent_update_user_kowledge_level(self, user_addr, problem_addr):
+        construction = ScConstruction()
+        construction.create_node(sc_types.NODE_CONST, 'node')
+
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, 'node', user_addr, 'user_edge')
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, 'node', problem_addr,'problem_edge')
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('rrel_1', sc_types.NODE_CONST_ROLE), 'user_edge')
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('rrel_2', sc_types.NODE_CONST_ROLE), 'problem_edge')
+
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('question', sc_types.NODE_CONST_CLASS), 'node')
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('action_update_user_knowledge_level', sc_types.NODE_CONST_CLASS), 'node')
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('question_initiated', sc_types.NODE_CONST_CLASS), 'node')
+
+        addrs = create_elements(construction)
+        if len(addrs) == 8:
+            return ScResult.OK
+        else:
+            raise
