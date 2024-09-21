@@ -76,6 +76,8 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             result = results[0]
             pair_topic_level_addr = result.get('_pair_topic_level')
 
+            rrel_problem_topic = ScKeynodes.resolve('rrel_problem_topic', sc_types.NODE_CONST_NOROLE)
+
             template = ScTemplate()
             template.triple_with_relation(
                 sc_types.NODE_VAR >> '_topic',
@@ -100,28 +102,59 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             knowledge_level_link = result.get('_knowledge_level')
             knowledge_level = get_link_content_data(knowledge_level_link)
 
-            """
-            ну короче вот тут вот уровень сложности искать от класса школьного вот
-
-            """
+            nrel_level_within_grade = ScKeynodes.resolve('nrel_level_within_grade', sc_types.NODE_CONST_NOROLE)
 
             template = ScTemplate()
             template.triple_with_relation(
                 task_addr,
                 sc_types.EDGE_D_COMMON_VAR,
+                sc_types.EDGE_D_COMMON_VAR >> '_grade_level_pair',
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_level_within_grade
+            )
+
+            results = template_search(template)
+            result = results[0]
+            grade_level_pair_link = result.get('_grade_level_pair')
+            grade_level_pair = get_link_content_data(grade_level_pair_link)
+
+            nrel_grade = ScKeynodes.resolve('nrel_grade', sc_types.NODE_CONST_NOROLE)
+
+            template = ScTemplate()
+            template.triple_with_relation(
+                user_addr,
+                sc_types.EDGE_D_COMMON_VAR,
+                sc_types.LINK_VAR >> '_user_grade',
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_grade
+            )
+
+            results = template_search(template)
+            result = results[0]
+            user_grade_link = result.get('_user_grade')
+            user_grade = get_link_content_data(user_grade_link)
+
+            nrel_grade_complexity_level = ScKeynodes.resolve('nrel_grade_complexity_level', sc_types.NODE_CONST_NOROLE)
+
+            template = ScTemplate()
+            template.triple_with_relation(
+                user_grade,
+                grade_level_pair,
                 sc_types.LINK_VAR >> '_complexity_level',
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                nrel_complexity_level
+                nrel_grade_complexity_level
             )
 
             results = template_search(template)
             result = results[0]
             complexity_level_link = result.get('_complexity_level')
             complexity_level = get_link_content_data(complexity_level_link)
+
             task_count_coefficient = 20.0
             knowledge_level_coefficient = 2.0
             knowledge_level_rounded = round(knowledge_level)
             
+             
 
 
             """
