@@ -3,9 +3,9 @@ This code creates some test agent and registers until the user stops the process
 For this we wait for SIGINT.
 """
 import logging
-from sc_client.models import ScAddr, ScLinkContentType, ScTemplate
+from sc_client.models import ScAddr, ScLinkContentType, ScTemplate, ScLinkContent, ScConstruction
 from sc_client.constants import sc_types
-from sc_client.client import template_search, get_links_by_content
+from sc_client.client import template_search, get_links_by_content, set_link_contents, create_elements, delete_elements
 
 from sc_kpm import ScAgentClassic, ScModule, ScResult, ScServer
 from sc_kpm.sc_sets import ScSet
@@ -99,8 +99,8 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             )
             results = template_search(template) 
             result = results[0]
-            knowledge_level_link = result.get('_knowledge_level')
-            knowledge_level = get_link_content_data(knowledge_level_link)
+            knowledge_level_addr = result.get('_knowledge_level')
+            knowledge_level = get_link_content_data(knowledge_level_addr)
 
             nrel_level_within_grade = ScKeynodes.resolve('nrel_level_within_grade', sc_types.NODE_CONST_NOROLE)
 
@@ -115,8 +115,7 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
 
             results = template_search(template)
             result = results[0]
-            grade_level_pair_link = result.get('_grade_level_pair')
-            grade_level_pair = get_link_content_data(grade_level_pair_link)
+            grade_level_pair_addr = result.get('_grade_level_pair')
 
             nrel_grade = ScKeynodes.resolve('nrel_grade', sc_types.NODE_CONST_NOROLE)
 
@@ -139,7 +138,7 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             template = ScTemplate()
             template.triple_with_relation(
                 user_grade,
-                grade_level_pair,
+                grade_level_pair_addr,
                 sc_types.LINK_VAR >> '_complexity_level',
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
                 nrel_grade_complexity_level
@@ -154,18 +153,88 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             knowledge_level_coefficient = 2.0
             knowledge_level_rounded = round(knowledge_level)
             
-             
+            nrel_solved_problems = ScKeynodes.resolve('nrel_solved_problems', sc_types.NODE_CONST_NOROLE)
+            template = ScTemplate()
+            template.triple_with_relation(
+                user_addr,
+                sc_types.EDGE_D_COMMON_VAR,
+                (sc_types.NODE_VAR_TUPLE, '_solved'),
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_solved_problems
+            )
+            results = template_search(template)
+            result = results[0]
+            solved_problems_addr = result.get('_solved')
 
+            nrel_not_solved_problems = ScKeynodes.resolve('nrel_not_solved_problems', sc_types.NODE_CONST_NOROLE)
+            template = ScTemplate()
+            template.triple_with_relation(
+                user_addr,
+                sc_types.EDGE_D_COMMON_VAR,
+                (sc_types.NODE_VAR_TUPLE, '_not_solved'),
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_not_solved_problems
+            )
+            results = template_search(template)
+            result = results[0]
+            not_solved_problems_addr = result.get('_not_solved')
+             
+            template = ScTemplate()
+            template.triple_with_relation(
+                task_addr,
+                sc_types.EDGE_D_COMMON_VAR,
+                (sc_types.LINK_VAR, '_attempts'),
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                not_solved_problems_addr
+            )
+            results = template_search(template)
+
+            template1 = ScTemplate()
+            template1.triple_with_relation(
+                task_addr,
+                sc_types.EDGE_D_COMMON_VAR,
+                (sc_types.LINK_VAR, '_attempts1'),
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                solved_problems_addr
+            )
+            results1 = template_search(template1)
+
+            nrel_problem_for_which_level_is_reduced = ScKeynodes.resolve('nrel_problem_for_which_level_is_reduced', sc_types.NODE_CONST_NOROLE)
+            template2 = ScTemplate()
+            template2.triple_with_relation(
+                knowledge_level_addr,
+                (sc_types.EDGE_D_COMMON_VAR, 'level_problem_edge_'),
+                task_addr,
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_problem_for_which_level_is_reduced
+            )
+            results2 = template_search(template2)
+
+            if len(results1) == 1:
+                knowledge_level = knowledge_level + (1/task_count_coefficient)*(knowledge_level_coefficient**(complexity_level-knowledge_level_rounded))
+                if len(results2) == 1:
+                    result2 = results2[0]
+                    level_problem_edge = result2.get('level_problem_edge_')
+                    delete_elements(level_problem_edge)
+            elif len(results) == 1 and knowledge_level_rounded >= complexity_level and len(results2) == 0:
+                knowledge_level = knowledge_level - (1/task_count_coefficient)*(knowledge_level_coefficient**(knowledge_level_rounded-complexity_level))
+                construction = ScConstruction()
+                construction.create_edge(sc_types.EDGE_D_COMMON_CONST, knowledge_level_addr, task_addr, 'level_task_edge')
+                construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, nrel_problem_for_which_level_is_reduced, 'level_task_edge')
+                addrs = create_elements(construction)
+                if len(addrs) == 2:
+                    return ScResult.OK
+                else:
+                    raise
+            
 
             """
-
             knowledge_level = knowledge_level + (1/task_count_coefficient)*(knowledge_level_coefficient**(complexity_level-knowledge_level_rounded))
-            knowledge_level = knowledge_level + (1/task_count_coefficient)*(knowledge_level_coefficient**(knowledge_level_rounded-complexity_level))
-
+            knowledge_level = knowledge_level - (1/task_count_coefficient)*(knowledge_level_coefficient**(knowledge_level_rounded-complexity_level))
             """
             
-            link_content2 = ScLinkContent(knowledge_level, ScLinkContentType.FLOAT, knowledge_level_link)
-            status = set_link_contents(link_content2)
+            link_content2 = ScLinkContent(knowledge_level, ScLinkContentType.FLOAT, knowledge_level_addr)
+            set_link_contents(link_content2)
 
         except Exception as e:
             self.logger.info(f"AgentUpdateUserKnowledgeLevel: finished with an error {e}")
