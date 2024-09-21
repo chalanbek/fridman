@@ -3,7 +3,7 @@ This code creates some test agent and registers until the user stops the process
 For this we wait for SIGINT.
 """
 import logging
-from sc_client.models import ScAddr, ScLinkContentType, ScTemplate, ScLinkContent, ScAddr, ScConstruction, 
+from sc_client.models import ScAddr, ScLinkContentType, ScTemplate, ScLinkContent, ScAddr, ScConstruction
 from sc_client.constants import sc_types
 from sc_client.client import template_search, get_links_by_content, create_elements_by_scs, create_elements, set_link_contents, get_link_content, delete_elements
 
@@ -188,8 +188,9 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                     else:
                         raise
                 else:
-                    #plus "1" the total value of attempts (our attempts_addr)
+                    #plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
                     self.update_link(attempts_addr=attempts_addr)
+                    self.call_agent_update_user_kowledge_level(user_addr=user_addr, problem_addr=problem_addr)
                     return ScResult.ERROR
                         
         except Exception as e:
