@@ -51,8 +51,12 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
         self.logger.info("AgentUpdateUserKnowledgeLevel started")
 
         try:
-            user_addr = get_action_arguments(action_node, 1)[0]
-            task_addr = get_action_arguments(action_node, 2)[0]
+            '''user_addr = get_action_arguments(action_node, 1)[0]
+            task_addr = get_action_arguments(action_node, 2)[0]'''
+            args = get_action_arguments(action_node, 2)
+            user_addr = args[0]
+            task_addr = args[1]
+
             if not user_addr.is_valid():
                 self.logger.error('AgentUpdateUserKnowledgeLevel: there are no argument with user')
                 return ScResult.ERROR
@@ -65,9 +69,9 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
 
             template = ScTemplate()
             template.triple_with_relation(
-                user_addr, 
+                user_addr,
                 sc_types.EDGE_D_COMMON_VAR,
-                sc_types.EDGE_D_COMMON_VAR >> '_pair_topic_level',
+                (sc_types.EDGE_D_COMMON_VAR, '_pair_topic_level'),
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
                 nrel_level_of_knowledge_of_topic
             )
@@ -100,7 +104,7 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             results = template_search(template) 
             result = results[0]
             knowledge_level_addr = result.get('_knowledge_level')
-            knowledge_level = get_link_content_data(knowledge_level_addr)
+            knowledge_level = float(get_link_content_data(knowledge_level_addr))
 
             nrel_level_within_grade = ScKeynodes.resolve('nrel_level_within_grade', sc_types.NODE_CONST_NOROLE)
 
@@ -147,7 +151,7 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             results = template_search(template)
             result = results[0]
             complexity_level_link = result.get('_complexity_level')
-            complexity_level = get_link_content_data(complexity_level_link)
+            complexity_level = float(get_link_content_data(complexity_level_link))
 
             task_count_coefficient = 20.0
             knowledge_level_coefficient = 2.0
@@ -222,10 +226,8 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
                 construction.create_edge(sc_types.EDGE_D_COMMON_CONST, knowledge_level_addr, task_addr, 'level_task_edge')
                 construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, nrel_problem_for_which_level_is_reduced, 'level_task_edge')
                 addrs = create_elements(construction)
-                if len(addrs) == 2:
-                    return ScResult.OK
-                else:
-                    raise
+                if len(addrs) != 2:
+                    return ScResult.ERROR
             
 
             """
