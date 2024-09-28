@@ -35,7 +35,7 @@ logging.basicConfig(
 )
 
 
-class AgentGetProblemText(ScAgentClassic):
+class AgentGetHint(ScAgentClassic):
     def __init__(self):
         super().__init__("action_get_hint")
 
@@ -43,24 +43,24 @@ class AgentGetProblemText(ScAgentClassic):
         result = self.run(action_element)
         is_successful = result == ScResult.OK
         finish_action_with_status(action_element, is_successful)
-        self.logger.info("AgentGetProblemText finished %s",
+        self.logger.info("AgentGetHint finished %s",
                          "successfully" if is_successful else "unsuccessfully")
         return result
 
     def run(self, action_node: ScAddr) -> ScResult:
-        self.logger.info("AgentGetProblemText started")
+        self.logger.info("AgentGetHint started")
 
         try:
             problem_number_link_addr = get_action_arguments(action_node, 1)[0]
 
             if not problem_number_link_addr.is_valid():
-                self.logger.error('AgentGetProblemText: there are no argument with problem number')
+                self.logger.error('AgentGetHint: there are no argument with problem number')
                 return ScResult.ERROR
             
             problem_number = get_link_content_data(problem_number_link_addr)
             [links_with_problem_number] = get_links_by_content(problem_number)
             if len(links_with_problem_number) == 0:
-                self.logger.error('AgentGetProblemText: there are no problems with such problem number')
+                self.logger.error('AgentGetHint: there are no problems with such problem number')
                 return ScResult.ERROR
 
             concept_problem_number = ScKeynodes.resolve('concept_problem_number', sc_types.NODE_CONST_CLASS)
@@ -70,10 +70,10 @@ class AgentGetProblemText(ScAgentClassic):
                     problem_number_links.append(problem_number_link_addr)
 
             if len(problem_number_links) == 0:
-                self.logger.error('AgentGetProblemText: there are no problem links with such problem number')
+                self.logger.error('AgentGetHint: there are no problem links with such problem number')
                 return ScResult.ERROR
             elif len(problem_number_links) > 1:
-                self.logger.error('AgentGetProblemText: there are more than 1 problem with such problem number')
+                self.logger.error('AgentGetHint: there are more than 1 problem with such problem number')
                 return ScResult.ERROR
             
             nrel_problem_number = ScKeynodes.resolve('nrel_problem_number', sc_types.NODE_CONST_NOROLE)
@@ -89,13 +89,15 @@ class AgentGetProblemText(ScAgentClassic):
 
             results = template_search(template)
             if len(results) == 0:
-                self.logger.error('AgentGetProblemText: there are no problems with such problem number')
+                self.logger.error('AgentGetHint: there are no problems with such problem number')
                 return ScResult.ERROR
             
             result = results[0]
             problem_addr = result.get('_problem')
 
             nrel_hint = ScKeynodes.resolve('nrel_hint', sc_types.NODE_CONST_NOROLE)
+            if not nrel_hint.is_valid() or not problem_addr.is_valid():
+                self.logger.error('AgentGetHint: there are no nrel_hint or problem_addr')
 
             template = ScTemplate()
             template.triple_with_relation(
@@ -108,14 +110,14 @@ class AgentGetProblemText(ScAgentClassic):
 
             results = template_search(template)
             if len(results) == 0:
-                self.logger.error('AgentGetProblemText: there are no text problem with such problem number')
+                self.logger.error('AgentGetHint: there are no hint with such problem number')
                 return ScResult.ERROR
 
             result = results[0]
             hint_addr = result.get('_hint')
 
         except Exception as e:
-            self.logger.info(f"AgentGetProblemText: finished with an error {e}")
+            self.logger.info(f"AgentGetHint: finished with an error {e}")
             return ScResult.ERROR
 
         create_action_answer(action_node, hint_addr)
