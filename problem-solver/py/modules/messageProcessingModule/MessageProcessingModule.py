@@ -6,7 +6,8 @@ from .AgentUpdateUserKnowledgeLevel import AgentUpdateUserKnowledgeLevel
 from .AgentGetHint import AgentGetHint
 from .AgentGetCompleteSolution import AgentGetCompleteSolution
 from .AgentGetShortSolution import AgentGetShortSolution
+from .AgentCreateUserProfile import AgentCreateUserProfile
 
 class MessageProcessingModule(ScModule):
     def __init__(self):
-        super().__init__(WeatherAgent(), AgentGetProblemText(), AgentCheckProblemSolutionAnswer(), AgentUpdateUserKnowledgeLevel(), AgentGetHint(), AgentGetCompleteSolution(), AgentGetShortSolution())
+        super().__init__(WeatherAgent(), AgentGetProblemText(), AgentCheckProblemSolutionAnswer(), AgentUpdateUserKnowledgeLevel(), AgentGetHint(), AgentGetCompleteSolution(), AgentGetShortSolution(), AgentCreateUserProfile())
