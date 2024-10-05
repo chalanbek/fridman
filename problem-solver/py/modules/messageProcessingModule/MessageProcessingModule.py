@@ -7,7 +7,8 @@ from .AgentGetHint import AgentGetHint
 from .AgentGetCompleteSolution import AgentGetCompleteSolution
 from .AgentGetShortSolution import AgentGetShortSolution
 from .AgentCreateUserProfile import AgentCreateUserProfile
+from .AgentGetUserProfile import AgentGetUserProfile
 
 class MessageProcessingModule(ScModule):
     def __init__(self):
-        super().__init__(WeatherAgent(), AgentGetProblemText(), AgentCheckProblemSolutionAnswer(), AgentUpdateUserKnowledgeLevel(), AgentGetHint(), AgentGetCompleteSolution(), AgentGetShortSolution(), AgentCreateUserProfile())
+        super().__init__(WeatherAgent(), AgentGetProblemText(), AgentCheckProblemSolutionAnswer(), AgentUpdateUserKnowledgeLevel(), AgentGetHint(), AgentGetCompleteSolution(), AgentGetShortSolution(), AgentCreateUserProfile(), AgentGetUserProfile())
