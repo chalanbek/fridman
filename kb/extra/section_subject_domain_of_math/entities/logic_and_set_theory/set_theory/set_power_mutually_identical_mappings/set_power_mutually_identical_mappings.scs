@@ -1,0 +1,19 @@
+set_power_mutually_identical_mappings
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [мощность множества. Взаимно-однозначные отображения]
+        (* <- lang_ru;; *);
+    [set power mutually identical mappings]
+        (* <- lang_en;; *);
+=> nrel_idtf:
+    [мощность множества]
+        (* <- lang_ru;; *);
+    [set power ]
+        (* <- lang_en;; *);
+//задачи темы:
+=> rrel_problem_topic: problem_0000000;
+//теоремы темы:
+=> rrel_theorem_topic: theorem_andrews;;

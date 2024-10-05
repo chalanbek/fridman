@@ -1,0 +1,21 @@
+game_theory
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Теория игр]
+        (* <- lang_ru;; *);
+    [game theory]
+        (* <- lang_en;; *);
+
+//задачи темы:
+=> rrel_problem_topic: problem_0000000;
+//теоремы темы:
+=> rrel_theorem_topic: theorem_andrews;
+//подтемы темы
+=> nrel_subtopic: game_theory_other;
+=> nrel_subtopic: joke_games;
+=> nrel_subtopic: symmetric_strategy;
+=> nrel_subtopic: winning_and_losing_positions;;
+
+//

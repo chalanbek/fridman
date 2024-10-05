@@ -1,0 +1,22 @@
+algorithm_theory
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Теория алгоритмов]
+        (* <- lang_ru;; *);
+    [algorithm theory]
+        (* <- lang_en;; *);
+
+//задачи темы:
+=> rrel_problem_topic: problem_0000000;
+//теоремы темы:
+=> rrel_theorem_topic: theorem_andrews;
+//подтемы темы
+=> nrel_subtopic: cooperative_algorithms;
+=> nrel_subtopic: crossings;
+=> nrel_subtopic: game_theory;
+=> nrel_subtopic: theory_of_algorithms_other;
+=> nrel_subtopic: weighings;;
+
+//

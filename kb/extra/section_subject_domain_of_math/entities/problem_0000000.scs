@@ -1,13 +1,13 @@
-problem_example
+problem_0000000
 <- concept_wit_entity;
 <- concept_problem;
 => nrel_main_idtf:
-    [пример задачи]
+    [0000000]
         (* <- lang_ru;; *);
-    [example problem]
+    [0000000]
         (* <- lang_en;; *);
 
-=> nrel_problem_number: [номер задачи](* <- concept_problem_number;; *);
+=> nrel_problem_number: [0000000](* <- concept_problem_number;; *);
 => nrel_problem_text: [пример условия задачи](* <- concept_problem_text;; *);
 => nrel_complete_solution: [полное решение задачи](* <- concept_problem_solution;; *);
 => nrel_short_solution: [краткое решение задачи](* <- concept_problem_solution;; *);

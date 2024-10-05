@@ -1,0 +1,15 @@
+union_intersection_difference_of_sets
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Объединение, пересечение и разность множеств]
+        (* <- lang_ru;; *);
+    [union intersection difference of sets]
+        (* <- lang_en;; *);
+
+//задачи темы:
+=> rrel_problem_topic: problem_0000000;
+//теоремы темы:
+=> rrel_theorem_topic: theorem_andrews;;

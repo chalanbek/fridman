@@ -1,0 +1,15 @@
+symmetric_strategy
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Симметричная стратегия]
+        (* <- lang_ru;; *);
+    [symmetric strategy]
+        (* <- lang_en;; *);
+
+//задачи темы:
+=> rrel_problem_topic: problem_0000000;
+//теоремы темы:
+=> rrel_theorem_topic: theorem_andrews;;
