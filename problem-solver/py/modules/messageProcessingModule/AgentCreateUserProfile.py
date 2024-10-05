@@ -59,7 +59,8 @@ class AgentCreateUserProfile(ScAgentClassic):
 
             nrel_data = {}
             nrel_data_index = ['nrel_surname', 'nrel_first_name', 'nrel_patronymic', 'nrel_grade', 'nrel_city', 'nrel_tg_id',
-                          'nrel_score_for_the_level_of_solved_problems', 'nrel_solution_scores', 'nrel_activity', 'nrel_statistics']
+                          'nrel_score_for_the_level_of_solved_problems', 'nrel_solution_scores', 'nrel_activity', 'nrel_statistics', 
+                          'nrel_solved_problems', 'nrel_not_solved_problems']
             for element in nrel_data_index: 
                 nrel_data[element] = ScKeynodes.resolve(element, sc_types.NODE_CONST_NOROLE)
 
@@ -74,10 +75,14 @@ class AgentCreateUserProfile(ScAgentClassic):
             construction.create_node(sc_types.NODE_CONST, 'user')
             construction.create_node(sc_types.NODE_CONST, 'view_profile')
             construction.create_node(sc_types.NODE_CONST_TUPLE, 'achievements')
-            construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_student'], 'user')
-            construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_user'], 'user')
+            construction.create_node(sc_types.NODE_CONST_TUPLE, 'solved_problems')
+            construction.create_node(sc_types.NODE_CONST_TUPLE, 'not_solved_problems')
             construction.create_edge(sc_types.EDGE_D_COMMON_CONST, 'user', 'view_profile', 'view_profile_user')
             construction.create_edge(sc_types.EDGE_D_COMMON_CONST, 'user', 'achievements', 'achievements_user')
+            construction.create_edge(sc_types.EDGE_D_COMMON_CONST, 'user', 'solved_problems', 'nrel_solved_problems_user')
+            construction.create_edge(sc_types.EDGE_D_COMMON_CONST, 'user', 'not_solved_problems', 'nrel_not_solved_problems_user')
+            construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_student'], 'user')
+            construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_user'], 'user')
             construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_view_profile'], 'view_profile')
             construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_achievements'], 'achievements')
             construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, nrel_data['nrel_statistics'], 'view_profile_user')
