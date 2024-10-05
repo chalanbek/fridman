@@ -1,12 +1,12 @@
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 import re
-from sc_client.models import ScLinkContentType, ScConstruction, ScLinkContent
+from sc_client.models import ScLinkContentType, ScConstruction, ScLinkContent, ScTemplate
 from sc_kpm.identifiers import CommonIdentifiers
 from sc_kpm.utils import create_link, get_link_content_data
 from sc_kpm.utils.action_utils import execute_agent, get_action_answer
 from sc_client.constants import sc_types
-from sc_client.client import create_elements, connect, disconnect
+from sc_client.client import create_elements, connect, disconnect, template_search
 from sc_kpm.sc_sets import ScStructure
 
 url = "ws://localhost:8090/ws_json"
@@ -31,11 +31,21 @@ async def process_message(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         action, is_successfully = execute_agent(**kwargs, wait_time=3)  # ScAddr(...), bool
         print(action, is_successfully)
         result = get_action_answer(action)
-        result_elements = ScStructure(result).elements_set
-        print(result_elements)
-        first_element = next(iter(result_elements))
-        result_element = get_link_content_data(first_element)
-        await update.message.reply_text(f'Подсказка: {result_element}')
+        template = ScTemplate()
+        template.triple(
+            result,
+            sc_types.EDGE_ACCESS_VAR_POS_PERM,
+            (sc_types.LINK_VAR, 'link')
+        )
+        result = template_search(template)
+        if len(result) == 0:
+            await update.message.reply_text('Нет такой задачи')
+            return
+        link = result[0].get('link')
+        print(link)
+        result_text = get_link_content_data(link)
+        print(result_text)
+        await update.message.reply_text(f'Подсказка: {result_text}')
     else:
         await update.message.reply_text(f'Как скажешь')
 
