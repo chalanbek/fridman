@@ -52,20 +52,20 @@ class AgentCreateUserProfile(ScAgentClassic):
 
         try:
             link_data = []
-            data_index = ['surname', 'firstname', 'patronymic', 'grade', 'city']
-            args = get_action_arguments(action_node, 5)
+            data_index = ['surname', 'firstname', 'patronymic', 'grade', 'city', 'id']
+            args = get_action_arguments(action_node, 6)
             for i in range(len(args)): 
                 link_data.append(args[i])
 
             nrel_data = {}
-            nrel_data_index = ['nrel_surname', 'nrel_first_name', 'nrel_patronymic', 'nrel_grade', 'nrel_city', 
+            nrel_data_index = ['nrel_surname', 'nrel_first_name', 'nrel_patronymic', 'nrel_grade', 'nrel_city', 'nrel_tg_id',
                           'nrel_score_for_the_level_of_solved_problems', 'nrel_solution_scores', 'nrel_activity', 'nrel_statistics']
             for element in nrel_data_index: 
                 nrel_data[element] = ScKeynodes.resolve(element, sc_types.NODE_CONST_NOROLE)
 
             concept_data = {}
             data_index = ['concept_student', 'concept_user', 'concept_view_profile', 
-                          'concept_achievements', 'concept_rating', 'concept_experience']
+                          'concept_achievements', 'concept_rating', 'concept_experience', 'concept_tg_id']
             for element in data_index: 
                 concept_data[element] = ScKeynodes.resolve(element, sc_types.NODE_CONST_CLASS)
 
@@ -100,6 +100,7 @@ class AgentCreateUserProfile(ScAgentClassic):
             for el in nrel_data_index:
                 construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, nrel_data[el], f'{el}_user')
 
+            construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_tg_id'], link_data[-1])
             addrs = create_elements(construction)
 
             '''if len(addrs) != 27:
