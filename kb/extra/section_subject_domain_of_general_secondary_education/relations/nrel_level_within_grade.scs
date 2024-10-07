@@ -10,7 +10,7 @@ nrel_level_within_grade
 	[level within grade*]
 	(* <- lang_en;; *);
 =>nrel_first_domain: concept_problem;
-=>nrel_second_domain: 
+=>nrel_second_domain: sc_arc_common;
  ...
  (*
   <= nrel_inclusion: pair_set;;

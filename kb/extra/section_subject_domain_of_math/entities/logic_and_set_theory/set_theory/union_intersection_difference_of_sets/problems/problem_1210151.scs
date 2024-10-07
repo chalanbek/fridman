@@ -1,0 +1,32 @@
+problem_1210151
+<- concept_wit_entity;
+<- concept_problem;
+=> nrel_main_idtf:
+    [1210151]
+        (* <- lang_ru;; *);
+    [1210151]
+        (* <- lang_en;; *);
+
+=> nrel_problem_number: [1210151](* <- concept_problem_number;; *);
+=> nrel_problem_text: [В первом пенале лежат лиловая ручка, зелёный карандаш и красный ластик; во втором – синяя ручка, зелёный карандаш и жёлтый ластик; в третьем – лиловая ручка, оранжевый карандаш и жёлтый ластик. Содержимое этих пеналов характеризуется такой закономерностью: в каждых двух из них ровно одна пара предметов совпадает и по цвету, и по назначению. Что должно лежать в четвёртом пенале, чтобы эта закономерность сохранилась? (В каждом пенале лежит ровно три предмета: ручка, карандвш и ластик.)](* <- concept_problem_solution;; *);
+=> nrel_complete_solution: [В четвёртом пенале должны лежать предметы, которые уже встречаются в первых трёх пеналах, но только по одному разу, ведь иначе для этих предметов пересечений не будет. Синяя ручка встречается только во втором пенале, оранжевый карандаш лежит только в третьем пенале, а красный ластик - только в первом пенале.](* <- concept_problem_solution;; *);
+=> nrel_short_solution: [В четвёртом пенале должны лежать предметы, которые уже встречаются в первых трёх пеналах, но только по одному разу.](* <- concept_problem_solution;; *);
+=> nrel_hint: [Подумайте, может ли в четвёртом пенале лежать лиловая ручка.](* <- concept_hint;; *);
+=> nrel_solution_answer: [Синяя ручка, оранжевый карандаш, красный ластик.](* <- concept_solution_answer;; *);
+=> nrel_problem_source: [Козлова Е.Г. - Сказки и подсказки (307)];
+<= rrel_problem_topic: logic_and_set_theory;
+<= rrel_problem_topic: set_theory;
+<= rrel_problem_topic: union_intersection_difference_of_sets;;
+@five_first_link = [5];;
+@six_first_link = [6];;
+@seven_first_link = [7];;
+@one_second_link = [1];;
+(@five_first_link => @one_second_link)
+    <- nrel_grade_comlexity_level;
+    <= nrel_level_within_grade: problem_1550151;;
+(@six_first_link => @one_second_link)
+    <- nrel_grade_comlexity_level;
+    <= nrel_level_within_grade: problem_1550151;;
+(@seven_first_link => @one_second_link)
+    <- nrel_grade_comlexity_level;
+    <= nrel_level_within_grade: problem_1550151;;

@@ -7,9 +7,4 @@ joke_games
     [игры шутки]
         (* <- lang_ru;; *);
     [joke games]
-        (* <- lang_en;; *);
-
-//задачи темы:
-=> rrel_problem_topic: problem_0000000;
-//теоремы темы:
-=> rrel_theorem_topic: theorem_andrews;;
+        (* <- lang_en;; *);;

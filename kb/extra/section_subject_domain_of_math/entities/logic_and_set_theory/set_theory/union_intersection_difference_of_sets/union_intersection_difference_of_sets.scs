@@ -7,9 +7,5 @@ union_intersection_difference_of_sets
     [Объединение, пересечение и разность множеств]
         (* <- lang_ru;; *);
     [union intersection difference of sets]
-        (* <- lang_en;; *);
+        (* <- lang_en;; *);;
 
-//задачи темы:
-=> rrel_problem_topic: problem_0000000;
-//теоремы темы:
-=> rrel_theorem_topic: theorem_andrews;;
