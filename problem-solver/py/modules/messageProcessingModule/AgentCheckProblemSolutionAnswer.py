@@ -144,6 +144,7 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                         addrs = create_elements(construction)
                         if len(addrs) == 4:
                             self.call_agent_update_user_kowledge_level(user_addr=user_addr, problem_addr=problem_addr)
+                            self.call_agent_update_statistics(user_addr=user_addr, problem_addr=problem_addr)
                             return ScResult.OK
                         else:
                             raise
@@ -184,6 +185,7 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                     addrs = create_elements(construction)
                     if len(addrs) == 1:
                         self.call_agent_update_user_kowledge_level(user_addr=user_addr, problem_addr=problem_addr)
+                        self.call_agent_update_statistics(user_addr=user_addr, problem_addr=problem_addr)
                         return ScResult.OK
                     else:
                         raise
@@ -213,6 +215,25 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
 
         construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('question', sc_types.NODE_CONST_CLASS), 'node')
         construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('action_update_user_knowledge_level', sc_types.NODE_CONST_CLASS), 'node')
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('question_initiated', sc_types.NODE_CONST_CLASS), 'node')
+
+        addrs = create_elements(construction)
+        if len(addrs) == 8:
+            return ScResult.OK
+        else:
+            raise
+
+    def call_agent_update_statistics(self, user_addr, problem_addr):
+        construction = ScConstruction()
+        construction.create_node(sc_types.NODE_CONST, 'node')
+
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, 'node', user_addr, 'user_edge')
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, 'node', problem_addr,'problem_edge')
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('rrel_1', sc_types.NODE_CONST_ROLE), 'user_edge')
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('rrel_2', sc_types.NODE_CONST_ROLE), 'problem_edge')
+
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('question', sc_types.NODE_CONST_CLASS), 'node')
+        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('action_update_statistics', sc_types.NODE_CONST_CLASS), 'node')
         construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, ScKeynodes.resolve('question_initiated', sc_types.NODE_CONST_CLASS), 'node')
 
         addrs = create_elements(construction)
