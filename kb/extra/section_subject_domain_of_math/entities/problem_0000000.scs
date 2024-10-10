@@ -20,9 +20,3 @@ problem_0000000
 (@five_first_link => @one_second_link)
     <- nrel_grade_comlexity_level;
     <= nrel_level_within_grade: problem_0000000;;
-(@six_first_link => @one_second_link)
-    <- nrel_grade_comlexity_level;
-    <= nrel_level_within_grade: problem_0000000;;
-(@seven_first_link => @one_second_link)
-    <- nrel_grade_comlexity_level;
-    <= nrel_level_within_grade: problem_0000000;;

@@ -63,13 +63,20 @@ class AgentCreateUserProfile(ScAgentClassic):
                           'nrel_solved_problems', 'nrel_not_solved_problems']
             for element in nrel_data_index: 
                 nrel_data[element] = ScKeynodes.resolve(element, sc_types.NODE_CONST_NOROLE)
-
+            
             concept_data = {}
             data_index = ['concept_student', 'concept_user', 'concept_view_profile', 
                           'concept_achievements', 'concept_rating', 'concept_experience', 'concept_tg_id']
             for element in data_index: 
                 concept_data[element] = ScKeynodes.resolve(element, sc_types.NODE_CONST_CLASS)
 
+            tg_id = get_link_content_data(link_data[-1])
+            [links_with_tg_id] = get_links_by_content(tg_id)
+            for id in links_with_tg_id:
+                if check_edge(sc_types.EDGE_ACCESS_VAR_POS_PERM, concept_data['concept_tg_id'], id):
+                    self.logger.info(f"AgentCreateUserProfile: the profile with such id is already existing")
+                    return ScResult.ERROR
+            
             construction = ScConstruction()
             #nodes, classes
             construction.create_node(sc_types.NODE_CONST, 'user')

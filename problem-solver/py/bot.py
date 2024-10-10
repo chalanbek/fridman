@@ -45,7 +45,7 @@ async def city(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
     result = create_profile(context.user_data)
     if not result:
-        await update.message.reply_text("Что-то не так.")
+        await update.message.reply_text("Профиль с таким id пользователя уже существует!")
         return ConversationHandler.END
     
     # Формирование сообщения для отправки
