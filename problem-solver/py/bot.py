@@ -3,10 +3,11 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 import re
 from sc_client.models import ScLinkContentType, ScConstruction, ScLinkContent, ScTemplate
 from sc_kpm.identifiers import CommonIdentifiers
-from sc_kpm.utils import create_link, get_link_content_data
+from sc_kpm import ScKeynodes
+from sc_kpm.utils import create_link, get_link_content_data, check_edge
 from sc_kpm.utils.action_utils import execute_agent, get_action_answer
 from sc_client.constants import sc_types
-from sc_client.client import create_elements, connect, disconnect, template_search
+from sc_client.client import create_elements, connect, disconnect, template_search, get_links_by_content
 from sc_kpm.sc_sets import ScStructure
 
 user_data = dict()
@@ -139,6 +140,38 @@ async def get_problem_text(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     result_text = await get_task_info(update,context,action='action_get_problem_text')
     await update.message.reply_text(f'Условие задачи: {result_text}', parse_mode='html')
 
+async def get_user_profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    concept_tg_id_ = ScKeynodes.resolve('concept_tg_id', sc_types.NODE_CONST_CLASS)
+    [links_with_tg_id] = get_links_by_content(update.message.chat_id)
+    for id in links_with_tg_id:
+        if check_edge(sc_types.EDGE_ACCESS_VAR_POS_PERM, concept_tg_id_, id):
+            arg1 = id
+            break
+    else:
+        await update.message.reply_text('Вы еще не зарегистрированы! (напишише /register чтобы сдеать это)')
+        return
+    
+    kwargs = dict(
+        arguments={arg1: False},
+        concepts=["question", 'action_get_user_profile'],
+    )
+
+    action, is_successfully = execute_agent(**kwargs, wait_time=3)  # ScAddr(...), bool
+    if not is_successfully:
+        await update.message.reply_text('Что-то не так...')
+        return
+    result = get_action_answer(action)
+    template = ScTemplate()
+    template.triple(
+        result,
+        sc_types.EDGE_ACCESS_VAR_POS_PERM,
+        (sc_types.LINK_VAR, 'link')
+    )
+    result = template_search(template)
+    link = result[0].get('link')
+    result_text = get_link_content_data(link)
+    await update.message.reply_text(f'Ваш профиль: {result_text}', parse_mode='html')
+    
 def find_task_number(message):
     # Регулярное выражение для поиска номера задачи
     match = re.search(r'задач[уи]\s*(\d+)', message)
@@ -182,6 +215,8 @@ if __name__ == "__main__":
     application.add_handler(MessageHandler(filters.Regex('краткое решение задачи'), get_short_solution))
     application.add_handler(MessageHandler(filters.Regex('полное решение задачи'), get_complete_solution))
     application.add_handler(MessageHandler(filters.Regex('условие задачи'), get_problem_text))
+
+    application.add_handler(CommandHandler('profile', get_user_profile))
 
     application.add_handler(conv_handler)
 
