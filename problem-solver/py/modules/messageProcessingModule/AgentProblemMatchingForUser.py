@@ -29,6 +29,11 @@ from sc_kpm import ScKeynodes
 
 import requests
 
+from array import *
+
+
+
+
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s | %(name)s | %(message)s", datefmt="[%d-%b-%y %H:%M:%S]"
@@ -63,6 +68,9 @@ class AgentProblemMatchingForUser(ScAgentClassic):
             nrel_grade_comlexity_level = ScKeynodes.resolve('nrel_grade_comlexity_level', sc_types.NODE_CONST_NOROLE)
             nrel_problem_number = ScKeynodes.resolve('nrel_problem_number', sc_types.NODE_CONST_NOROLE)
             nrel_problem_text = ScKeynodes.resolve('nrel_problem_text', sc_types.NODE_CONST_NOROLE)
+            nrel_solved_problems = ScKeynodes.resolve('nrel_solved_problems', sc_types.NODE_CONST_NOROLE)
+            number_of_matching_attempts = 0
+            attempts_array = array('i',[0,0,0,0,0,0,0])
 
             template = ScTemplate()
             template.triple_with_relation(
@@ -80,6 +88,15 @@ class AgentProblemMatchingForUser(ScAgentClassic):
                 self.logger.error('AgentProblemMatchingForUser: there are no argument with user')
                 return ScResult.ERROR
             
+            template = ScTemplate()
+            template.triple_with_relation(
+                user_addr,
+                sc_types.EDGE_D_COMMON_VAR,
+                (sc_types.NODE_VAR_TUPLE, '_solved'),
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_solved_problems
+            )
+            solved = template_search(template)[0].get('_solved')
 
             template = ScTemplate()
             template.triple_with_relation(
@@ -90,73 +107,51 @@ class AgentProblemMatchingForUser(ScAgentClassic):
                 nrel_level_of_knowledge_of_topic
             )
             results = template_search(template)
-            for result in results:
-                pair_topic_level_addr = result.get('_pair_topic_level')
-                template = ScTemplate()
-                template.triple(
-                    (sc_types.NODE_VAR, '_topic'),
-                    pair_topic_level_addr,
-                    (sc_types.LINK_VAR, '_topic_knowledge_level')
-                )
-                pairs = template_search(template)
-                topic_knowledge_level_addr = pairs[0].get('_topic_knowledge_level')
-                topic_knowledge_level = float(get_link_content_data(topic_knowledge_level_addr))
-                topic_addr = pairs[0].get('_topic')
-                if topic_knowledge_level < user_lowest_knowledge_level:
-                    user_lowest_knowledge_level = topic_knowledge_level_addr
-                    lowest_level_topic_addr = topic_addr
-            template = ScTemplate()
-            template.triple_with_relation(
-                lowest_level_topic_addr,
-                sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                (sc_types.NODE_VAR, '_problem'),
-                sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                rrel_problem_topic
-            )
-            problems = template_search(template)
-            for problem in problems:
-                this_problem = problem.get('_problem')
+
+            while number_of_matching_attempts < 7 & is_problem_matched == 0:
+
+                user_lowest_knowledge_level = 7.0
+                for result in range(7):
+                    if attempts_array[result] == 1:
+                        continue
+                    pair_topic_level_addr = results[result].get('_pair_topic_level')
+                    template = ScTemplate()
+                    template.triple(
+                        (sc_types.NODE_VAR, '_topic'),
+                        pair_topic_level_addr,
+                        (sc_types.LINK_VAR, '_topic_knowledge_level')
+                    )
+                    pairs = template_search(template)
+                    topic_knowledge_level_addr = pairs[0].get('_topic_knowledge_level')
+                    topic_knowledge_level = float(get_link_content_data(topic_knowledge_level_addr))
+                    topic_addr = pairs[0].get('_topic')
+                    if topic_knowledge_level < user_lowest_knowledge_level:
+                        user_lowest_knowledge_level = topic_knowledge_level_addr
+                        lowest_level_topic_addr = topic_addr
+                        topic_number = result
+                attempts_array[topic_number] = 1
+                number_of_matching_attempts += 1
                 template = ScTemplate()
                 template.triple_with_relation(
-                    this_problem,
-                    sc_types.EDGE_D_COMMON_VAR,
-                    sc_types.EDGE_D_COMMON_VAR >> '_grade_level_pair',
+                    lowest_level_topic_addr,
                     sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                    nrel_level_within_grade
+                    (sc_types.NODE_VAR, '_problem'),
+                    sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                    rrel_problem_topic
                 )
-                complexities = template_search(template)
-                for complexity in complexities:
-                    grade_level_pair_addr = complexity.get('_grade_level_pair')
-                    template = ScTemplate()
-                    template.triple_with_relation(
-                        (sc_types.LINK_VAR, '_problem_grade'),
-                        grade_level_pair_addr,
-                        (sc_types.LINK_VAR, '_problem_grade_complexity'),
-                        sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                        nrel_grade_comlexity_level
-                    )
-                    problem_grade_addr = template_search(template)[0].get('_problem_grade')
-                    problem_grade = get_link_content_data(problem_grade_addr)
-                    problem_grade_complexity_addr = template_search(template)[0].get('_problem_grade_complexity')
-                    problem_grade_complexity = get_link_content_data(problem_grade_complexity_addr)
-                    if problem_grade == user_grade & problem_grade_complexity == round(user_lowest_knowledge_level):
-                        is_problem_matched = 1
-                        matched_problem = this_problem
-                        template = ScTemplate()
-                        template.triple_with_relation(
-                            this_problem,
-                            sc_types.EDGE_D_COMMON_VAR,
-                            (sc_types.NODE_VAR, '_problem_number'),
-                            sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                            nrel_problem_number
-                        )
-                        problem_number_link = template_search(template)[0].get('_problem_number')
-                        problem_number = get_link_content_data(problem_number_link)
-                        break
-                else: break
-            if is_problem_matched ==0:
+                problems = template_search(template)
+                
                 for problem in problems:
                     this_problem = problem.get('_problem')
+                    template = ScTemplate()
+                    template.triple_with_relation(
+                        this_problem,
+                        sc_types.EDGE_D_COMMON_VAR,
+                        (sc_types.LINK_VAR, '_attempts1'),
+                        sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                        solved
+                    )
+                    if len(template_search(template)) == 0: continue
                     template = ScTemplate()
                     template.triple_with_relation(
                         this_problem,
@@ -180,8 +175,11 @@ class AgentProblemMatchingForUser(ScAgentClassic):
                         problem_grade = get_link_content_data(problem_grade_addr)
                         problem_grade_complexity_addr = template_search(template)[0].get('_problem_grade_complexity')
                         problem_grade_complexity = get_link_content_data(problem_grade_complexity_addr)
-                        if problem_grade == user_grade & problem_grade_complexity <= round(user_lowest_knowledge_level):
+                        
+
+                        if problem_grade == user_grade & problem_grade_complexity == round(user_lowest_knowledge_level):
                             is_problem_matched = 1
+                            matched_problem = this_problem
                             template = ScTemplate()
                             template.triple_with_relation(
                                 this_problem,
@@ -193,7 +191,60 @@ class AgentProblemMatchingForUser(ScAgentClassic):
                             problem_number_link = template_search(template)[0].get('_problem_number')
                             problem_number = get_link_content_data(problem_number_link)
                             break
+                    else: break
+                else: break
+    
+                if is_problem_matched ==0:
+                    for problem in problems:
+                        this_problem = problem.get('_problem')
+                        template = ScTemplate()
+                        template.triple_with_relation(
+                            this_problem,
+                            sc_types.EDGE_D_COMMON_VAR,
+                            (sc_types.LINK_VAR, '_attempts1'),
+                            sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                            solved
+                        )
+                        if len(template_search(template)) == 0: continue                        
+                        template = ScTemplate()
+                        template.triple_with_relation(
+                            this_problem,
+                            sc_types.EDGE_D_COMMON_VAR,
+                            sc_types.EDGE_D_COMMON_VAR >> '_grade_level_pair',
+                            sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                            nrel_level_within_grade
+                        )
+                        complexities = template_search(template)
+                        for complexity in complexities:
+                            grade_level_pair_addr = complexity.get('_grade_level_pair')
+                            template = ScTemplate()
+                            template.triple_with_relation(
+                                (sc_types.LINK_VAR, '_problem_grade'),
+                                grade_level_pair_addr,
+                                (sc_types.LINK_VAR, '_problem_grade_complexity'),
+                                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                                nrel_grade_comlexity_level
+                            )
+                            problem_grade_addr = template_search(template)[0].get('_problem_grade')
+                            problem_grade = get_link_content_data(problem_grade_addr)
+                            problem_grade_complexity_addr = template_search(template)[0].get('_problem_grade_complexity')
+                            problem_grade_complexity = get_link_content_data(problem_grade_complexity_addr)
+                            if problem_grade == user_grade & problem_grade_complexity <= round(user_lowest_knowledge_level):
+                                is_problem_matched = 1
+                                template = ScTemplate()
+                                template.triple_with_relation(
+                                    this_problem,
+                                    sc_types.EDGE_D_COMMON_VAR,
+                                    (sc_types.NODE_VAR, '_problem_number'),
+                                    sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                                    nrel_problem_number
+                                )
+                                problem_number_link = template_search(template)[0].get('_problem_number')
+                                problem_number = get_link_content_data(problem_number_link)
+                                break
                         else: break
+                    else: break
+
             if is_problem_matched == 0:
                 print('Приносим свои извинения, на данный момент не получается подобрать задачу. Попробуйте перейти в каталог и выбрать задачу там.')
             else: 
