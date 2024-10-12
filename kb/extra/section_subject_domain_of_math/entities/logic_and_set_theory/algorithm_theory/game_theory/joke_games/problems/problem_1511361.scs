@@ -1,6 +1,7 @@
 problem_1511361
 <- concept_wit_entity;
 <- concept_problem;
+<- concept_solvable_problem;
 => nrel_main_idtf:
     [1511361]
         (* <- lang_ru;; *);

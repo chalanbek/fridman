@@ -37,7 +37,7 @@ nrel_saw_answer
 		*);;
 	<= nrel_using_constants:
 		{
-			concept_user,
+			concept_user;
 			concept_problem
 		};;
 	*);;
