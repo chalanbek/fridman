@@ -52,9 +52,52 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
 
         try:
             args = get_action_arguments(action_node, 3)
-            problem_addr = args[0]
+            problem_number_link_addr = args[0]
             user_problem_solution_answer_addr = args[1]
             user_addr = args[2]
+            #find the problem by its number
+            if not problem_number_link_addr.is_valid():
+                self.logger.error('AgentGetSolutionAnswer: there are no argument with problem number')
+                return ScResult.ERROR
+            
+            problem_number = get_link_content_data(problem_number_link_addr)
+            [links_with_problem_number] = get_links_by_content(problem_number)
+            if len(links_with_problem_number) == 0:
+                self.logger.error('AgentGetSolutionAnswer: there are no problems with such problem number')
+                return ScResult.ERROR
+
+            concept_problem_number = ScKeynodes.resolve('concept_problem_number', sc_types.NODE_CONST_CLASS)
+            problem_number_links = []
+            for problem_number_link_addr in links_with_problem_number:
+                if check_edge(sc_types.EDGE_ACCESS_VAR_POS_PERM, concept_problem_number, problem_number_link_addr):
+                    problem_number_links.append(problem_number_link_addr)
+
+            if len(problem_number_links) == 0:
+                self.logger.error('AgentGetSolutionAnswer: there are no problem links with such problem number')
+                return ScResult.ERROR
+            elif len(problem_number_links) > 1:
+                self.logger.error('AgentGetSolutionAnswer: there are more than 1 problem with such problem number')
+                return ScResult.ERROR
+            
+            nrel_problem_number = ScKeynodes.resolve('nrel_problem_number', sc_types.NODE_CONST_NOROLE)
+            problem_number_link_addr = problem_number_links[0]
+            template = ScTemplate()
+            template.triple_with_relation(
+                (sc_types.NODE_VAR, '_problem'),
+                sc_types.EDGE_D_COMMON_VAR,
+                problem_number_link_addr,
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_problem_number
+            )
+
+            results = template_search(template)
+            if len(results) == 0:
+                self.logger.error('AgentGetSolutionAnswer: there are no problems with such problem number')
+                return ScResult.ERROR
+            
+            result = results[0]
+            problem_addr = result.get('_problem')
+            ############################################################
 
             nrel_solved_problems = ScKeynodes.resolve('nrel_solved_problems', sc_types.NODE_CONST_NOROLE)
             template = ScTemplate()
@@ -118,6 +161,18 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                 not_solved_problems_addr
             )
             results = template_search(template)
+
+            nrel_saw_answer = ScKeynodes.resolve('nrel_saw_answer', sc_types.NODE_CONST_NOROLE)
+            template3 = ScTemplate()
+            template3.triple_with_relation(
+                user_addr,
+                sc_types.EDGE_D_COMMON_VAR,
+                problem_addr,
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_saw_answer
+            )
+
+            results3 = template_search(template3)
             if len(results) == 0:
                 template1 = ScTemplate()
                 template1.triple_with_relation(
@@ -131,14 +186,15 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                 results1 = template_search(template1)
                 if len(results1) == 0:
                     #creating the structure
-                    construction = ScConstruction()
-                    link_content = ScLinkContent(1, ScLinkContentType.INT)
-                    construction.create_link(sc_types.LINK_CONST, link_content, 'link')
+                    if len(results3) == 0:
+                        construction = ScConstruction()
+                        link_content = ScLinkContent(1, ScLinkContentType.INT)
+                        construction.create_link(sc_types.LINK_CONST, link_content, 'link')
 
-                    construction.create_edge(sc_types.EDGE_D_COMMON_CONST, problem_addr, 'link', 'problem_attempts_edge')
-                    construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, nrel_solution_attempts_number, 'problem_attempts_edge')
+                        construction.create_edge(sc_types.EDGE_D_COMMON_CONST, problem_addr, 'link', 'problem_attempts_edge')
+                        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, nrel_solution_attempts_number, 'problem_attempts_edge')
 
-                    if problem_solution_answer == user_problem_solution_answer:
+                    if problem_solution_answer == user_problem_solution_answer and len(results3) == 0:
                         #add the problem to solved, make the value of attempts "1", call the 3rd agent
                         construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, solved_problems_addr, 'problem_attempts_edge')
                         addrs = create_elements(construction)
@@ -148,7 +204,11 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                             return ScResult.OK
                         else:
                             raise
-                    else:
+
+                    elif problem_solution_answer == user_problem_solution_answer and len(results3) == 1:
+                        return ScResult.OK
+                    
+                    elif problem_solution_answer != user_problem_solution_answer and len(results3) == 0:
                         #add the problem to not solved, make the value of attempts "1", call the 3rd agent
                         construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, not_solved_problems_addr, 'problem_attempts_edge')
                         addrs = create_elements(construction)
@@ -157,6 +217,10 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                             return ScResult.ERROR
                         else:
                             raise
+
+                    elif problem_solution_answer != user_problem_solution_answer and len(results3) == 1:
+                        return ScResult.ERROR
+                    
                 else:
                     result1 = results1[0]
                     attempts_addr = result1.get('_attempts1')
@@ -171,7 +235,7 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
             else:
                 result = results[0]
                 attempts_addr = result.get('_attempts')
-                if problem_solution_answer == user_problem_solution_answer:
+                if problem_solution_answer == user_problem_solution_answer and len(results3) == 0:
                     #add the problem to solved, remove from not, plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
                     self.update_link(attempts_addr=attempts_addr)
 
@@ -189,12 +253,19 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                         return ScResult.OK
                     else:
                         raise
-                else:
+
+                elif problem_solution_answer == user_problem_solution_answer and len(results3) == 1:
+                    return ScResult.OK
+                
+                elif problem_solution_answer != user_problem_solution_answer and len(results3) == 0:
                     #plus "1" the total value of attempts (our attempts_addr), call the 3rd agent
                     self.update_link(attempts_addr=attempts_addr)
                     self.call_agent_update_user_kowledge_level(user_addr=user_addr, problem_addr=problem_addr)
                     return ScResult.ERROR
-                        
+                
+                elif problem_solution_answer != user_problem_solution_answer and len(results3) == 1:
+                    return ScResult.ERROR
+                
         except Exception as e:
             self.logger.info(f"AgentCheckProblemSolutionAnswer: finished with an error {e}")
             return ScResult.ERROR

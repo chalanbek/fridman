@@ -70,38 +70,27 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text("Регистрация отменена.")
     return ConversationHandler.END
 
-'''async def get_hint(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    task_number = find_task_number(update.message.text)
-    construction = ScConstruction()  # Create link for example
-    construction.create_link(sc_types.LINK_CONST, ScLinkContent(task_number, ScLinkContentType.STRING))
-    arg1 = create_elements(construction)[0]
-
-    kwargs = dict(
-        arguments={arg1: False},
-        concepts=["question", "action_get_hint"],
-    )
-
-    action, is_successfully = execute_agent(**kwargs, wait_time=3)  # ScAddr(...), bool
-    if not is_successfully:
-        await update.message.reply_text('Нет такой задачи')
-        return
-    result = get_action_answer(action)
-    template = ScTemplate()
-    template.triple(
-        result,
-        sc_types.EDGE_ACCESS_VAR_POS_PERM,
-        (sc_types.LINK_VAR, 'link')
-    )
-    result = template_search(template)
-    link = result[0].get('link')
-    result_text = get_link_content_data(link)
-    await update.message.reply_text(result_text, parse_mode='html')'''
-
 async def get_task_info(update: Update, context: ContextTypes.DEFAULT_TYPE, action) -> str:
     task_number = find_task_number(update.message.text)
+    if task_number == None:
+        if 'current_problem' in context.user_data:
+            task_number = context.user_data['current_problem']
+        else:
+            await update.message.reply_text('Похоже, вы забыли указать номер задачи и ничего не решаете в данный момент')
+            return
     construction = ScConstruction()  # Create link for example
     construction.create_link(sc_types.LINK_CONST, ScLinkContent(task_number, ScLinkContentType.STRING))
     arg1 = create_elements(construction)[0]
+    if action == 'action_get_solution_answer':
+        concept_tg_id_ = ScKeynodes.resolve('concept_tg_id', sc_types.NODE_CONST_CLASS)
+        [links_with_tg_id] = get_links_by_content(update.message.chat_id)
+        for id in links_with_tg_id:
+            if check_edge(sc_types.EDGE_ACCESS_VAR_POS_PERM, concept_tg_id_, id):
+                arg1.append(id)
+                break
+        else:
+            await update.message.reply_text('Вы еще не зарегистрированы! (напишише /register чтобы сдеать это)')
+            return
 
     kwargs = dict(
         arguments={arg1: False},
@@ -122,6 +111,7 @@ async def get_task_info(update: Update, context: ContextTypes.DEFAULT_TYPE, acti
     result = template_search(template)
     link = result[0].get('link')
     result_text = get_link_content_data(link)
+    context.user_data['current_problem'] = task_number
     return result_text
 
 async def get_hint(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -139,6 +129,10 @@ async def get_complete_solution(update: Update, context: ContextTypes.DEFAULT_TY
 async def get_problem_text(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     result_text = await get_task_info(update,context,action='action_get_problem_text')
     await update.message.reply_text(f'Условие задачи: {result_text}', parse_mode='html')
+
+async def get_problem_answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    result_text = await get_task_info(update,context,action='action_get_solution_answer')
+    await update.message.reply_text(f'Ответ задачи: {result_text}', parse_mode='html')
 
 async def get_user_profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     concept_tg_id_ = ScKeynodes.resolve('concept_tg_id', sc_types.NODE_CONST_CLASS)
@@ -171,6 +165,41 @@ async def get_user_profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     link = result[0].get('link')
     result_text = get_link_content_data(link)
     await update.message.reply_text(f'Ваш профиль: {result_text}', parse_mode='html')
+
+async def check_user_answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    concept_tg_id_ = ScKeynodes.resolve('concept_tg_id', sc_types.NODE_CONST_CLASS)
+    [links_with_tg_id] = get_links_by_content(update.message.chat_id)
+    for id in links_with_tg_id:
+        if check_edge(sc_types.EDGE_ACCESS_VAR_POS_PERM, concept_tg_id_, id):
+            template = ScTemplate()
+            template.triple_with_relation(
+                    (sc_types.NODE_VAR, 'user'),
+                    sc_types.EDGE_D_COMMON_VAR,
+                    id,
+                    sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                    ScKeynodes.resolve('nrel_tg_id', sc_types.NODE_CONST_NOROLE),
+                )
+            results = template_search(template)
+            result_search = results[0]
+            user_addr = result_search.get('user')
+            break
+    else:
+        await update.message.reply_text('Вы еще не зарегистрированы! (напишише /register чтобы сдеать это)')
+        return
+    
+    construction = ScConstruction()  # Create link for example
+    construction.create_link(sc_types.LINK_CONST, ScLinkContent(context.user_data['current_problem'], ScLinkContentType.STRING))
+    construction.create_link(sc_types.LINK_CONST, ScLinkContent(update.message.text.replace(r'/answer\s*', ''), ScLinkContentType.STRING))
+    arg1 = create_elements(construction)[0]
+    arg1.append(user_addr)
+
+    kwargs = dict(
+        arguments={arg1: False},
+        concepts=["question", 'action_check_problem_solution_answer'],
+    )
+
+    action, is_successfully = execute_agent(**kwargs, wait_time=3)  # ScAddr(...), bool
+    await update.message.reply_text(f'Правильно', parse_mode='html') if is_successfully else await update.message.reply_text(f'Неправильно', parse_mode='html')
     
 def find_task_number(message):
     # Регулярное выражение для поиска номера задачи
@@ -215,6 +244,9 @@ if __name__ == "__main__":
     application.add_handler(MessageHandler(filters.Regex('краткое решение задачи'), get_short_solution))
     application.add_handler(MessageHandler(filters.Regex('полное решение задачи'), get_complete_solution))
     application.add_handler(MessageHandler(filters.Regex('условие задачи'), get_problem_text))
+    application.add_handler(MessageHandler(filters.Regex('решать задачу'), get_problem_text))
+    application.add_handler(MessageHandler(filters.Regex('ответ задачи'), get_problem_answer))
+    application.add_handler(CommandHandler('register', check_user_answer))
 
     application.add_handler(CommandHandler('profile', get_user_profile))
 
