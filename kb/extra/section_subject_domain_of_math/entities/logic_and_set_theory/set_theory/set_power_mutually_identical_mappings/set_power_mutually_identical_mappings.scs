@@ -12,8 +12,5 @@ set_power_mutually_identical_mappings
     [мощность множества]
         (* <- lang_ru;; *);
     [set power ]
-        (* <- lang_en;; *);
-//задачи темы:
+        (* <- lang_en;; *);;
  
-//теоремы темы:
- ;

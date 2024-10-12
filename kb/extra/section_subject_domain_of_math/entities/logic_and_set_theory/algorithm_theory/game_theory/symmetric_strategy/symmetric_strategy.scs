@@ -7,9 +7,4 @@ symmetric_strategy
     [Симметричная стратегия]
         (* <- lang_ru;; *);
     [symmetric strategy]
-        (* <- lang_en;; *);
-
-//задачи темы:
- 
-//теоремы темы:
- ;
+        (* <- lang_en;; *);;

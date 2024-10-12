@@ -7,7 +7,7 @@ geometry
     [Геометрия]
         (* <- lang_ru;; *);
     [geometry]
-        (* <- lang_en;; *);
+        (* <- lang_en;; *);;
 
 //задачи темы:
  

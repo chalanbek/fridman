@@ -7,9 +7,6 @@ game_theory_other
     [Теория игр прочее]
         (* <- lang_ru;; *);
     [game theory other]
-        (* <- lang_en;; *);
+        (* <- lang_en;; *);;
 
-//задачи темы:
  
-//теоремы темы:
- ;

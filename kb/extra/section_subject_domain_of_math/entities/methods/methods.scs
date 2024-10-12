@@ -7,7 +7,7 @@ methods
     [Методы]
         (* <- lang_ru;; *);
     [methods]
-        (* <- lang_en;; *);
+        (* <- lang_en;; *);;
 
 //задачи темы:
  

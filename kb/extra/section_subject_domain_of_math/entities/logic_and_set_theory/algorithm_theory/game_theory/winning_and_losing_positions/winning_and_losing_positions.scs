@@ -7,9 +7,4 @@ winning_and_losing_positions
     [Выигрышные и проигрышные позиции]
         (* <- lang_ru;; *);
     [winning and losing positions]
-        (* <- lang_en;; *);
-
-//задачи темы:
- 
-//теоремы темы:
- ;
+        (* <- lang_en;; *);;

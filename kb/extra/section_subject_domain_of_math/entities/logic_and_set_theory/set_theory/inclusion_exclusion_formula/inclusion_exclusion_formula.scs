@@ -7,9 +7,4 @@ inclusion_exclusion_formula
     [Формула включения-исключения]
         (* <- lang_ru;; *);
     [inclusion exclusion formula]
-        (* <- lang_en;; *);
-
-//задачи темы:
- 
-//теоремы темы:
- 
+        (* <- lang_en;; *);;

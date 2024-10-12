@@ -7,7 +7,7 @@ combinatorics
     [Комбинаторика]
         (* <- lang_ru;; *);
     [combinatorics]
-        (* <- lang_en;; *);
+        (* <- lang_en;; *);;
 
 //задачи темы:
  
