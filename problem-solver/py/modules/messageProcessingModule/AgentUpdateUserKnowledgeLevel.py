@@ -52,108 +52,101 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
 
         try:
             '''user_addr = get_action_arguments(action_node, 1)[0]
-            task_addr = get_action_arguments(action_node, 2)[0]'''
+            problem_addr = get_action_arguments(action_node, 2)[0]'''
             args = get_action_arguments(action_node, 2)
             user_addr = args[0]
-            task_addr = args[1]
+            problem_addr = args[1]
 
             if not user_addr.is_valid():
                 self.logger.error('AgentUpdateUserKnowledgeLevel: there are no argument with user')
                 return ScResult.ERROR
-            if not task_addr.is_valid():
-                self.logger.error('AgentUpdateUserKnowledgeLevel: there are no argument with task')
+            if not problem_addr.is_valid():
+                self.logger.error('AgentUpdateUserKnowledgeLevel: there are no argument with problem')
                 return ScResult.ERROR
             
+            rrel_problem_topic = ScKeynodes.resolve('rrel_problem_topic', sc_types.NODE_CONST_ROLE)
+            rrel_problem_first_topic = ScKeynodes.resolve('rrel_problem_first_topic', sc_types.NODE_CONST_ROLE)
             nrel_user = ScKeynodes.resolve('nrel_user', sc_types.NODE_CONST_NOROLE)
             nrel_level_of_knowledge_of_topic = ScKeynodes.resolve('nrel_level_of_knowledge_of_topic', sc_types.NODE_CONST_NOROLE)
-
-            template = ScTemplate()
-            template.triple_with_relation(
-                user_addr,
-                sc_types.EDGE_D_COMMON_VAR,
-                (sc_types.EDGE_D_COMMON_VAR, '_pair_topic_level'),
-                sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                nrel_level_of_knowledge_of_topic
-            )
-
-            results = template_search(template)
-            result = results[0]
-            pair_topic_level_addr = result.get('_pair_topic_level')
-
-            rrel_problem_topic = ScKeynodes.resolve('rrel_problem_topic', sc_types.NODE_CONST_NOROLE)
+            nrel_grade = ScKeynodes.resolve('nrel_grade', sc_types.NODE_CONST_NOROLE)
+            nrel_level_within_grade = ScKeynodes.resolve('nrel_level_within_grade', sc_types.NODE_CONST_NOROLE)
+            nrel_grade_comlexity_level = ScKeynodes.resolve('nrel_grade_comlexity_level', sc_types.NODE_CONST_NOROLE)
+            nrel_solution_scores = ScKeynodes.resolve('nrel_solution_scores', sc_types.NODE_CONST_NOROLE)
+            nrel_score_for_the_level_of_solved_problems = ScKeynodes.resolve('nrel_score_for_the_level_of_solved_problems', sc_types.NODE_CONST_NOROLE)
 
             template = ScTemplate()
             template.triple_with_relation(
                 sc_types.NODE_VAR >> '_topic',
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                task_addr,
+                problem_addr,
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                rrel_problem_topic
+                rrel_problem_first_topic
             )
-
-            results = template_search(template)
-            result = results[0]
-            topic_addr = result.get('_topic')
-
-            template = ScTemplate()
-            template.triple(
-                topic_addr,
-                pair_topic_level_addr,
-                sc_types.NODE_VAR >> '_knowledge_level'
-            )
-            results = template_search(template) 
-            result = results[0]
-            knowledge_level_addr = result.get('_knowledge_level')
-            knowledge_level = float(get_link_content_data(knowledge_level_addr))
-
-            nrel_level_within_grade = ScKeynodes.resolve('nrel_level_within_grade', sc_types.NODE_CONST_NOROLE)
+            topic = template_search(template)[0].get('_topic')
 
             template = ScTemplate()
             template.triple_with_relation(
-                task_addr,
+                user_addr, 
+                sc_types.EDGE_D_COMMON_VAR,
+                sc_types.EDGE_D_COMMON_VAR >> '_pair_topic_level',
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_level_of_knowledge_of_topic
+            )
+            pair_topic_level_arr = template_search(template)
+            for pair_level in pair_topic_level_arr:
+                pair_topic_level = pair_level.get('_pair_topic_level')
+                template = ScTemplate()
+                template.triple_with(
+                    topic,
+                    pair_topic_level,
+                    (sc_types.LINK_VAR, '_knowledge_level')
+                )
+                is_this_topic = template_search(template)
+                if len(is_this_topic != 0):
+                    knowledge_level_addr = is_this_topic[0].get('_knowledge_level')
+                    knowledge_level = float(get_link_content_data(knowledge_level_addr))
+                    break
+            template = ScTemplate()
+            template.triple_with_relation(
+                user_addr,
+                sc_types.EDGE_D_COMMON_VAR,
+                (sc_types.LINK_VAR, '_user_grade'),
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_grade
+            )
+            user_grade_addr = template_search(template)[0].get('_user_grade')
+            user_grade = float(get_link_content_data(user_grade_addr))
+
+            template = ScTemplate()
+            template.triple_with_relation(
+                problem_addr,
                 sc_types.EDGE_D_COMMON_VAR,
                 sc_types.EDGE_D_COMMON_VAR >> '_grade_level_pair',
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
                 nrel_level_within_grade
             )
+            complexities = template_search(template)
 
-            results = template_search(template)
-            result = results[0]
-            grade_level_pair_addr = result.get('_grade_level_pair')
+            for complexity in complexities:
+                grade_level_pair_addr = complexity.get('_grade_level_pair')
+                template = ScTemplate()
+                template.triple_with_relation(
+                    (sc_types.LINK_VAR, '_problem_grade'),
+                    grade_level_pair_addr,
+                    (sc_types.LINK_VAR, '_problem_grade_complexity'),
+                    sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                    nrel_grade_comlexity_level
+                )
+                problem_grade_addr = template_search(template)[0].get('_problem_grade')
+                problem_grade = float(get_link_content_data(problem_grade_addr))
+                problem_grade_complexity_addr = template_search(template)[0].get('_problem_grade_complexity')
+                problem_grade_complexity = float(get_link_content_data(problem_grade_complexity_addr))
+                complexity_knowledge_difference = abs(user_grade - problem_grade)
+                if(complexity_knowledge_difference < complexity_knowledge_difference_min):
+                    complexity_knowledge_difference_min = complexity_knowledge_difference
+                    complexity_level = problem_grade_complexity
 
-            nrel_grade = ScKeynodes.resolve('nrel_grade', sc_types.NODE_CONST_NOROLE)
-
-            template = ScTemplate()
-            template.triple_with_relation(
-                user_addr,
-                sc_types.EDGE_D_COMMON_VAR,
-                sc_types.LINK_VAR >> '_user_grade',
-                sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                nrel_grade
-            )
-
-            results = template_search(template)
-            result = results[0]
-            user_grade_link = result.get('_user_grade')
-            user_grade = get_link_content_data(user_grade_link)
-
-            nrel_grade_complexity_level = ScKeynodes.resolve('nrel_grade_complexity_level', sc_types.NODE_CONST_NOROLE)
-
-            template = ScTemplate()
-            template.triple_with_relation(
-                user_grade,
-                grade_level_pair_addr,
-                sc_types.LINK_VAR >> '_complexity_level',
-                sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                nrel_grade_complexity_level
-            )
-
-            results = template_search(template)
-            result = results[0]
-            complexity_level_link = result.get('_complexity_level')
-            complexity_level = float(get_link_content_data(complexity_level_link))
-
-            task_count_coefficient = 20.0
+            problem_count_coefficient = 20.0
             knowledge_level_coefficient = 2.0
             knowledge_level_rounded = round(knowledge_level)
             
@@ -185,7 +178,7 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
              
             template = ScTemplate()
             template.triple_with_relation(
-                task_addr,
+                problem_addr,
                 sc_types.EDGE_D_COMMON_VAR,
                 (sc_types.LINK_VAR, '_attempts'),
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
@@ -195,7 +188,7 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
 
             template1 = ScTemplate()
             template1.triple_with_relation(
-                task_addr,
+                problem_addr,
                 sc_types.EDGE_D_COMMON_VAR,
                 (sc_types.LINK_VAR, '_attempts1'),
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
@@ -208,31 +201,31 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             template2.triple_with_relation(
                 knowledge_level_addr,
                 (sc_types.EDGE_D_COMMON_VAR, 'level_problem_edge_'),
-                task_addr,
+                problem_addr,
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
                 nrel_problem_for_which_level_is_reduced
             )
             results2 = template_search(template2)
 
             if len(results1) == 1:
-                knowledge_level = knowledge_level + (1/task_count_coefficient)*(knowledge_level_coefficient**(complexity_level-knowledge_level_rounded))
+                knowledge_level = knowledge_level + (1/problem_count_coefficient)*(knowledge_level_coefficient**(complexity_level-knowledge_level_rounded))
                 if len(results2) == 1:
                     result2 = results2[0]
                     level_problem_edge = result2.get('level_problem_edge_')
                     delete_elements(level_problem_edge)
             elif len(results) == 1 and knowledge_level_rounded >= complexity_level and len(results2) == 0:
-                knowledge_level = knowledge_level - (1/task_count_coefficient)*(knowledge_level_coefficient**(knowledge_level_rounded-complexity_level))
+                knowledge_level = knowledge_level - (1/problem_count_coefficient)*(knowledge_level_coefficient**(knowledge_level_rounded-complexity_level))
                 construction = ScConstruction()
-                construction.create_edge(sc_types.EDGE_D_COMMON_CONST, knowledge_level_addr, task_addr, 'level_task_edge')
-                construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, nrel_problem_for_which_level_is_reduced, 'level_task_edge')
+                construction.create_edge(sc_types.EDGE_D_COMMON_CONST, knowledge_level_addr, problem_addr, 'level_problem_edge')
+                construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, nrel_problem_for_which_level_is_reduced, 'level_problem_edge')
                 addrs = create_elements(construction)
                 if len(addrs) != 2:
                     return ScResult.ERROR
             
 
             """
-            knowledge_level = knowledge_level + (1/task_count_coefficient)*(knowledge_level_coefficient**(complexity_level-knowledge_level_rounded))
-            knowledge_level = knowledge_level - (1/task_count_coefficient)*(knowledge_level_coefficient**(knowledge_level_rounded-complexity_level))
+            knowledge_level = knowledge_level + (1/problem_count_coefficient)*(knowledge_level_coefficient**(complexity_level-knowledge_level_rounded))
+            knowledge_level = knowledge_level - (1/problem_count_coefficient)*(knowledge_level_coefficient**(knowledge_level_rounded-complexity_level))
             """
             
             link_content2 = ScLinkContent(knowledge_level, ScLinkContentType.FLOAT, knowledge_level_addr)

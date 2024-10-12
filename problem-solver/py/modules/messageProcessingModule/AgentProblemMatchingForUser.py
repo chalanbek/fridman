@@ -61,7 +61,6 @@ class AgentProblemMatchingForUser(ScAgentClassic):
             rrel_problem_topic = ScKeynodes.resolve('rrel_problem_topic', sc_types.NODE_CONST_ROLE)
             nrel_level_within_grade = ScKeynodes.resolve('nrel_level_within_grade', sc_types.NODE_CONST_NOROLE)
             nrel_grade_comlexity_level = ScKeynodes.resolve('nrel_grade_comlexity_level', sc_types.NODE_CONST_NOROLE)
-            nrel_grade_comlexity_level = ScKeynodes.resolve('nrel_grade_comlexity_level', sc_types.NODE_CONST_NOROLE)
             nrel_problem_number = ScKeynodes.resolve('nrel_problem_number', sc_types.NODE_CONST_NOROLE)
             nrel_problem_text = ScKeynodes.resolve('nrel_problem_text', sc_types.NODE_CONST_NOROLE)
 
@@ -74,14 +73,11 @@ class AgentProblemMatchingForUser(ScAgentClassic):
                 nrel_grade
             )
             results = template_search(template)
-            user_grade_link = results[0].get('_user_grade')
-            user_grade = get_link_content_data(user_grade_link)
+            user_grade_addr = results[0].get('_user_grade')
+            user_grade = get_link_content_data(user_grade_addr)
 
             if not user_addr.is_valid():
                 self.logger.error('AgentProblemMatchingForUser: there are no argument with user')
-                return ScResult.ERROR
-            if not Problem_addr.is_valid():
-                self.logger.error('AgentProblemMatchingForUser: there are no argument with Problem')
                 return ScResult.ERROR
             
 
@@ -133,17 +129,17 @@ class AgentProblemMatchingForUser(ScAgentClassic):
                     grade_level_pair_addr = complexity.get('_grade_level_pair')
                     template = ScTemplate()
                     template.triple_with_relation(
-                        (sc_types.LINK_VAR, '_Problem_grade'),
+                        (sc_types.LINK_VAR, '_problem_grade'),
                         grade_level_pair_addr,
-                        (sc_types.LINK_VAR, '_Problem_grade_complexity'),
+                        (sc_types.LINK_VAR, '_problem_grade_complexity'),
                         sc_types.EDGE_ACCESS_VAR_POS_PERM,
                         nrel_grade_comlexity_level
                     )
-                    Problem_grade_addr = template_search(template)[0].get('_Problem_grade')
-                    Problem_grade = get_link_content_data(Problem_grade_addr)
-                    Problem_grade_complexity_addr = template_search(template)[0].get('_Problem_grade_complexity')
-                    Problem_grade_complexity = get_link_content_data(Problem_grade_complexity_addr)
-                    if Problem_grade == user_grade & Problem_grade_complexity == round(user_lowest_knowledge_level):
+                    problem_grade_addr = template_search(template)[0].get('_problem_grade')
+                    problem_grade = get_link_content_data(problem_grade_addr)
+                    problem_grade_complexity_addr = template_search(template)[0].get('_problem_grade_complexity')
+                    problem_grade_complexity = get_link_content_data(problem_grade_complexity_addr)
+                    if problem_grade == user_grade & problem_grade_complexity == round(user_lowest_knowledge_level):
                         is_problem_matched = 1
                         matched_problem = this_problem
                         template = ScTemplate()
@@ -174,17 +170,17 @@ class AgentProblemMatchingForUser(ScAgentClassic):
                         grade_level_pair_addr = complexity.get('_grade_level_pair')
                         template = ScTemplate()
                         template.triple_with_relation(
-                            (sc_types.LINK_VAR, '_Problem_grade'),
+                            (sc_types.LINK_VAR, '_problem_grade'),
                             grade_level_pair_addr,
-                            (sc_types.LINK_VAR, '_Problem_grade_complexity'),
+                            (sc_types.LINK_VAR, '_problem_grade_complexity'),
                             sc_types.EDGE_ACCESS_VAR_POS_PERM,
                             nrel_grade_comlexity_level
                         )
-                        Problem_grade_addr = template_search(template)[0].get('_Problem_grade')
-                        Problem_grade = get_link_content_data(Problem_grade_addr)
-                        Problem_grade_complexity_addr = template_search(template)[0].get('_Problem_grade_complexity')
-                        Problem_grade_complexity = get_link_content_data(Problem_grade_complexity_addr)
-                        if Problem_grade == user_grade & Problem_grade_complexity <= round(user_lowest_knowledge_level):
+                        problem_grade_addr = template_search(template)[0].get('_problem_grade')
+                        problem_grade = get_link_content_data(problem_grade_addr)
+                        problem_grade_complexity_addr = template_search(template)[0].get('_problem_grade_complexity')
+                        problem_grade_complexity = get_link_content_data(problem_grade_complexity_addr)
+                        if problem_grade == user_grade & problem_grade_complexity <= round(user_lowest_knowledge_level):
                             is_problem_matched = 1
                             template = ScTemplate()
                             template.triple_with_relation(
