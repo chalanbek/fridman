@@ -55,6 +55,7 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
             problem_number_link_addr = args[0]
             user_problem_solution_answer_addr = args[1]
             user_addr = args[2]
+
             #find the problem by its number
             if not problem_number_link_addr.is_valid():
                 self.logger.error('AgentGetSolutionAnswer: there are no argument with problem number')
@@ -98,7 +99,6 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
             result = results[0]
             problem_addr = result.get('_problem')
             ############################################################
-
             nrel_solved_problems = ScKeynodes.resolve('nrel_solved_problems', sc_types.NODE_CONST_NOROLE)
             template = ScTemplate()
             template.triple_with_relation(

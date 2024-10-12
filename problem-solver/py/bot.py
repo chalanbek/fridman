@@ -86,16 +86,20 @@ async def get_task_info(update: Update, context: ContextTypes.DEFAULT_TYPE, acti
         [links_with_tg_id] = get_links_by_content(update.message.chat_id)
         for id in links_with_tg_id:
             if check_edge(sc_types.EDGE_ACCESS_VAR_POS_PERM, concept_tg_id_, id):
-                arg1.append(id)
+                kwargs = dict(
+                    arguments={arg1: False, 
+                            id: False},
+                    concepts=["question", action],
+                )
                 break
         else:
             await update.message.reply_text('Вы еще не зарегистрированы! (напишише /register чтобы сдеать это)')
             return
-
-    kwargs = dict(
-        arguments={arg1: False},
-        concepts=["question", action],
-    )
+    else:
+        kwargs = dict(
+            arguments={arg1: False},
+            concepts=["question", action],
+        )
 
     action, is_successfully = execute_agent(**kwargs, wait_time=3)  # ScAddr(...), bool
     if not is_successfully:
@@ -184,17 +188,18 @@ async def check_user_answer(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             user_addr = result_search.get('user')
             break
     else:
-        await update.message.reply_text('Вы еще не зарегистрированы! (напишише /register чтобы сдеать это)')
+        await update.message.reply_text('Вы еще не зарегистрированы! (напишите /register чтобы сделать это)')
         return
     
     construction = ScConstruction()  # Create link for example
     construction.create_link(sc_types.LINK_CONST, ScLinkContent(context.user_data['current_problem'], ScLinkContentType.STRING))
-    construction.create_link(sc_types.LINK_CONST, ScLinkContent(update.message.text.replace(r'/answer\s*', ''), ScLinkContentType.STRING))
-    arg1 = create_elements(construction)[0]
-    arg1.append(user_addr)
-
+    construction.create_link(sc_types.LINK_CONST, ScLinkContent(re.sub("/answer\s*", "", update.message.text), ScLinkContentType.STRING))
+    [arg1, arg2] = create_elements(construction)
+    
     kwargs = dict(
-        arguments={arg1: False},
+        arguments={arg1: False,
+                   arg2: False,
+                   user_addr: False},
         concepts=["question", 'action_check_problem_solution_answer'],
     )
 
@@ -246,7 +251,7 @@ if __name__ == "__main__":
     application.add_handler(MessageHandler(filters.Regex('условие задачи'), get_problem_text))
     application.add_handler(MessageHandler(filters.Regex('решать задачу'), get_problem_text))
     application.add_handler(MessageHandler(filters.Regex('ответ задачи'), get_problem_answer))
-    application.add_handler(CommandHandler('register', check_user_answer))
+    application.add_handler(CommandHandler('answer', check_user_answer))
 
     application.add_handler(CommandHandler('profile', get_user_profile))
 
