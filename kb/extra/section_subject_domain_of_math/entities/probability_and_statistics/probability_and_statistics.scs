@@ -1,15 +1,17 @@
-game_theory_other
+probability_and_statistics
 <- concept_wit_entity;
 <- concept_topic;
-<- concept_math_topic;
+<- concept_first_topic;
 
 => nrel_main_idtf:
-    [Теория игр прочее]
+    [Вероятность и статистика]
         (* <- lang_ru;; *);
-    [game theory other]
+    [probability and statistics]
         (* <- lang_en;; *);
 
 //задачи темы:
  
 //теоремы темы:
- ;
+//подтемы темы
+
+//

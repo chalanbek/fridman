@@ -9,9 +9,9 @@ set_theory
         (* <- lang_en;; *);
 
 //задачи темы:
-=> rrel_problem_topic: problem_0000000;
+ 
 //теоремы темы:
-=> rrel_theorem_topic: theorem_andrews;
+ 
 //подтемы темы
 => nrel_subtopic: inclusion_exclusion_formula;
 => nrel_subtopic: set_power_mutually_identical_mappings;

@@ -1,15 +1,17 @@
-game_theory_other
+mathematical_analysis
 <- concept_wit_entity;
 <- concept_topic;
-<- concept_math_topic;
+<- concept_first_topic;
 
 => nrel_main_idtf:
-    [Теория игр прочее]
+    [Математический анализ]
         (* <- lang_ru;; *);
-    [game theory other]
+    [mathematical analysis]
         (* <- lang_en;; *);
 
 //задачи темы:
  
 //теоремы темы:
- ;
+//подтемы темы
+
+//

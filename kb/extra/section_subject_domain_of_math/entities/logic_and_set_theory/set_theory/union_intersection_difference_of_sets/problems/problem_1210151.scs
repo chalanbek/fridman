@@ -14,6 +14,7 @@ problem_1210151
 => nrel_hint: [Подумайте, может ли в четвёртом пенале лежать лиловая ручка.](* <- concept_hint;; *);
 => nrel_solution_answer: [Синяя ручка, оранжевый карандаш, красный ластик.](* <- concept_solution_answer;; *);
 => nrel_problem_source: [Козлова Е.Г. - Сказки и подсказки (307)];
+<= rrel_problem_first_topic: logic_and_set_theory;
 <= rrel_problem_topic: logic_and_set_theory;
 <= rrel_problem_topic: set_theory;
 <= rrel_problem_topic: union_intersection_difference_of_sets;;

@@ -1,15 +1,17 @@
-game_theory_other
+algebra_and_arithmetic
 <- concept_wit_entity;
 <- concept_topic;
-<- concept_math_topic;
+<- concept_first_topic;
 
 => nrel_main_idtf:
-    [Теория игр прочее]
+    [Алгебра и арифметика]
         (* <- lang_ru;; *);
-    [game theory other]
+    [algebra and arithmetic]
         (* <- lang_en;; *);
 
 //задачи темы:
  
 //теоремы темы:
- ;
+//подтемы темы
+
+//

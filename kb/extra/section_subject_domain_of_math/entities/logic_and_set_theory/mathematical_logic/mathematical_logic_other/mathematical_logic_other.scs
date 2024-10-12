@@ -10,6 +10,6 @@ mathematical_logic_other
         (* <- lang_en;; *);
 
 //задачи темы:
-=> rrel_problem_topic: problem_0000000;
+ 
 //теоремы темы:
-=> rrel_theorem_topic: theorem_andrews;;
+ ;

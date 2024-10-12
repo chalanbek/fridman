@@ -8,16 +8,16 @@ problem_1550151
         (* <- lang_en;; *);
 
 => nrel_problem_number: [1550151](* <- concept_problem_number;; *);
-=> nrel_problem_text: [Имеется три кучки камней: в первой – 10, во второй – 15, в третьей – 20. За ход разрешается разбить любую кучку на две меньшие. Проигрывает тот, кто не сможет сделать ход. Кто выиграет?](* <- concept_problem_text;; *);
+=> nrel_problem_text: [Имеется три кучки камней: в первой – 10, во второй – 15, в третьей – 20. За ход разрешается разбить любую кучку на две меньшие. Проигрывает тот, кто не сможет сделать ход. Кто выиграет? (ответ запишите числом, например "1" или "2")](* <- concept_problem_text;; *);
 => nrel_complete_solution: [После каждого хода какая-то одна кучка разбивается на две, то есть количество кучек увеличивается на 1 с каждым ходом. Сначала их было 3, в конце – 10+15+20=45. Таким образом, всего будет сделано 45-3=42 хода. Последний выигрывающий 42-й ход сделает второй игрок.](* <- concept_problem_solution;; *);
 => nrel_short_solution: [После каждого хода количество кучек увеличивается на 1. Сначала их было 3, в конце – 45. Таким образом, всего будет сделано 42 хода. Последний выигрывающий 42-й ход сделает второй игрок.](* <- concept_problem_solution;; *);
 => nrel_hint: [Рассмотрите количество ходов.](* <- concept_hint;; *);
-=> nrel_solution_answer: [Второй](* <- concept_solution_answer;; *);
+=> nrel_solution_answer: [2](* <- concept_solution_answer;; *);
 => nrel_problem_source: [Генкин С.А., Итенберг И.В., Фомин Д.В. - Ленинградские математические кружки (8.002)];
+<= rrel_problem_first_topic: logic_and_set_theory;
 <= rrel_problem_topic: logic_and_set_theory;
 <= rrel_problem_topic: algorithm_theory;
 <= rrel_problem_topic: theory_of_algorithms_other;;
-
 @five_first_link = [5];;
 @six_first_link = [6];;
 @seven_first_link = [7];;

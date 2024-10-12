@@ -15,6 +15,7 @@ problem_1511361
 => nrel_solution_answer: [2](* <- concept_solution_answer;; *);
 => nrel_problem_source: [Генкин С.А., Итенберг И.В., Фомин Д.В. - Ленинградские математические кружки (8.002)];
 <= rrel_problem_topic: logic_and_set_theory;
+<= rrel_problem_first_topic: logic_and_set_theory;
 <= rrel_problem_topic: algorithm_theory;
 <= rrel_problem_topic: game_theory;
 <= rrel_problem_topic: joke_games;;

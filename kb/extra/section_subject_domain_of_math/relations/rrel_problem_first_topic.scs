@@ -1,0 +1,53 @@
+rrel_problem_first_topic
+<- sc_node_role_relation;
+<- relation;
+<- role_relation;
+<- binary_relation;
+<- oriented_relation;
+<- antireflexive_relation;
+<- asymmetric_relation;
+<- antitransitive_relation;
+=> nrel_main_idtf:
+	[первая тема задачи']
+	(* <- lang_ru;; *);
+	[problem first topic']
+	(* <- lang_en;; *);
+=> nrel_first_domain: concept_first_topic;
+=> nrel_second_domain: concept_problem;
+=> nrel_definitional_domain:
+	...
+	(*
+	<= nrel_combination:
+		{
+			concept_first_topic;
+			concept_problem
+		};;
+	*);
+<- rrel_key_sc_element:
+	...
+	(*
+	=> nrel_main_idtf:
+		[Опр. (первая тема задачи')]
+		(* <- lang_ru;; *);
+		[Def. (problem first topic')]
+		(* <- lang_en;; *);;
+	<- definition;;
+	<= nrel_sc_text_translation:
+		...
+		(*
+		-> rrel_example:
+			[первая тема задачи' - отношение, связывающее задачу с её самой первой темой.]
+			(* <- lang_ru;; *);;
+		*);
+		...
+		(*
+		-> rrel_example: 
+			[problem first topic' - the relation linking the task to its very first topic.]
+			(* <- lang_en;; *);;
+		*);;
+	<= nrel_using_constants:
+		{
+			concept_first_topic;
+			concept_problem
+		};;
+	*);;
