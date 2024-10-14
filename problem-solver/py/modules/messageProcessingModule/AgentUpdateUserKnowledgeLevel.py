@@ -57,6 +57,8 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             user_addr = args[0]
             problem_addr = args[1]
 
+            self.logger.info(f'{args}')
+            
             if not user_addr.is_valid():
                 self.logger.error('AgentUpdateUserKnowledgeLevel: there are no argument with user')
                 return ScResult.ERROR
@@ -73,16 +75,23 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             nrel_grade_comlexity_level = ScKeynodes.resolve('nrel_grade_comlexity_level', sc_types.NODE_CONST_NOROLE)
             nrel_solution_scores = ScKeynodes.resolve('nrel_solution_scores', sc_types.NODE_CONST_NOROLE)
             nrel_score_for_the_level_of_solved_problems = ScKeynodes.resolve('nrel_score_for_the_level_of_solved_problems', sc_types.NODE_CONST_NOROLE)
+            complexity_knowledge_difference_min = 7
 
+            self.logger.info('1')
+            
             template = ScTemplate()
             template.triple_with_relation(
                 sc_types.NODE_VAR >> '_topic',
-                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                sc_types.EDGE_D_COMMON_VAR,
                 problem_addr,
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
                 rrel_problem_first_topic
             )
+            topic_arr = template_search(template)
+            self.logger.info(f'{topic_arr}')
+
             topic = template_search(template)[0].get('_topic')
+            self.logger.info(f'{topic}')
 
             template = ScTemplate()
             template.triple_with_relation(
@@ -93,19 +102,22 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
                 nrel_level_of_knowledge_of_topic
             )
             pair_topic_level_arr = template_search(template)
+
             for pair_level in pair_topic_level_arr:
                 pair_topic_level = pair_level.get('_pair_topic_level')
                 template = ScTemplate()
-                template.triple_with(
+                template.triple(
                     topic,
                     pair_topic_level,
                     (sc_types.LINK_VAR, '_knowledge_level')
                 )
                 is_this_topic = template_search(template)
-                if len(is_this_topic != 0):
+                if len(is_this_topic) != 0:
                     knowledge_level_addr = is_this_topic[0].get('_knowledge_level')
                     knowledge_level = float(get_link_content_data(knowledge_level_addr))
+                    self.logger.info(f'level: {knowledge_level}')
                     break
+            
             template = ScTemplate()
             template.triple_with_relation(
                 user_addr,
@@ -116,6 +128,7 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             )
             user_grade_addr = template_search(template)[0].get('_user_grade')
             user_grade = float(get_link_content_data(user_grade_addr))
+            self.logger.info(f'grade: {user_grade}')
 
             template = ScTemplate()
             template.triple_with_relation(
@@ -126,6 +139,8 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
                 nrel_level_within_grade
             )
             complexities = template_search(template)
+
+            self.logger.info('2')
 
             for complexity in complexities:
                 grade_level_pair_addr = complexity.get('_grade_level_pair')
@@ -139,17 +154,26 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
                 )
                 problem_grade_addr = template_search(template)[0].get('_problem_grade')
                 problem_grade = float(get_link_content_data(problem_grade_addr))
+                self.logger.info(f'problem_grade: {problem_grade}')
+
                 problem_grade_complexity_addr = template_search(template)[0].get('_problem_grade_complexity')
+
                 problem_grade_complexity = float(get_link_content_data(problem_grade_complexity_addr))
+                self.logger.info(f'problem_grade_complexity: {problem_grade_complexity}')
+
                 complexity_knowledge_difference = abs(user_grade - problem_grade)
                 if(complexity_knowledge_difference < complexity_knowledge_difference_min):
                     complexity_knowledge_difference_min = complexity_knowledge_difference
                     complexity_level = problem_grade_complexity
+            
+            self.logger.info(f'complexity_level: {complexity_level}')
 
             problem_count_coefficient = 20.0
             knowledge_level_coefficient = 2.0
             knowledge_level_rounded = round(knowledge_level)
             
+            self.logger.info('3')
+
             nrel_solved_problems = ScKeynodes.resolve('nrel_solved_problems', sc_types.NODE_CONST_NOROLE)
             template = ScTemplate()
             template.triple_with_relation(
