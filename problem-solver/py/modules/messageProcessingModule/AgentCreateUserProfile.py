@@ -52,10 +52,12 @@ class AgentCreateUserProfile(ScAgentClassic):
 
         try:
             link_data = []
-            data_index = ['surname', 'firstname', 'patronymic', 'grade', 'city', 'id']
-            args = get_action_arguments(action_node, 6)
-            for i in range(len(args)): 
+            data_index = ['surname', 'firstname', 'patronymic', 'grade', 'city', 'id', 'level']
+            args = get_action_arguments(action_node, 7)
+            for i in range(len(args)-1): 
                 link_data.append(args[i])
+            
+            level = get_link_content(args[-1])[0].data
 
             nrel_data = {}
             nrel_data_index = ['nrel_surname', 'nrel_first_name', 'nrel_patronymic', 'nrel_grade', 'nrel_city', 'nrel_tg_id',
@@ -66,7 +68,8 @@ class AgentCreateUserProfile(ScAgentClassic):
             
             concept_data = {}
             data_index = ['concept_student', 'concept_user', 'concept_view_profile', 
-                          'concept_achievements', 'concept_rating', 'concept_experience', 'concept_tg_id']
+                          'concept_achievements', 'concept_rating', 'concept_experience', 'concept_tg_id',
+                          'concept_first_topic']
             for element in data_index: 
                 concept_data[element] = ScKeynodes.resolve(element, sc_types.NODE_CONST_CLASS)
 
@@ -108,6 +111,21 @@ class AgentCreateUserProfile(ScAgentClassic):
             construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_rating'], 'score_for_the_level_of_solved_problems_user')
             construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_experience'], 'solution_scores')
             
+            template = ScTemplate()
+            template.triple(
+                concept_data['concept_first_topic'],
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                (sc_types.NODE_VAR, 'topic')
+            )
+
+            nrel_level_of_knowledge_of_topic = ScKeynodes.resolve('nrel_level_of_knowledge_of_topic', sc_types.NODE_CONST_NOROLE)
+            res = template_search(template)
+            for i, element in enumerate(res):
+                construction.create_link(sc_types.LINK_CONST, ScLinkContent(level, ScLinkContentType.INT), f'link_{i}')
+                construction.create_edge(sc_types.EDGE_D_COMMON_CONST, element.get('topic'), f'link_{i}', f'pair_{i}')
+                construction.create_edge(sc_types.EDGE_D_COMMON_CONST, 'user', f'pair_{i}', f'_pair_{i}')
+                construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, nrel_level_of_knowledge_of_topic, f'_pair_{i}')
+
             #nrels
             for el in nrel_data_index:
                 construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, nrel_data[el], f'{el}_user')
