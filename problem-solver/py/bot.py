@@ -14,7 +14,7 @@ user_data = dict()
 url = "ws://localhost:8090/ws_json"
 connect(url)
 # Define the command handler for /start
-NAME, SURNAME, PATRONYMIC, CLASS, CITY = range(5)
+NAME, SURNAME, PATRONYMIC, CLASS, CITY, LEVEL = range(6)
 
 async def register(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text("Введите ваше имя:")
@@ -42,6 +42,11 @@ async def student_class(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
 
 async def city(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     context.user_data['city'] = update.message.text
+    await update.message.reply_text("Оцените свой уровень знаний от 0 до 7:")
+    return LEVEL
+
+async def level(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data['level'] = update.message.text
     context.user_data['id'] = update.message.chat_id
 
     result = create_profile(context.user_data)
@@ -56,7 +61,8 @@ async def city(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         f"Фамилия: {context.user_data['surname']}\n"
         f"Отчество: {context.user_data['patronymic']}\n"
         f"Класс: {context.user_data['class']}\n"
-        f"Город: {context.user_data['city']}"
+        f"Город: {context.user_data['city']}\n"
+        f"Уровень знаний: {context.user_data['level']}"
     )
     
     # Отправка данных в Telegram (замените 'YOUR_CHAT_ID' на ID вашего чата)
@@ -216,7 +222,7 @@ def find_task_number(message):
 
 def create_profile(user_data):
     construction = ScConstruction()  # Create link for example
-    data_index = ['surname', 'name', 'patronymic', 'class', 'city', 'id']
+    data_index = ['surname', 'name', 'patronymic', 'class', 'city', 'id', 'level']
     for element in data_index:
         construction.create_link(sc_types.LINK_CONST, ScLinkContent(user_data[element], ScLinkContentType.STRING))
     args = create_elements(construction)
@@ -241,6 +247,7 @@ if __name__ == "__main__":
             PATRONYMIC: [MessageHandler(filters.TEXT & ~filters.COMMAND, patronymic)],
             CLASS: [MessageHandler(filters.TEXT & ~filters.COMMAND, student_class)],
             CITY: [MessageHandler(filters.TEXT & ~filters.COMMAND, city)],
+            LEVEL: [MessageHandler(filters.TEXT & ~filters.COMMAND, level)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )

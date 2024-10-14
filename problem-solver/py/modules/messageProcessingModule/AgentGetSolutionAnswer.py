@@ -51,7 +51,7 @@ class AgentGetSolutionAnswer(ScAgentClassic):
         self.logger.info("AgentGetSolutionAnswer started")
 
         try:
-            args = get_action_arguments(action_node, 1)
+            args = get_action_arguments(action_node, 2)
             problem_number_link_addr = args[0]
             user_id_addr = args[1]
 
