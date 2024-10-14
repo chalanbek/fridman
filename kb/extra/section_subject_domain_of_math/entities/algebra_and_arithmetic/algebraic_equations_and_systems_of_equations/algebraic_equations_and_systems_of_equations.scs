@@ -1,0 +1,9 @@
+algebraic_equations_and_systems_of_equations
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Алгебраические уравнения и системы уравнений]
+        (* <- lang_ru;; *);
+    [algebraic equations and systems of equations]
+        (* <- lang_en;; *);;

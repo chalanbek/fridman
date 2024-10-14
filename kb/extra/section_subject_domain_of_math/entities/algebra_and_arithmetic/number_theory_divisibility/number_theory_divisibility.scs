@@ -1,0 +1,9 @@
+number_theory_divisibility
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Теория чисел. Делимость]
+        (* <- lang_ru;; *);
+    [number theory divisibility]
+        (* <- lang_en;; *);;

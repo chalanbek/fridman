@@ -24,10 +24,10 @@ problem_1210151
 @one_second_link = [1];;
 (@five_first_link => @one_second_link)
     <- nrel_grade_comlexity_level;
-    <= nrel_level_within_grade: problem_1550151;;
+    <= nrel_level_within_grade: problem_1210151;;
 (@six_first_link => @one_second_link)
     <- nrel_grade_comlexity_level;
-    <= nrel_level_within_grade: problem_1550151;;
+    <= nrel_level_within_grade: problem_1210151;;
 (@seven_first_link => @one_second_link)
     <- nrel_grade_comlexity_level;
-    <= nrel_level_within_grade: problem_1550151;;
+    <= nrel_level_within_grade: problem_1210151;;

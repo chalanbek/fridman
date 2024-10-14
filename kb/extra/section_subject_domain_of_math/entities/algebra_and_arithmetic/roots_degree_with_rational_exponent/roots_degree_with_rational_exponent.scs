@@ -1,0 +1,9 @@
+roots_degree_with_rational_exponent
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Корни. Степень с рациональным показателем]
+        (* <- lang_ru;; *);
+    [roots degree with rational exponent]
+        (* <- lang_en;; *);;

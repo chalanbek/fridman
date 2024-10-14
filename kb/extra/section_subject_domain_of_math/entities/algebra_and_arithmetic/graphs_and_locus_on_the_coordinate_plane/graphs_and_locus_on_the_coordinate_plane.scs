@@ -1,0 +1,10 @@
+graphs_and_locus_on_the_coordinate_plane
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Графики и ГМТ на координатной плоскости]
+        (* <- lang_ru;; *);
+    [graphs and locus on the coordinate plane]
+        (* <- lang_en;; *);;
