@@ -59,6 +59,8 @@ class AgentGetCatalog(ScAgentClassic):
             concept_math_topic = ScKeynodes.resolve('concept_math_topic', sc_types.NODE_CONST_CLASS)
             nrel_subtopic = ScKeynodes.resolve('nrel_subtopic', sc_types.NODE_CONST_NOROLE)
             nrel_subtopic_sequence = ScKeynodes.resolve('nrel_subtopic_sequence', sc_types.NODE_CONST_NOROLE)
+            nrel_main_idtf = ScKeynodes.resolve('nrel_main_idtf', sc_types.NODE_CONST_NOROLE)
+            lang_ru = ScKeynodes.resolve("lang_ru", sc_types.NODE_CONST_CLASS)
 
             template = ScTemplate()
             template.triple(
@@ -114,9 +116,40 @@ class AgentGetCatalog(ScAgentClassic):
                     topic_next = template_search(template)[0].get('_topic_next')
                     topic_sequence_current = topic_next
                     ## вроде так, но надо проверить
+                    template = ScTemplate()
+                    template.triple_with_relation(
+                        topic,
+                        sc_types.EDGE_D_COMMON_VAR,
+                        sc_types.LINK_VAR >> 'link',
+                        sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                        nrel_main_idtf
+                    )
+                    links = template_search(template)
+                    for link in links:
+                        template = ScTemplate()
+                        template.triple(
+                            lang_ru,
+                            sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                            link.get('link') >> '_link'
+                        )
+                        result = template_search(template)
+                        if result == 1:
+                            result = result[0]
+                            break
+
+                    result = get_link_content_data(result)
+                    topic_list.append(result)
+
+                topic_list.sort()
                 data = {1:topic_list}
                 text = str(json.dumps(data))
-                create_action_answer(action_node, text)
+                
+                construction = ScConstruction()
+                construction.create_link(sc_types.LINK_CONST, ScLinkContent(text, ScLinkContentType.STRING))
+                addrs = create_elements(construction)
+                link_answer = addrs[0]
+                
+                create_action_answer(action_node, link_answer)
                 return ScResult.OK
             else:
                 return ScResult.ERROR

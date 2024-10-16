@@ -56,51 +56,40 @@ class AgentGetCatalogTheorems(ScAgentClassic):
                 self.logger.error('AgentGetCatalogTheorems: there are no argument with user')
                 return ScResult.ERROR
             
-            concept_math_topic = ScKeynodes.resolve('concept_math_topic', sc_types.NODE_CONST_CLASS)
             rrel_theorem_topic = ScKeynodes.resolve('rrel_theorem_topic', sc_types.NODE_CONST_ROLE)
             nrel_theorem_name = ScKeynodes.resolve('nrel_theorem_name', sc_types.NODE_CONST_NOROLE)
 
             template = ScTemplate()
-            template.triple(
-                concept_math_topic,
-                sc_types.EDGE_ACCESS_VAR_POS_PERM >> '_final_topic_edge',
-                topic_addr
+            template.triple_with_relation(
+                topic_addr,
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                sc_types.NODE_VAR >> '_theorem',
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                rrel_theorem_topic
             )
-            is_final_topic = template_search(template)
-            if len(is_final_topic) == 0:
-                self.logger.info('Thats not final subtopic')
-                """если это не последняя тема, вызывать потом этого же агента от этой темы"""
-            else:
+            theorems = template_search(template)
+            theorem_name_list = []
+        
+            for theorem in theorems:
+                theorem_this = theorem.get('_theorem')
                 template = ScTemplate()
                 template.triple_with_relation(
-                    topic_addr,
+                    theorem_this,
+                    sc_types.EDGE_D_COMMON_VAR,
+                    sc_types.LINK_VAR >> '_theorem_name',
                     sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                    sc_types.NODE_VAR >> '_theorem',
-                    sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                    rrel_theorem_topic
+                    nrel_theorem_name
                 )
-                theorems = template_search(template)
-                theorem_name_list = np.empty(len(theorems), dtype=np.str)
-                theorem_i = 0
-                for theorem in theorems:
-                    theorem_this = theorem.get('_theorem')
-                    template = ScTemplate()
-                    template.triple_with_relation(
-                        theorem_this,
-                        sc_types.DGE_D_COMMON_VAR,
-                        sc_types.LINK_VAR >> '_theorem_name',
-                        sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                        nrel_theorem_name
-                    )
-                    names = template_search(template)
-                    name = names[0]
-                    name_link = name.get('_theorem_name')
-                    theorem_name = get_link_content_data(name_link)
-                    theorem_name_list[theorem_i] = theorem_name
-                    theorem_i += 1
-                theorem_name_list.sort()
-                for theorem_number_count in theorem_name_list:
-                    self.logger.info(f"{theorem_number_count}")
+                names = template_search(template)
+                name = names[0]
+                name_link = name.get('_theorem_name')
+                theorem_name = get_link_content_data(name_link)
+                theorem_name_list.append(theorem_name)
+                
+            theorem_name_list.sort()
+            '''for theorem_number_count in theorem_name_list:
+                self.logger.info(f"{theorem_number_count}")'''
+            return ScResult.OK
 
             
 
@@ -108,4 +97,4 @@ class AgentGetCatalogTheorems(ScAgentClassic):
             self.logger.info(f"AgentGetCatalogTheorems: finished with an error {e}")
             return ScResult.ERROR
 
-        return ScResult.OK
+        

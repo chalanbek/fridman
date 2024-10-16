@@ -28,7 +28,7 @@ from sc_kpm.utils.action_utils import (
 from sc_kpm import ScKeynodes
 import numpy as np
 import requests
-
+import json
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s | %(name)s | %(message)s", datefmt="[%d-%b-%y %H:%M:%S]"
@@ -56,56 +56,43 @@ class AgentGetCatalogProblems(ScAgentClassic):
                 self.logger.error('AgentGetCatalogProblems: there are no argument with user')
                 return ScResult.ERROR
             
-            concept_math_topic = ScKeynodes.resolve('concept_math_topic', sc_types.NODE_CONST_CLASS)
             rrel_problem_topic = ScKeynodes.resolve('rrel_problem_topic', sc_types.NODE_CONST_ROLE)
             nrel_problem_number = ScKeynodes.resolve('nrel_problem_number', sc_types.NODE_CONST_NOROLE)
-            
+
             template = ScTemplate()
-            template.triple(
-                concept_math_topic,
-                sc_types.EDGE_ACCESS_VAR_POS_PERM >> '_final_topic_edge',
-                topic_addr
+            template.triple_with_relation(
+                topic_addr,
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                sc_types.NODE_VAR >> '_problem',
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                rrel_problem_topic
             )
-            is_final_topic = template_search(template)
-            if len(is_final_topic) == 0:
-                self.logger.info('Thats not final subtopic')
-                """если это не последняя тема, вызывать потом этого же агента от этой темы"""
-            else:
+            problems = template_search(template)
+            problem_number_list = []
+            for problem in problems:
+                problem_this = problem.get('_problem')
                 template = ScTemplate()
                 template.triple_with_relation(
-                    topic_addr,
+                    problem_this,
+                    sc_types.EDGE_D_COMMON_VAR,
+                    sc_types.LINK_VAR >> '_problem_number',
                     sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                    sc_types.NODE_VAR >> '_problem',
-                    sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                    rrel_problem_topic
+                    nrel_problem_number
                 )
-                problems = template_search(template)
-                problem_number_list = np.empty(len(problems), dtype=np.int16)
-                problem_i = 0
-                for problem in problems:
-                    problem_this = problem.get('_problem')
-                    template = ScTemplate()
-                    template.triple_with_relation(
-                        problem_this,
-                        sc_types.DGE_D_COMMON_VAR,
-                        sc_types.LINK_VAR >> '_problem_number',
-                        sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                        nrel_problem_number
-                    )
-                    numbers = template_search(template)
-                    number = numbers[0]
-                    number_link = number.get('_problem_number')
-                    problem_number = get_link_content_data(number_link)
-                    problem_number_list[problem_i] = problem_number
-                    problem_i += 1
-                problem_number_list.sort()
-                for problem_number_count in problem_number_list:
-                    self.logger.info(f"{problem_number_count}")
-
+                numbers = template_search(template)
+                number = numbers[0]
+                number_link = number.get('_problem_number')
+                problem_number = get_link_content_data(number_link)
+                problem_number_list.append(problem_number)
+            problem_number_list.sort()
+            '''for problem_number_count in problem_number_list:
+                self.logger.info(f"{problem_number_count}")'''
+            data = {1:problem_number_list}
+            text = str(json.dumps(data))
+            create_action_answer(action_node, text)
+            return ScResult.OK
             
 
         except Exception as e:
             self.logger.info(f"AgentGetCatalogProblems: finished with an error {e}")
             return ScResult.ERROR
-
-        return ScResult.OK

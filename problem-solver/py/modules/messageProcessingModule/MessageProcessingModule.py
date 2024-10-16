@@ -9,9 +9,10 @@ from .AgentGetShortSolution import AgentGetShortSolution
 from .AgentCreateUserProfile import AgentCreateUserProfile
 from .AgentGetUserProfile import AgentGetUserProfile
 from .AgentGetSolutionAnswer import AgentGetSolutionAnswer
+from .AgentGetCatalog import AgentGetCatalog
 class MessageProcessingModule(ScModule):
     def __init__(self):
         super().__init__(WeatherAgent(), AgentGetProblemText(), AgentCheckProblemSolutionAnswer(), 
                          AgentUpdateUserKnowledgeLevel(), AgentGetHint(), AgentGetCompleteSolution(), 
                          AgentGetShortSolution(), AgentCreateUserProfile(), AgentGetUserProfile(), 
-                         AgentGetSolutionAnswer())
+                         AgentGetSolutionAnswer(), AgentGetCatalog())
