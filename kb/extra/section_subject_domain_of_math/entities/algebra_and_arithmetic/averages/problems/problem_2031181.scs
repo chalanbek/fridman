@@ -1,7 +1,7 @@
 problem_2031181
 <- concept_wit_entity;
 <- concept_problem;
-<- concept_solvable_problem
+<- concept_solvable_problem;
 => nrel_main_idtf:
     [2031181]
         (* <- lang_ru;; *);
@@ -22,6 +22,6 @@ problem_2031181
 (@eight_first_link => @one_second_link)
     <- nrel_grade_comlexity_level;
     <= nrel_level_within_grade: problem_2031181;;
-(@nine_first_linkk => @one_second_link)
+(@nine_first_link => @one_second_link)
     <- nrel_grade_comlexity_level;
     <= nrel_level_within_grade: problem_2031181;;

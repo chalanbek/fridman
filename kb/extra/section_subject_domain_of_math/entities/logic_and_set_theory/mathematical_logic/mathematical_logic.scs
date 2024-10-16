@@ -8,4 +8,12 @@ mathematical_logic
     [mathematical logic]
         (* <- lang_en;; *);;
 
- 
+ /*=> nrel_subtopic: paradoxes;
+=> nrel_subtopic: rebuses;
+=> nrel_subtopic: mathematical_logic_other;
+*/
+@paradoxes_arc = (mathematical_logic => nrel_subtopic: paradoxes);;
+@rebuses_arc = (mathematical_logic => nrel_subtopic: rebuses);;
+@paradoxes_arc => nrel_subtopic_sequence: @rebuses_arc;;
+@mathematical_logic_other_arc = (mathematical_logic => nrel_subtopic: mathematical_logic_other);;
+@rebuses_arc => nrel_subtopic_sequence: @mathematical_logic_other_arc;;

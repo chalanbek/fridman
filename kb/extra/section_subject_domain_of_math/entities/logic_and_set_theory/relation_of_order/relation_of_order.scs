@@ -1,12 +1,12 @@
-equivalence_relation
+relation_of_order
 <- concept_wit_entity;
 <- concept_topic;
 <- concept_math_topic;
 
 => nrel_main_idtf:
-    [отношение эквивалентности]
+    [отношение порядка]
         (* <- lang_ru;; *);
-    [equivalence relation]
+    [relation_of_order]
         (* <- lang_en;; *);;
 
  

@@ -1,23 +1,34 @@
 logic_and_set_theory
-<- concept_wit_entity;
-<- concept_topic;
-<- concept_first_topic;
+<- conept_wit_entity;
+<- conept_topic;
+<- conept_first_topic;
 
 => nrel_main_idtf:
     [Логика и теория множеств]
         (* <- lang_ru;; *);
     [logic and set theory]
-        (* <- lang_en;; *);
+        (* <- lang_en;; *);;
 
 //задачи темы:
  
 //теоремы темы:
  
 //подтемы темы
-=> nrel_subtopic: mathematical_logic;
+/*=> nrel_subtopic: mathematical_logic;
 => nrel_subtopic: set_theory;
-=> nrel_subtopic: order_relation;
-=> nrel_subtopic: equivalence_relationc;
+=> nrel_subtopic: relation_of_order;
+=> nrel_subtopic: relation_of_equivalence;
 => nrel_subtopic: algorithm_theory;
-=> nrel_subtopic: logic_and_set_theory_other;;
+=> nrel_subtopic: logic_and_set_theory_other;;*/
 //
+@mathematical_logic_arc = (logic_and_set_theory => nrel_subtopic: mathematical_logic);;
+@set_theory_arc = (logic_and_set_theory => nrel_subtopic: set_theory);;
+@mathematical_logic_arc => nrel_subtopic_sequence: @set_theory_arc;;
+@relation_of_order_arc = (logic_and_set_theory => nrel_subtopic: relation_of_order);;
+@set_theory_arc => nrel_subtopic_sequence: @relation_of_order_arc;;
+@relation_of_equivalence_arc = ( logic_and_set_theory => nrel_subtopic: relation_of_equivalence);;
+@relation_of_order_arc => nrel_subtopic_sequence: @relation_of_equivalence_arc;;
+@algorithm_theory_arc = ( logic_and_set_theory => nrel_subtopic: algorithm_theory);;
+@relation_of_equivalence_arc => nrel_subtopic_sequence: @algorithm_theory_arc;;
+@logic_and_set_theory_other_arc = ( logic_and_set_theory => nrel_subtopic: logic_and_set_theory_other);;
+@algorithm_theory_arc => nrel_subtopic_sequence: @logic_and_set_theory_other_arc;;
