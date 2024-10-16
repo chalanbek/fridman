@@ -58,6 +58,7 @@ class AgentGetCatalog(ScAgentClassic):
             
             concept_math_topic = ScKeynodes.resolve('concept_math_topic', sc_types.NODE_CONST_CLASS)
             nrel_subtopic = ScKeynodes.resolve('nrel_subtopic', sc_types.NODE_CONST_NOROLE)
+            nrel_subtopic_sequence = ScKeynodes.resolve('nrel_subtopic_sequence', sc_types.NODE_CONST_NOROLE)
 
             template = ScTemplate()
             template.triple(
@@ -77,13 +78,42 @@ class AgentGetCatalog(ScAgentClassic):
                     nrel_subtopic
                 )
                 topics = template_search(template)
+                for topic in topics:
+                    topic_this = topic.get('_topic')
+                    template = ScTemplate()
+                    template.triple_with_relation(
+                        topic_addr,
+                        (sc_types.EDGE_D_COMMON_VAR, '_topic_this_arc'),
+                        topic_this,
+                        sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                        nrel_subtopic
+                    )
+                    topic_this_arc = template_search(template)[0].get('_topic_this_arc')
+                    template = ScTemplate()
+                    template.triple_with_relation(
+                        sc_types.EDGE_D_COMMON_VAR,
+                        (sc_types.EDGE_D_COMMON_VAR, '_topic_squence_arc'),
+                        topic_this_arc,
+                        sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                        nrel_subtopic_sequence
+                    )
+                    if len(template_search(template)) == 0:
+                        topic_sequence_current = topic_this
+                        break
                 topic_list = []
                 for topic in topics:
-                    topic = topic.get('_topic')
-                    topic = get_link_content_data(topic)
-                    topic_list.append(topic)
-
-                topic_list.sort()
+                    topic_list.append(topic_sequence_current)
+                    template = ScTemplate()
+                    template.triple_with_relation(
+                        topic_sequence_current,
+                        sc_types.EDGE_D_COMMON_VAR,
+                        (sc_types.NODE_VAR, '_topic_next'),
+                        sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                        nrel_subtopic_sequence
+                    )
+                    topic_next = template_search(template)[0].get('_topic_next')
+                    topic_sequence_current = topic_next
+                    ## вроде так, но надо проверить
                 data = {1:topic_list}
                 text = str(json.dumps(data))
                 create_action_answer(action_node, text)
