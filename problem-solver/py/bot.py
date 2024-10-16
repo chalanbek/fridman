@@ -1,5 +1,5 @@
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes, ConversationHandler
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes, ConversationHandler, CallbackQueryHandler
 import re
 from sc_client.models import ScLinkContentType, ScConstruction, ScLinkContent, ScTemplate
 from sc_kpm.identifiers import CommonIdentifiers
@@ -9,12 +9,15 @@ from sc_kpm.utils.action_utils import execute_agent, get_action_answer
 from sc_client.constants import sc_types
 from sc_client.client import create_elements, connect, disconnect, template_search, get_links_by_content
 from sc_kpm.sc_sets import ScStructure
+import json
 
 user_data = dict()
 url = "ws://localhost:8090/ws_json"
 connect(url)
 # Define the command handler for /start
 NAME, SURNAME, PATRONYMIC, CLASS, CITY, LEVEL = range(6)
+TOPICS = ['Алгебра и арифметика', 'Геометрия', 'Комбинаторика','Логика и теория множеств','Математический анализ','Методы','Вероятность и статистика']
+TOPICS.sort()
 
 async def register(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text("Введите ваше имя:")
@@ -176,6 +179,63 @@ async def get_user_profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     result_text = get_link_content_data(link)
     await update.message.reply_text(f'Ваш профиль: {result_text}', parse_mode='html')
 
+async def get_catalog(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    context.user_data['current_direction'] = 0
+    current_direction = context.user_data['current_direction']
+    reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text, callback_data=text)] for text in TOPICS])
+    message = await update.message.reply_text('Please choose:', reply_markup=reply_markup)
+    context.bot_data['bot_id'] = message.message_id
+
+async def onButton(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+
+    if query not in ['Показать задачи', 'Показать теоремы', 'Назад']:
+        [links] = get_links_by_content(query.data)
+        nrel_main_idtf = ScKeynodes.resolve('nrel_main_idtf', sc_types.NODE_CONST_NOROLE)
+        for link in links:
+            template = ScTemplate()
+            template.triple_with_relation(
+                sc_types.NODE_VAR >> '_topic',
+                sc_types.EDGE_D_COMMON_VAR,
+                link,
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_main_idtf
+            )
+            links = template_search(template)
+            if len(links) == 1:
+                topic_addr = links[0].get('_topic')
+                break
+
+        kwargs = dict(
+        arguments={topic_addr: False},
+        concepts=["question", 'action_get_catalog'],
+        )
+
+        action, is_successfully = execute_agent(**kwargs, wait_time=3)  # ScAddr(...), bool
+        if not is_successfully:
+            await query.message.reply_text('Что-то не так...')
+            return
+        result = get_action_answer(action)
+        template = ScTemplate()
+        template.triple(
+            result,
+            sc_types.EDGE_ACCESS_VAR_POS_PERM,
+            (sc_types.LINK_VAR, 'link')
+        )
+        result = template_search(template)
+        link = result[0].get('link')
+        result = get_link_content_data(link)
+        result = json.loads(result)['1']
+        result.append('text')
+        if 'bot_id' in context.bot_data:
+            await context.bot.edit_message_text(
+                    chat_id=query.message.chat_id,
+                    message_id=context.bot_data['bot_id'],
+                    text="Please choose:",
+                    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text, callback_data=text)] for text in result])
+                )
+    
+    
 async def check_user_answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     concept_tg_id_ = ScKeynodes.resolve('concept_tg_id', sc_types.NODE_CONST_CLASS)
     [links_with_tg_id] = get_links_by_content(update.message.chat_id)
@@ -261,7 +321,8 @@ if __name__ == "__main__":
     application.add_handler(CommandHandler('answer', check_user_answer))
 
     application.add_handler(CommandHandler('profile', get_user_profile))
-
+    application.add_handler(CommandHandler('catalog', get_catalog))
+    application.add_handler(CallbackQueryHandler(onButton))
     application.add_handler(conv_handler)
 
     # Run the bot until you send a signal with Ctrl-C
