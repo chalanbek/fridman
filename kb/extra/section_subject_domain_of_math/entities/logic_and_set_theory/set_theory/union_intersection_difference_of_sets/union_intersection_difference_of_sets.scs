@@ -4,7 +4,7 @@ union_intersection_difference_of_sets
 <- concept_math_topic;
 
 => nrel_main_idtf:
-    [Объединение, пересечение и разность множеств]
+    [Объединение, пересечение, разность]
         (* <- lang_ru;; *);
     [union intersection difference of sets]
         (* <- lang_en;; *);;

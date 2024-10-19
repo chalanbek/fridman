@@ -23,7 +23,7 @@ set_theory
 @inclusion_exclusion_formula_arc = (set_theory => nrel_subtopic: inclusion_exclusion_formula);;
 @union_intersection_difference_of_sets_arc => nrel_subtopic_sequence: @inclusion_exclusion_formula_arc;;
 @set_power_mutually_identical_mappings_arc = (set_theory => nrel_subtopic: set_power_mutually_identical_mappings);;
-@inclusion_exclusion_formula_arc => nrel_subtopic_sequence: @inclusion_exclusion_formula_arc;;
+@inclusion_exclusion_formula_arc => nrel_subtopic_sequence: @set_power_mutually_identical_mappings_arc;;
 @unusual_designs_arc = (set_theory => nrel_subtopic: unusual_designs);;
 @set_power_mutually_identical_mappings_arc => nrel_subtopic_sequence: @unusual_designs_arc;;
 @set_theory_other_arc = (set_theory => nrel_subtopic: set_theory_other);;

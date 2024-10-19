@@ -4,7 +4,7 @@ set_power_mutually_identical_mappings
 <- concept_math_topic;
 
 => nrel_main_idtf:
-    [мощность множества. Взаимно-однозначные отображения]
+    [мощность множества]
         (* <- lang_ru;; *);
     [set power mutually identical mappings]
         (* <- lang_en;; *);
