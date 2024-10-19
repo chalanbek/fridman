@@ -1,14 +1,14 @@
-concept_first
+concept_first_topic
 <- sc_node_class;
 => nrel_main_idtf:
 	[первая тема математики](* <- lang_ru;; *);
-	[first mathematics theme](* <- lang_en;; *);
+	[first topic](* <- lang_en;; *);
 <- rrel_key_sc_element:
 	...
 	(*
         => nrel_main_idtf:
             [Опр. (первая тема математики)](* <- lang_ru;; *);
-            [Def. (first mathematics theme)](* <- lang_en;; *);;
+            [Def. (first topic)](* <- lang_en;; *);;
         <- definition;;
         <= nrel_sc_text_translation:
             ...
@@ -19,6 +19,6 @@ concept_first
             ...
             (*
                 -> rrel_example:
-                    [first mathematics theme - topic that is not a subtopic of another.](* <- lang_en;; *);;
+                    [first topic - topic that is not a subtopic of another.](* <- lang_en;; *);;
             *);;
 	*);;

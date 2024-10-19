@@ -1,7 +1,7 @@
 logic_and_set_theory
 <- conept_wit_entity;
 <- conept_topic;
-<- conept_first_topic;
+<- concept_first_topic;
 
 => nrel_main_idtf:
     [Логика и теория множеств]
