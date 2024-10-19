@@ -189,7 +189,7 @@ async def get_catalog(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 async def onButton(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
 
-    if query not in ['Показать задачи', 'Показать теоремы', 'Назад']:
+    if query.data not in ['Показать задачи', 'Показать теоремы', 'Назад']:
         [links] = get_links_by_content(query.data)
         nrel_main_idtf = ScKeynodes.resolve('nrel_main_idtf', sc_types.NODE_CONST_NOROLE)
         for link in links:
@@ -203,9 +203,66 @@ async def onButton(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             )
             links = template_search(template)
             if len(links) == 1:
+                context.user_data['current_topic'] = get_link_content_data(link)
                 topic_addr = links[0].get('_topic')
                 break
+        
+        #print(topic_addr)
+        result = await call_AgentGetCatalog(topic_addr, query, context, 1)
 
+    elif query.data == 'Назад':
+        if context.user_data['current_direction'] > 1:
+            [links] = get_links_by_content(context.user_data['current_topic'])
+            nrel_main_idtf = ScKeynodes.resolve('nrel_main_idtf', sc_types.NODE_CONST_NOROLE)
+            for link in links:
+                template = ScTemplate()
+                template.triple_with_relation(
+                    sc_types.NODE_VAR >> '_topic',
+                    sc_types.EDGE_D_COMMON_VAR,
+                    link,
+                    sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                    nrel_main_idtf
+                )
+                links = template_search(template)
+                if len(links) == 1:
+                    topic_addr = links[0].get('_topic')
+                    break
+
+            template = ScTemplate()
+            nrel_subtopic = ScKeynodes.resolve('nrel_subtopic', sc_types.NODE_CONST_NOROLE)
+
+            template.triple_with_relation(
+                sc_types.NODE_VAR >> '_topic',
+                sc_types.EDGE_D_COMMON_VAR,
+                topic_addr,
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                nrel_subtopic
+            )
+            topics = template_search(template)
+
+            if len(topics) != 1:
+                await query.message.reply_text('Что-то не так...')
+                return
+            else:
+                upper_topic_addr = topics[0].get('_topic')
+                template = ScTemplate()
+                template.triple_with_relation(
+                    upper_topic_addr,
+                    sc_types.EDGE_D_COMMON_VAR,
+                    sc_types.LINK_VAR >> '_link',
+                    sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                    nrel_main_idtf
+                )
+                links = template_search(template)
+                link_addr = links[0].get('_link')
+                context.user_data['current_topic'] = get_link_content_data(link_addr)
+
+            result = await call_AgentGetCatalog(upper_topic_addr, query, context, -1)
+        else:
+            result = await call_AgentGetCatalog(None, query, context, 0, result=TOPICS)
+                
+async def call_AgentGetCatalog(topic_addr, query, context, i, result=None) -> bool:
+    if result == None:
         kwargs = dict(
         arguments={topic_addr: False},
         concepts=["question", 'action_get_catalog'],
@@ -214,7 +271,7 @@ async def onButton(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         action, is_successfully = execute_agent(**kwargs, wait_time=3)  # ScAddr(...), bool
         if not is_successfully:
             await query.message.reply_text('Что-то не так...')
-            return
+            return False
         result = get_action_answer(action)
         template = ScTemplate()
         template.triple(
@@ -226,15 +283,27 @@ async def onButton(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         link = result[0].get('link')
         result = get_link_content_data(link)
         result = json.loads(result)['1']
-        result.append('text')
-        if 'bot_id' in context.bot_data:
-            await context.bot.edit_message_text(
-                    chat_id=query.message.chat_id,
-                    message_id=context.bot_data['bot_id'],
-                    text="Please choose:",
-                    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text, callback_data=text)] for text in result])
-                )
-    
+        result.append('Показать задачи')
+        result.append('Показать теоремы')
+        result.append('Назад')
+        '''for element in ['-', '.', ',']:
+            result = list(map(lambda el: el.replace(element, ' '),result))'''
+        #print(result)
+    if 'bot_id' in context.bot_data:
+        if result != TOPICS:
+            context.user_data['current_direction'] += i
+        else:
+            #del context.user_data['current_topic']
+            context.user_data['current_direction'] = 0
+        await context.bot.edit_message_text(
+                chat_id=query.message.chat_id,
+                message_id=context.bot_data['bot_id'],
+                text="Please choose:",
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text, callback_data=text)] for text in result])
+            )
+        return  True
+    else:
+        return False
     
 async def check_user_answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     concept_tg_id_ = ScKeynodes.resolve('concept_tg_id', sc_types.NODE_CONST_CLASS)

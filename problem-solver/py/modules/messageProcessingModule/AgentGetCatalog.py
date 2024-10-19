@@ -82,6 +82,7 @@ class AgentGetCatalog(ScAgentClassic):
                 )
                 topics = template_search(template)
                 for topic in topics:
+                    topic_this = topic.get('_topic')
                     topic_this_arc = topic.get('_topic_this_arc')
 
                     template = ScTemplate()
@@ -94,6 +95,29 @@ class AgentGetCatalog(ScAgentClassic):
                     )
                     if len(template_search(template)) == 0:
                         topic_sequence_current_arc = topic_this_arc
+                        template = ScTemplate()
+                        template.triple_with_relation(
+                            topic_this,
+                            sc_types.EDGE_D_COMMON_VAR,
+                            sc_types.LINK_VAR >> 'link',
+                            sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                            nrel_main_idtf
+                        )
+                        links = template_search(template)
+                        for link in links:
+                            template = ScTemplate()
+                            template.triple(
+                                lang_ru,
+                                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                                link.get('link') >> '_link'
+                            )
+                            result = template_search(template)
+                            if len(result) == 1:
+                                result = result[0].get('_link')
+                                break
+
+                        result = get_link_content_data(result)
+                        topic_list.append(result)
                         break
 
                 for topic in topics:
@@ -153,8 +177,18 @@ class AgentGetCatalog(ScAgentClassic):
                 create_action_answer(action_node, link_answer)
                 return ScResult.OK
             else:
-                return ScResult.ERROR
-            
+                
+                data = {1:[]}
+                text = str(json.dumps(data))
+                
+                construction = ScConstruction()
+                construction.create_link(sc_types.LINK_CONST, ScLinkContent(text, ScLinkContentType.STRING))
+                addrs = create_elements(construction)
+                link_answer = addrs[0]
+                
+                create_action_answer(action_node, link_answer)
+
+                return ScResult.OK
 
         except Exception as e:
             self.logger.info(f"AgentGetCatalogProblems: finished with an error {e}")
