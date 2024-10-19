@@ -61,6 +61,7 @@ class AgentGetCatalog(ScAgentClassic):
             nrel_subtopic_sequence = ScKeynodes.resolve('nrel_subtopic_sequence', sc_types.NODE_CONST_NOROLE)
             nrel_main_idtf = ScKeynodes.resolve('nrel_main_idtf', sc_types.NODE_CONST_NOROLE)
             lang_ru = ScKeynodes.resolve("lang_ru", sc_types.NODE_CONST_CLASS)
+            topic_list = []
 
             template = ScTemplate()
             template.triple(
@@ -74,23 +75,15 @@ class AgentGetCatalog(ScAgentClassic):
                 template = ScTemplate()
                 template.triple_with_relation(
                     topic_addr,
-                    sc_types.EDGE_D_COMMON_VAR,
+                    sc_types.EDGE_D_COMMON_VAR >> '_topic_this_arc',
                     sc_types.NODE_VAR >> '_topic',
                     sc_types.EDGE_ACCESS_VAR_POS_PERM,
                     nrel_subtopic
                 )
                 topics = template_search(template)
                 for topic in topics:
-                    topic_this = topic.get('_topic')
-                    template = ScTemplate()
-                    template.triple_with_relation(
-                        topic_addr,
-                        (sc_types.EDGE_D_COMMON_VAR, '_topic_this_arc'),
-                        topic_this,
-                        sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                        nrel_subtopic
-                    )
-                    topic_this_arc = template_search(template)[0].get('_topic_this_arc')
+                    topic_this_arc = topic.get('_topic_this_arc')
+
                     template = ScTemplate()
                     template.triple_with_relation(
                         sc_types.EDGE_D_COMMON_VAR,
@@ -100,25 +93,33 @@ class AgentGetCatalog(ScAgentClassic):
                         nrel_subtopic_sequence
                     )
                     if len(template_search(template)) == 0:
-                        topic_sequence_current = topic_this
+                        topic_sequence_current_arc = topic_this_arc
                         break
-                topic_list = []
+
                 for topic in topics:
-                    topic_list.append(topic_sequence_current)
+                    #topic_list.append(topic_sequence_current)
                     template = ScTemplate()
                     template.triple_with_relation(
-                        topic_sequence_current,
+                        topic_sequence_current_arc,
                         sc_types.EDGE_D_COMMON_VAR,
-                        (sc_types.NODE_VAR, '_topic_next'),
+                        (sc_types.EDGE_D_COMMON_VAR, '_topic_next_arc'),
                         sc_types.EDGE_ACCESS_VAR_POS_PERM,
                         nrel_subtopic_sequence
                     )
-                    topic_next = template_search(template)[0].get('_topic_next')
-                    topic_sequence_current = topic_next
+                    result1 = template_search(template)
+                    if len(result1) == 0:
+                        break
+                    topic_next_arc = result1[0].get('_topic_next_arc')
+                    topic_sequence_current_arc = topic_next_arc
                     ## вроде так, но надо проверить
                     template = ScTemplate()
+                    template.triple(
+                        topic_addr,
+                        topic_next_arc,
+                        sc_types.NODE_VAR >> '_topic_next'
+                    )
                     template.triple_with_relation(
-                        topic,
+                        '_topic_next',
                         sc_types.EDGE_D_COMMON_VAR,
                         sc_types.LINK_VAR >> 'link',
                         sc_types.EDGE_ACCESS_VAR_POS_PERM,
@@ -133,14 +134,14 @@ class AgentGetCatalog(ScAgentClassic):
                             link.get('link') >> '_link'
                         )
                         result = template_search(template)
-                        if result == 1:
-                            result = result[0]
+                        if len(result) == 1:
+                            result = result[0].get('_link')
                             break
 
                     result = get_link_content_data(result)
                     topic_list.append(result)
 
-                topic_list.sort()
+                
                 data = {1:topic_list}
                 text = str(json.dumps(data))
                 
