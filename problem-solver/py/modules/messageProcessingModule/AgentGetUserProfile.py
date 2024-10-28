@@ -58,7 +58,7 @@ class AgentGetUserProfile(ScAgentClassic):
             #nrel's
             self.nrel_data = {}
             nrel_data_index = ['nrel_surname', 'nrel_first_name', 'nrel_patronymic', 'nrel_grade', 'nrel_city',
-                          'nrel_score_for_the_level_of_solved_problems', 'nrel_solution_scores', 'nrel_activity', 
+                          'nrel_score_for_the_level_of_solved_problems', 'nrel_solution_scores', 'nrel_level_of_knowledge_of_topic', 
                           'nrel_solved_problems', 'nrel_not_solved_problems']
             for element in nrel_data_index: 
                 self.nrel_data[element] = ScKeynodes.resolve(element, sc_types.NODE_CONST_NOROLE)
@@ -83,13 +83,56 @@ class AgentGetUserProfile(ScAgentClassic):
             for element in nrel_data_index[:7]:
                 statistic_data[f'{element[5:]}'] = get_link_content_data(self.call_temp(element))
 
-            statistic_data['activity'] = self.triple_template_searching(
+            '''statistic_data['activity'] = self.triple_template_searching(
                     self.call_temp('nrel_activity', sctype=sc_types.NODE_VAR_TUPLE),
                     sc_types.EDGE_ACCESS_VAR_POS_PERM,
                     sc_types.LINK_VAR,
                     idtf='_activity'
+                    )'''
+            statistic_data['knowledge_level'] = {}
+            template = ScTemplate()
+            template.triple_with_relation(
+                self.user_addr,
+                sc_types.EDGE_D_COMMON_VAR,
+                sc_types.EDGE_D_COMMON_VAR >> '_edgge',
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                self.nrel_data['nrel_level_of_knowledge_of_topic']
+            )
+            results = template_search(template)
+            nrel_main_idtf = ScKeynodes.resolve('nrel_main_idtf', sc_types.NODE_CONST_NOROLE)
+            lang_ru = ScKeynodes.resolve("lang_ru", sc_types.NODE_CONST_CLASS)
+            for result in results:
+                template1 = ScTemplate()
+                template1.triple(
+                sc_types.NODE_VAR >> '_topic',
+                result.get('_edgge'),
+                sc_types.LINK_VAR >> '_level',
+                )
+                res = template_search(template1)[0]
+                link = res.get('_level')
+                topic = res.get('_topic')
+
+                template = ScTemplate()
+                template.triple_with_relation(
+                    topic,
+                    sc_types.EDGE_D_COMMON_VAR,
+                    sc_types.LINK_VAR >> 'link',
+                    sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                    nrel_main_idtf
+                )
+                links = template_search(template)
+                for link in links:
+                    template = ScTemplate()
+                    template.triple(
+                        lang_ru,
+                        sc_types.EDGE_ACCESS_VAR_POS_PERM,
+                        link.get('link') >> '_link'
                     )
-            
+                    topic = get_link_content_data(template_search(template)[0].get('_link'))
+                link = get_link_content_data(link)
+
+                statistic_data['knowledge_level'][topic] = link
+
             for element in nrel_data_index[8:]:
                 statistic_data[f'{element[5:]}'] = self.template_searching(
                     sc_types.NODE_VAR,

@@ -51,8 +51,9 @@ class AgentUpdateStatistics(ScAgentClassic):
         self.logger.info("AgentUpdateStatistics started")
 
         try:
-            user_addr = get_action_arguments(action_node, 1)[0]
-            problem_addr = get_action_arguments(action_node, 2)[0]
+            args = get_action_arguments(action_node, 2)
+            user_addr = args[0]
+            problem_addr = args[1]
             rrel_problem_topic = ScKeynodes.resolve('rrel_problem_topic', sc_types.NODE_CONST_ROLE)
             rrel_problem_first_topic = ScKeynodes.resolve('rrel_problem_first_topic', sc_types.NODE_CONST_ROLE)
             nrel_user = ScKeynodes.resolve('nrel_user', sc_types.NODE_CONST_NOROLE)
@@ -62,7 +63,7 @@ class AgentUpdateStatistics(ScAgentClassic):
             nrel_grade_comlexity_level = ScKeynodes.resolve('nrel_grade_comlexity_level', sc_types.NODE_CONST_NOROLE)
             nrel_solution_scores = ScKeynodes.resolve('nrel_solution_scores', sc_types.NODE_CONST_NOROLE)
             nrel_score_for_the_level_of_solved_problems = ScKeynodes.resolve('nrel_score_for_the_level_of_solved_problems', sc_types.NODE_CONST_NOROLE)
-            complexity_knowledge_difference_min = 7.0
+            complexity_knowledge_difference_min = 11
 
             if not user_addr.is_valid():
                 self.logger.error('AgentUpdateStatistics: there are no argument with user')
@@ -71,7 +72,8 @@ class AgentUpdateStatistics(ScAgentClassic):
                 self.logger.error('AgentUpdateStatistics: there are no argument with problem')
                 return ScResult.ERROR
             
-            
+            self.logger.info('0')
+
             template = ScTemplate()
             template.triple_with_relation(
                 sc_types.NODE_VAR >> '_topic',
@@ -81,6 +83,8 @@ class AgentUpdateStatistics(ScAgentClassic):
                 rrel_problem_first_topic
             )
             topic = template_search(template)[0].get('_topic')
+
+            self.logger.info('1')
 
             template = ScTemplate()
             template.triple_with_relation(
@@ -94,13 +98,13 @@ class AgentUpdateStatistics(ScAgentClassic):
             for pair_level in pair_topic_level_arr:
                 pair_topic_level = pair_level.get('_pair_topic_level')
                 template = ScTemplate()
-                template.triple_with(
+                template.triple(
                     topic,
                     pair_topic_level,
                     (sc_types.LINK_VAR, '_knowledge_level')
                 )
                 is_this_topic = template_search(template)
-                if len(is_this_topic != 0):
+                if len(is_this_topic) != 0:
                     knowledge_level_addr = is_this_topic[0].get('_knowledge_level')
                     knowledge_level = float(get_link_content_data(knowledge_level_addr))
                     break

@@ -75,14 +75,14 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             nrel_grade_comlexity_level = ScKeynodes.resolve('nrel_grade_comlexity_level', sc_types.NODE_CONST_NOROLE)
             nrel_solution_scores = ScKeynodes.resolve('nrel_solution_scores', sc_types.NODE_CONST_NOROLE)
             nrel_score_for_the_level_of_solved_problems = ScKeynodes.resolve('nrel_score_for_the_level_of_solved_problems', sc_types.NODE_CONST_NOROLE)
-            complexity_knowledge_difference_min = 7
+            complexity_knowledge_difference_min = 11
 
             self.logger.info('1')
             
             template = ScTemplate()
             template.triple_with_relation(
                 sc_types.NODE_VAR >> '_topic',
-                sc_types.EDGE_D_COMMON_VAR,
+                sc_types.EDGE_ACCESS_VAR_POS_PERM,
                 problem_addr,
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
                 rrel_problem_first_topic
@@ -164,9 +164,8 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
                 complexity_knowledge_difference = abs(user_grade - problem_grade)
                 if(complexity_knowledge_difference < complexity_knowledge_difference_min):
                     complexity_knowledge_difference_min = complexity_knowledge_difference
-                    complexity_level = problem_grade_complexity
-            
-            self.logger.info(f'complexity_level: {complexity_level}')
+                    complexity_level = problem_grade_complexity            
+                    self.logger.info(f'complexity_level!!!!!!!!!!!!!!!!')
 
             problem_count_coefficient = 20.0
             knowledge_level_coefficient = 2.0

@@ -15,7 +15,8 @@ problem_2031181
 => nrel_hint: [Рассмотрите, какое расстояние мог проходить пешеход за меньший промежуток времени, гапример полчаса.](* <- concept_hint;; *);
 => nrel_solution_answer: [2](* <- concept_solution_answer;; *);
 => nrel_problem_source: [Турнир городов, 1982/1983 N 4, второй тур, 7-8 класс, N 1];
-<= rrel_problem_topic: logic_and_set_theory;;
+<- rrel_problem_first_topic: algebra_and_arithmetic;
+<- rrel_problem_topic: averages;;
 @eight_first_link = [8];;
 @nine_first_link = [9];;
 @one_second_link = [1];;

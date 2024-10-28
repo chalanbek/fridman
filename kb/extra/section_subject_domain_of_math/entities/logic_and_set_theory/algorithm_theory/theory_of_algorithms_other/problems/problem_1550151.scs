@@ -15,10 +15,10 @@ problem_1550151
 => nrel_hint: [Рассмотрите количество ходов.](* <- concept_hint;; *);
 => nrel_solution_answer: [2](* <- concept_solution_answer;; *);
 => nrel_problem_source: [Генкин С.А., Итенберг И.В., Фомин Д.В. - Ленинградские математические кружки (8.002)];
-<= rrel_problem_first_topic: logic_and_set_theory;
-<= rrel_problem_topic: logic_and_set_theory;
-<= rrel_problem_topic: algorithm_theory;
-<= rrel_problem_topic: theory_of_algorithms_other;;
+<- rrel_problem_first_topic: logic_and_set_theory;
+<- rrel_problem_topic: logic_and_set_theory;
+<- rrel_problem_topic: algorithm_theory;
+<- rrel_problem_topic: theory_of_algorithms_other;;
 @five_first_link = [5];;
 @six_first_link = [6];;
 @seven_first_link = [7];;
