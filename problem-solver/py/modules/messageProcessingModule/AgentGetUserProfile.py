@@ -100,7 +100,7 @@ class AgentGetUserProfile(ScAgentClassic):
             )
             results = template_search(template)
             nrel_main_idtf = ScKeynodes.resolve('nrel_main_idtf', sc_types.NODE_CONST_NOROLE)
-            lang_ru = ScKeynodes.resolve("lang_ru", sc_types.NODE_CONST_CLASS)
+            lang_ru = ScKeynodes.resolve("lang_en", sc_types.NODE_CONST_CLASS)
             for result in results:
                 template1 = ScTemplate()
                 template1.triple(
@@ -121,16 +121,18 @@ class AgentGetUserProfile(ScAgentClassic):
                     nrel_main_idtf
                 )
                 links = template_search(template)
-                for link in links:
+                for link_ in links:
                     template = ScTemplate()
                     template.triple(
                         lang_ru,
                         sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                        link.get('link') >> '_link'
+                        link_.get('link') >> '_link'
                     )
-                    topic = get_link_content_data(template_search(template)[0].get('_link'))
+                    if len(template_search(template)) != 0:
+                        topic = get_link_content_data(template_search(template)[0].get('_link'))
+                self.logger.info(f'{link}')
                 link = get_link_content_data(link)
-
+                self.logger.info('2')
                 statistic_data['knowledge_level'][topic] = link
 
             for element in nrel_data_index[8:]:
