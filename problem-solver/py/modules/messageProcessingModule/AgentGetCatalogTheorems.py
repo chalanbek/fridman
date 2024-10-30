@@ -28,7 +28,7 @@ from sc_kpm.utils.action_utils import (
 from sc_kpm import ScKeynodes
 import numpy as np
 import requests
-
+import json
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s | %(name)s | %(message)s", datefmt="[%d-%b-%y %H:%M:%S]"
@@ -69,7 +69,9 @@ class AgentGetCatalogTheorems(ScAgentClassic):
             )
             theorems = template_search(template)
             theorem_name_list = []
-        
+            
+            self.logger.info(theorems)
+
             for theorem in theorems:
                 theorem_this = theorem.get('_theorem')
                 template = ScTemplate()
@@ -85,10 +87,19 @@ class AgentGetCatalogTheorems(ScAgentClassic):
                 name_link = name.get('_theorem_name')
                 theorem_name = get_link_content_data(name_link)
                 theorem_name_list.append(theorem_name)
+                self.logger.info(theorem_name_list)
                 
             theorem_name_list.sort()
-            '''for theorem_number_count in theorem_name_list:
-                self.logger.info(f"{theorem_number_count}")'''
+            self.logger.info(f'!!!{theorem_name_list}')
+            data = {1:theorem_name_list}
+            text = str(json.dumps(data))
+            
+            construction = ScConstruction()
+            construction.create_link(sc_types.LINK_CONST, ScLinkContent(text, ScLinkContentType.STRING))
+            addrs = create_elements(construction)
+            link_answer = addrs[0]
+            
+            create_action_answer(action_node, link_answer)
             return ScResult.OK
 
             

@@ -89,10 +89,15 @@ class AgentGetCatalogProblems(ScAgentClassic):
                 self.logger.info(f"{problem_number_count}")'''
             data = {1:problem_number_list}
             text = str(json.dumps(data))
-            create_action_answer(action_node, text)
+            
+            construction = ScConstruction()
+            construction.create_link(sc_types.LINK_CONST, ScLinkContent(text, ScLinkContentType.STRING))
+            addrs = create_elements(construction)
+            link_answer = addrs[0]
+            
+            create_action_answer(action_node, link_answer)
             return ScResult.OK
             
-
         except Exception as e:
             self.logger.info(f"AgentGetCatalogProblems: finished with an error {e}")
             return ScResult.ERROR
