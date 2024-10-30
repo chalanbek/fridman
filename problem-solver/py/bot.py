@@ -105,7 +105,7 @@ async def get_task_info(update: Update, context: ContextTypes.DEFAULT_TYPE, acti
                 )
                 break
         else:
-            await update.message.reply_text('Вы еще не зарегистрированы! (напишише /register чтобы сдеать это)')
+            await update.message.reply_text('Вы еще не зарегистрированы! (напишите /register чтобы сделать это)')
             return
     else:
         kwargs = dict(
@@ -180,7 +180,28 @@ async def get_user_profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     result = template_search(template)
     link = result[0].get('link')
     result_text = get_link_content_data(link)
-    await update.message.reply_text(f'Ваш профиль: {result_text}', parse_mode='html')
+    result_text = json.loads(result_text)
+    profile_info = (
+        f"<b>Информация о вашем профиле</b>\n\n"
+        f"• Фамилия: {result_text['surname']}\n"
+        f"• Имя: {result_text['first_name']}\n"
+        f"• Отчество: {result_text['patronymic']}\n"
+        f"• Класс: {result_text['grade']}\n"
+        f"• Город: {result_text['city']}\n"
+        f"• Рейтинг: {round(float(result_text['score_for_the_level_of_solved_problems']), 3)}\n"
+        f"• Опыт: {round(float(result_text['solution_scores']), 3)}\n"
+        f"• Уровень знаний:\n"
+        f"     » Логика и теория множеств: {round(float(result_text['knowledge_level']['logic and set theory']), 3)}\n"
+        f"     » Алгебра и арифметика: {round(float(result_text['knowledge_level']['algebra and arithmetic']), 3)}\n"
+        f"     » Геометрия: {round(float(result_text['knowledge_level']['geometry']), 3)}\n"
+        f"     » Комбинаторика: {round(float(result_text['knowledge_level']['combinatorics']), 3)}\n"
+        f"     » Вероятность и статистика: {round(float(result_text['knowledge_level']['probability and statistics']), 3)}\n"
+        f"     » Математический анализ: {round(float(result_text['knowledge_level']['mathematical analysis']), 3)}\n"
+        f"     » Методы: {round(float(result_text['knowledge_level']['methods']), 3)}\n"
+        f"• Количество решенных задач: {result_text['solved_problems']}\n"
+        f"• Количество нерешенных задач: {result_text['not_solved_problems']}"
+    )
+    await update.message.reply_text(profile_info, parse_mode='html')
 
 async def get_catalog(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     context.user_data['current_direction'] = 0
