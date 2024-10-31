@@ -22,7 +22,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     text ='''
     ㅤ\n
     Здравствуй, друг! Хочешь начать писать олимпиады по математике? Или быть может ты уже опытный олимпиадник и хочешь улучшить свой результат? ФРИДМАН всегда готов тебе помочь! Скорее жми /register, чтобы зарегистрироваться! Не переживай, для отмены регистрации можно нажать /cancel.\n
-    Чтобы начать решать задачу можешь просто написать "условие задачи" или "решать задачу" и добавить её номер. Чтобы получить полное решение задачи можно написать "полное решение задачи" и номер, "краткое решение задачи" для краткого решения, "как решать задачу" для подсказки и конечно же "ответ" для ответа.\n
+    Чтобы начать решать задачу можешь просто написать "условие задачи", или "решать задачу", или /problem и добавить её номер. Чтобы получить полное решение задачи можно написать "полное решение задачи" или /solution и номер, "краткое решение задачи" или /short для краткого решения, "как решать задачу" или /hint для подсказки и конечно же "ответ" или /get_answer для ответа.\n
     Помни: если ты уже решаешь какую-то задачу, номер в командах можно не писать.\n
     При решении задачи можно написать /answer и ответ (одним сообщением) для ввода ответа на проверку. Не для всех задач это доступно. Чтобы выбрать задачу, уверенно жми /catalog , выбирай тему, а там и задачу!\n
     Тебе не обязательно самостоятельно копаться в каталоге. Ты всегда можешь нажать /recommendation и система всё сделает за тебя!\n
@@ -38,7 +38,13 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 /catalog - команда отображения каталога \n
 /answer - команда ввода ответа на задачу \n
 /recommendation - команда подбора задачи системой \n
-/profile - команда просмотра профиля \n'''
+/profile - команда просмотра профиля \n
+/hint - команда получения подсказки к задаче\n
+/short - команда получения краткого решения задачи\n
+/solution - команда получения полного решения задачи\n
+/problem - команда получения условия задачи\n
+/get_answer - команда получения ответа задачи
+'''
     await update.message.reply_text(text, parse_mode='html')
 
 async def register(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -562,7 +568,15 @@ def find_task_number(message):
     
     if match:
         return match.group(1)  # Возвращаем номер задачи
-    return None  # Если номер не найден, возвращаем None
+    else:
+        match = re.search(r'ответ\s*(\d+)', message)
+        if match:
+            return match.group(1)  # Возвращаем номер задачи
+        else:
+            match = re.search(r'/[^ ]*\s*(\d+)', message)
+            if match:
+                return match.group(1)  # Возвращаем номер задачи
+            return None  # Если номер не найден, возвращаем None
 
 def create_profile(user_data):
     construction = ScConstruction()  # Create link for example
@@ -597,13 +611,19 @@ if __name__ == "__main__":
     )
 
     application.add_handler(MessageHandler(filters.Regex('как решать задачу'), get_hint))
+    application.add_handler(CommandHandler('hint', get_hint))
     application.add_handler(MessageHandler(filters.Regex('краткое решение задачи'), get_short_solution))
+    application.add_handler(CommandHandler('short', get_short_solution))
     application.add_handler(MessageHandler(filters.Regex('полное решение задачи'), get_complete_solution))
+    application.add_handler(CommandHandler('solution', get_complete_solution))
     application.add_handler(MessageHandler(filters.Regex('условие задачи'), get_problem_text))
+    application.add_handler(CommandHandler('problem', get_problem_text))
     application.add_handler(MessageHandler(filters.Regex('решать задачу'), get_problem_text))
+    application.add_handler(CommandHandler('problem', get_problem_text))
     application.add_handler(MessageHandler(filters.Regex('ответ задачи'), get_problem_answer))
     application.add_handler(MessageHandler(filters.Regex('ответ на задчу'), get_problem_answer))
     application.add_handler(MessageHandler(filters.Regex('ответ'), get_problem_answer))
+    application.add_handler(CommandHandler('get_answer', get_problem_answer))
     application.add_handler(CommandHandler('answer', check_user_answer))
     application.add_handler(CommandHandler('recommendation', match_problem))
 
