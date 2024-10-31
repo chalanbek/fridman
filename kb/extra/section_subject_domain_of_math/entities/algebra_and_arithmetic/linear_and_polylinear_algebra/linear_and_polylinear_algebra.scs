@@ -1,0 +1,10 @@
+linear_and_polylinear_algebra
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Линейная и полилинейная алгебра]
+        (* <- lang_ru;; *);
+    [linear and polylinear algebra]
+        (* <- lang_en;; *);;

@@ -1,0 +1,28 @@
+concept_theorem
+<- sc_node_class;
+=> nrel_main_idtf:
+	[теорема](* <- lang_ru;; *);
+	[theorem](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (теорема)](* <- lang_ru;; *);
+            [Def. (theorem)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [теорема - математическая теорема по определенной теме.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [theorem - mathematical theorem on a specific topic.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_topic
+            };;
+	*);;

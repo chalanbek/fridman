@@ -1,0 +1,29 @@
+concept_admin
+<- sc_node_class;
+=> nrel_main_idtf:
+	[администратор](* <- lang_ru;; *);
+	[admin](* <- lang_en;; *);
+<= nrel_inclusion: concept_user;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (администратор)](* <- lang_ru;; *);
+            [Def. (admin)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [администратор - пользователь, имеющий возможность редактировать и добавлять задачи и теорию.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [admin - a user who has the ability to edit and add tasks and theory.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_user
+            };;
+	*);;

@@ -1,0 +1,17 @@
+combinatorics
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_first_topic;
+
+=> nrel_main_idtf:
+    [Комбинаторика]
+        (* <- lang_ru;; *);
+    [combinatorics]
+        (* <- lang_en;; *);;
+
+//задачи темы:
+ 
+//теоремы темы:
+//подтемы темы
+
+//

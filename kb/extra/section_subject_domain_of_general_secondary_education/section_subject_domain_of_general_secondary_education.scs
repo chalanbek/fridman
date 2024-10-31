@@ -1,0 +1,55 @@
+section_subject_domain_of_general_secondary_education => nrel_main_idtf: [Раздел. Предметная область общего среднего образования] (* <- lang_ru;; *);;
+section_subject_domain_of_general_secondary_education => nrel_main_idtf: [Section. Subject domain of general secondary education] (* <- lang_en;; *);;
+section_subject_domain_of_general_secondary_education <- sc_node_class;;
+
+non_atomic_section -> section_subject_domain_of_general_secondary_education;;
+
+section_subject_domain_of_general_secondary_education = [*
+    subject_domain_of_general_secondary_education
+    =>nrel_main_idtf:
+        [Предметная область общего среднего образования](* <- lang_ru;; *);
+        [Subject domain of general secondary education](* <- lang_en;; *);
+    <- subject_domain;
+    -> rrel_maximum_studied_object_class: concept_test;
+    -> rrel_not_maximum_studied_object_class:
+        concept_problem;
+        concept_question;
+        concept_recommendation;
+    -> rrel_explored_relation:
+        nrel_level_within_class;
+        nrel_relative_to_test_level;
+        nrel_questions;
+        nrel_recommendation_for_solving_problem;
+        nrel_theory_recommendation;;
+*];;
+
+rrel_key_sc_element -> (section_subject_domain_of_general_secondary_education -> subject_domain_of_general_secondary_education)
+(*
+	=> nrel_key_sc_element_order: (section_subject_domain_of_general_secondary_education -> concept_test)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_general_secondary_education -> concept_question)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_general_secondary_education -> concept_problem)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_general_secondary_education -> concept_recommendation)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_general_secondary_education -> nrel_level_within_class)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_general_secondary_education -> nrel_relative_to_test_level)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_general_secondary_education -> nrel_questions)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_general_secondary_education -> nrel_recommendation_for_solving_problem)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_general_secondary_education -> nrel_theory_recommendation)
+
+	(* <- rrel_key_sc_element;; *);;
+*);;*);;*);;*);;*);;*);;*);;*);;*);;

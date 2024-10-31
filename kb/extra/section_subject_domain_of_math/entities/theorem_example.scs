@@ -1,0 +1,13 @@
+theorem_example
+<- concept_wit_entity;
+<- concept_theorem;
+
+=> nrel_main_idtf:
+    [пример теоремы]
+        (* <- lang_ru;; *);
+    [theorem example]
+        (* <- lang_en;; *);
+
+=> nrel_theorem_name: [название теоремы](* <- concept_theorem_name;; *);
+=> nrel_theorem_definition: [определение теоремы](* <- concept_theorem_definition;; *);;
+

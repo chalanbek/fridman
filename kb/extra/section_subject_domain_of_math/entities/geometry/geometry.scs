@@ -1,0 +1,17 @@
+geometry
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_first_topic;
+
+=> nrel_main_idtf:
+    [Геометрия]
+        (* <- lang_ru;; *);
+    [geometry]
+        (* <- lang_en;; *);;
+
+//задачи темы:
+ 
+//теоремы темы:
+//подтемы темы
+
+//

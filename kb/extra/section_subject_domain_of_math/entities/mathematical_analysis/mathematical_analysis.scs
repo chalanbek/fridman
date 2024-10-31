@@ -1,0 +1,17 @@
+mathematical_analysis
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_first_topic;
+
+=> nrel_main_idtf:
+    [Математический анализ]
+        (* <- lang_ru;; *);
+    [mathematical analysis]
+        (* <- lang_en;; *);;
+
+//задачи темы:
+ 
+//теоремы темы:
+//подтемы темы
+
+//

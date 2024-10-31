@@ -1,0 +1,12 @@
+set_theory_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Теория множеств прочее]
+        (* <- lang_ru;; *);
+    [set theory other]
+        (* <- lang_en;; *);;
+
+ 

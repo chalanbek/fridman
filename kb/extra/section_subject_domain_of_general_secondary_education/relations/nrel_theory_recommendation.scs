@@ -1,0 +1,43 @@
+nrel_theory_recommendation
+<-sc_node_norole_relation; 
+<-relation;
+<-binary_relation;
+<-oriented_relation;
+<-antireflexive_relation;
+<-antitransitive_relation;
+<-asymmetric_relation;
+=>nrel_main_idtf:
+	[рекомендация по теории*]
+	(* <- lang_ru;; *);
+	[theory recommendation*]
+	(* <- lang_en;; *);
+=>nrel_first_domain: concept_theory;
+=>nrel_second_domain: concept_recommendation;
+<-rrel_key_sc_element:
+	...
+	(*
+	=> nrel_main_idtf:
+		[Опр. (рекомендация по теории*)]
+		(* <- lang_ru;; *);
+		[Def. (theory recommendation*)]
+		(* <- lang_en;; *);;
+	<- definition;;
+	<= nrel_sc_text_translation:
+		...
+		(*
+		-> rrel_example:
+			[рекомендация по теории* - отношение, связывающее задачу с ее кратким решением.]
+			(* <- lang_ru;; *);;
+		*);
+		...
+		(*
+		-> rrel_example: 
+			[theory recommendation* is a relation, that connects promlem with it theory recommendation.]
+			(* <- lang_en;; *);;
+		*);;
+	<= nrel_using_constants:
+		{
+		concept_problem;
+		concept_problem_solution
+		};;
+	*);;

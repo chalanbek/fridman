@@ -1,0 +1,29 @@
+concept_experience
+<- sc_node_class;
+=> nrel_main_idtf:
+	[опыт](* <- lang_ru;; *);
+	[experience](* <- lang_en;; *);
+<= nrel_inclusion: concept_statistical_indicator;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (опыт)](* <- lang_ru;; *);
+            [Def. (experience)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [опыт - опыт, получаемй пользователем в ходе решения задач.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [experience - the experience gained by the user in the course of solving tasks.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_statistical_indicator
+            };;
+	*);;

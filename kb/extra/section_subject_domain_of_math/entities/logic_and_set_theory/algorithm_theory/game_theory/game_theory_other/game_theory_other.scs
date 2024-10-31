@@ -1,0 +1,12 @@
+game_theory_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Теория игр прочее]
+        (* <- lang_ru;; *);
+    [game theory other]
+        (* <- lang_en;; *);;
+
+ 

@@ -1,0 +1,29 @@
+game_theory
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Теория игр]
+        (* <- lang_ru;; *);
+    [game theory]
+        (* <- lang_en;; *);;
+
+//задачи темы:
+ 
+//теоремы темы:
+ 
+//подтемы темы
+/*=> nrel_subtopic: joke_games;
+=> nrel_subtopic: symmetric_strategy;
+=> nrel_subtopic: winning_and_losing_positions;;
+=> nrel_subtopic: game_theory_other;*/
+
+@joke_games_arc = (game_theory => nrel_subtopic: joke_games);;
+@symmetric_strategy_arc = (game_theory => nrel_subtopic: symmetric_strategy);;
+@joke_games_arc => nrel_subtopic_sequence: @symmetric_strategy_arc;;
+@winning_and_losing_positions_arc = (game_theory => nrel_subtopic: winning_and_losing_positions);;
+@symmetric_strategy_arc => nrel_subtopic_sequence: @winning_and_losing_positions_arc;;
+@game_theory_other_arc = (game_theory => nrel_subtopic: game_theory_other);;
+@winning_and_losing_positions_arc => nrel_subtopic_sequence: @game_theory_other_arc;;
+
+//

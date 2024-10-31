@@ -1,0 +1,13 @@
+theorem_andrews
+<- concept_wit_entity;
+<- concept_theorem;
+
+=> nrel_main_idtf:
+    [Теорема Андрея]
+        (* <- lang_ru;; *);
+    [Andrews theorem]
+        (* <- lang_en;; *);
+
+=> nrel_theorem_name: [Теорема Андрея](* <- concept_theorem_name;; *);
+=> nrel_theorem_definition: [Эээ кароче ну это самое ну учитесь кароч](* <- concept_theorem_definition;; *);;
+

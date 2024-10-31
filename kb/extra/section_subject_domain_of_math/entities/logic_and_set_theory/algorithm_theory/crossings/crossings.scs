@@ -1,0 +1,12 @@
+crossings
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Переправы]
+        (* <- lang_ru;; *);
+    [crossings]
+        (* <- lang_en;; *);;
+
+ 

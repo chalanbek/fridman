@@ -1,0 +1,44 @@
+nrel_start_test
+<-sc_node_norole_relation;
+<-relation;
+<-binary_relation;
+<-oriented_relation;
+<-antireflexive_relation;
+<-antitransitive_relation;
+<-asymmetric_relation;
+=>nrel_main_idtf:
+	[первичный тест*]
+	(* <- lang_ru;; *);
+	[startnrel_start_test*]
+	(* <- lang_en;; *);
+=>nrel_first_domain: computer_system;
+=>nrel_second_domain: concept_test;
+<-rrel_key_sc_element:
+	...
+	(*
+	=> nrel_main_idtf:
+		[Опр. (первичный тест*)]
+		(* <- lang_ru;; *);
+		[Def. (startnrel_start_test*)]
+		(* <- lang_en;; *);;
+	<- definition;;
+	<= nrel_sc_text_translation:
+		...
+		(*
+		-> rrel_example:
+			[первичный тест* - отношение, связывающее систему с первичный тестом.]
+			(* <- lang_ru;; *);;
+		*);
+		...
+		(*
+		-> rrel_example: 
+			[startnrel_start_test* is a relationship, that connects system with start test.]
+			(* <- lang_en;; *);;
+		*);;
+	<= nrel_using_constants:
+		{
+		computer_system;
+		concept_test;
+		relation
+		};;
+	*);;
