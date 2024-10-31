@@ -18,6 +18,29 @@ connect(url)
 NAME, SURNAME, PATRONYMIC, CLASS, CITY, LEVEL = range(6)
 TOPICS = ['Логика и теория множеств', 'Алгебра и арифметика', 'Геометрия', 'Комбинаторика','Вероятность и статистика', 'Математический анализ', 'Методы']
 
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    text ='''
+    ㅤ\n
+    Здравствуй, друг! Хочешь начать писать олимпиады по математике? Или быть может ты уже опытный олимпиадник и хочешь улучшить свой результат? ФРИДМАН всегда готов тебе помочь! Скорее жми /register, чтобы зарегистрироваться! Не переживай, для отмены регистрации можно нажать /cancel.\n
+    Чтобы начать решать задачу можешь просто написать "условие задачи" или "решать задачу" и добавить её номер. Чтобы получить полное решение задачи можно написать "полное решение задачи" и номер, "краткое решение задачи" для краткого решения, "как решать задачу" для подсказки и конечно же "ответ" для ответа.\n
+    Помни: если ты уже решаешь какую-то задачу, номер в командах можно не писать.\n
+    При решении задачи можно написать /answer и ответ (одним сообщением) для ввода ответа на проверку. Не для всех задач это доступно. Чтобы выбрать задачу, уверенно жми /catalog , выбирай тему, а там и задачу!\n
+    Тебе не обязательно самостоятельно копаться в каталоге. Ты всегда можешь нажать /recommendation и система всё сделает за тебя!\n
+    Помни: ты всегда можешь просмотреть свой профиль нажав /profile.\n
+    Если у тебя возникнут вопросы по поводу команд, /help напомнит тебе всё что надо!\n
+    <i>Удачи в решении, успехов в олимпиадах!</i>\n
+    ㅤ\n
+    '''
+    await update.message.reply_text(text, parse_mode='html')
+
+async def help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    text = '''/register - команда регистрации \n
+/catalog - команда отображения каталога \n
+/answer - команда ввода ответа на задачу \n
+/recommendation - команда подбора задачи системой \n
+/profile - команда просмотра профиля \n'''
+    await update.message.reply_text(text, parse_mode='html')
+
 async def register(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text("Введите ваше имя:")
     return NAME
@@ -44,7 +67,15 @@ async def student_class(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
 
 async def city(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     context.user_data['city'] = update.message.text
-    await update.message.reply_text("Оцените свой уровень знаний от 0 до 7:")
+    await update.message.reply_text('''Оцените свой уровень знаний на основе вашего опыта от 0 до 7:
+0 - вы не знаете математику от слова совсем
+1 - вы знаете математику на школьном уровне
+2 - вы знаете математику на достаточно хорошем школьном уровне
+3 - вы принимали участие в школьной олимпиаде
+4 - вы принимали участие в районной олимпиаде
+5 - вы принимали участие в областной олимпиаде
+6 - вы принимали участие в республиканской олимпиаде
+7 - вы принимали участие в международной олимпиаде''')
     return LEVEL
 
 async def level(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -441,6 +472,54 @@ async def call_AgentGetCatalogProblemsorTheorems(agent, topic_addr, query, conte
     else:
         return False
     
+async def match_problem(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    concept_tg_id_ = ScKeynodes.resolve('concept_tg_id', sc_types.NODE_CONST_CLASS)
+    [links_with_tg_id] = get_links_by_content(update.message.chat_id)
+    for id in links_with_tg_id:
+        if check_edge(sc_types.EDGE_ACCESS_VAR_POS_PERM, concept_tg_id_, id):
+            user_id_addr = id
+            break
+    else:
+        await update.message.reply_text('Вы еще не зарегистрированы! (напишише /register чтобы сдеать это)')
+        return
+    
+    template = ScTemplate()
+    template.triple_with_relation(
+            (sc_types.NODE_VAR, 'user'),
+            sc_types.EDGE_D_COMMON_VAR,
+            user_id_addr,
+            sc_types.EDGE_ACCESS_VAR_POS_PERM,
+            ScKeynodes.resolve('nrel_tg_id', sc_types.NODE_CONST_NOROLE),
+        )
+
+    results = template_search(template)
+    result_search = results[0]
+    user_addr = result_search.get('user')
+        
+    kwargs = dict(
+        arguments={user_addr: False},
+        concepts=["question", 'action_problem_matching_for_user'],
+    )
+
+    action, is_successfully = execute_agent(**kwargs, wait_time=3)  # ScAddr(...), bool
+    if not is_successfully:
+        await update.message.reply_text('Что-то не так...')
+        return
+    result = get_action_answer(action)
+    template = ScTemplate()
+    template.triple(
+        result,
+        sc_types.EDGE_ACCESS_VAR_POS_PERM,
+        (sc_types.LINK_VAR, 'link')
+    )
+    result = template_search(template)
+    link = result[0].get('link')
+    number = get_link_content_data(link)
+    result_text = await get_task_info(update,context,action='action_get_problem_text', number=number)
+    if number.isnumeric():
+        await update.message.reply_text(f'<b>Задача {number}:</b>\n {result_text}', parse_mode='html')
+    else:
+        await update.message.reply_text(f'{result_text}', parse_mode='html')
 async def check_user_answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     concept_tg_id_ = ScKeynodes.resolve('concept_tg_id', sc_types.NODE_CONST_CLASS)
     [links_with_tg_id] = get_links_by_content(update.message.chat_id)
@@ -523,10 +602,15 @@ if __name__ == "__main__":
     application.add_handler(MessageHandler(filters.Regex('условие задачи'), get_problem_text))
     application.add_handler(MessageHandler(filters.Regex('решать задачу'), get_problem_text))
     application.add_handler(MessageHandler(filters.Regex('ответ задачи'), get_problem_answer))
+    application.add_handler(MessageHandler(filters.Regex('ответ на задчу'), get_problem_answer))
+    application.add_handler(MessageHandler(filters.Regex('ответ'), get_problem_answer))
     application.add_handler(CommandHandler('answer', check_user_answer))
+    application.add_handler(CommandHandler('recommendation', match_problem))
 
     application.add_handler(CommandHandler('profile', get_user_profile))
     application.add_handler(CommandHandler('catalog', get_catalog))
+    application.add_handler(CommandHandler('start', start))
+    application.add_handler(CommandHandler('help', help))
     application.add_handler(CallbackQueryHandler(onButton))
     application.add_handler(conv_handler)
 
