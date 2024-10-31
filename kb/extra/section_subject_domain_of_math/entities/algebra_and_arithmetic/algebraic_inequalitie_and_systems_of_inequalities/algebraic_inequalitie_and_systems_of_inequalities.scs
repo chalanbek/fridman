@@ -3,7 +3,7 @@ algebraic_inequalitie_and_systems_of_inequalities
 <- concept_topic;
 
 => nrel_main_idtf:
-    [Алгебраические неравенства и системы неравенств]
+    [Неравенства и их системы]
         (* <- lang_ru;; *);
     [algebraic inequalitie and systems of inequalities]
         (* <- lang_en;; *);;

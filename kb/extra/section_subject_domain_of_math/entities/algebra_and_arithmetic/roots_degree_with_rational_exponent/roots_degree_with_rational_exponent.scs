@@ -3,7 +3,7 @@ roots_degree_with_rational_exponent
 <- concept_topic;
 
 => nrel_main_idtf:
-    [Корни. Степень с рациональным показателем]
+    [Корни, рациональные степени]
         (* <- lang_ru;; *);
     [roots degree with rational exponent]
         (* <- lang_en;; *);;
