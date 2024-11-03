@@ -20,10 +20,14 @@ problem_2230291
 <- rrel_problem_topic: algebra_and_arithmetic_other;;
 @eight_first_link = [8];;
 @nine_first_link = [9];;
+@eleven_first_link = [11];;
 @two_second_link = [2];;
 (@eight_first_link => @two_second_link)
     <- nrel_grade_comlexity_level;
     <= nrel_level_within_grade: problem_2230291;;
 (@nine_first_link => @two_second_link)
+    <- nrel_grade_comlexity_level;
+    <= nrel_level_within_grade: problem_2230291;;
+(@eleven_first_link => @two_second_link)
     <- nrel_grade_comlexity_level;
     <= nrel_level_within_grade: problem_2230291;;
