@@ -15,7 +15,8 @@ user_data = dict()
 url = "ws://localhost:8090/ws_json"
 connect(url)
 # Define the command handler for /start
-NAME, SURNAME, PATRONYMIC, CLASS, CITY, LEVEL = range(6)
+NAME, SURNAME, PATRONYMIC, CLASS, CITY, LEVEL, FIRST, SECOND = range(8)
+
 TOPICS = ['Логика и теория множеств', 'Алгебра и арифметика', 'Геометрия', 'Комбинаторика','Вероятность и статистика', 'Математический анализ', 'Методы']
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -24,7 +25,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     Здравствуй, друг! Хочешь начать писать олимпиады по математике? Или быть может ты уже опытный олимпиадник и хочешь улучшить свой результат? ФРИДМАН всегда готов тебе помочь! Скорее жми /register, чтобы зарегистрироваться! Не переживай, для отмены регистрации можно нажать /cancel.\n
     Чтобы начать решать задачу можешь просто написать "условие задачи", или "решать задачу", или /problem и добавить её номер. Чтобы получить полное решение задачи можно написать "полное решение задачи" или /solution и номер, "краткое решение задачи" или /short для краткого решения, "как решать задачу" или /hint для подсказки и конечно же "ответ" или /get_answer для ответа.\n
     Помни: если ты уже решаешь какую-то задачу, номер в командах можно не писать.\n
-    При решении задачи можно написать /answer и ответ (одним сообщением) для ввода ответа на проверку. Не для всех задач это доступно. Чтобы выбрать задачу, уверенно жми /catalog , выбирай тему, а там и задачу!\n
+    При решении задачи можно написать /answer для ввода ответа на проверку, а также /cancel для его отмены. Не для всех задач это доступно. Чтобы выбрать задачу, уверенно жми /catalog , выбирай тему, а там и задачу!\n
     Тебе не обязательно самостоятельно копаться в каталоге. Ты всегда можешь нажать /recommendation и система всё сделает за тебя!\n
     Помни: ты всегда можешь просмотреть свой профиль нажав /profile.\n
     Если у тебя возникнут вопросы по поводу команд, /help напомнит тебе всё что надо!\n
@@ -43,7 +44,8 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 /short - команда получения краткого решения задачи\n
 /solution - команда получения полного решения задачи\n
 /problem - команда получения условия задачи\n
-/get_answer - команда получения ответа задачи
+/get_answer - команда получения ответа задачи\n
+/cancel - команда отмены регистрации или ввода ответа
 '''
     await update.message.reply_text(text, parse_mode='html')
 
@@ -521,12 +523,24 @@ async def match_problem(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     result = template_search(template)
     link = result[0].get('link')
     number = get_link_content_data(link)
-    result_text = await get_task_info(update,context,action='action_get_problem_text', number=number)
     if number.isnumeric():
+        result_text = await get_task_info(update,context,action='action_get_problem_text', number=number)
         await update.message.reply_text(f'<b>Задача {number}:</b>\n {result_text}', parse_mode='html')
     else:
-        await update.message.reply_text(f'{result_text}', parse_mode='html')
+        await update.message.reply_text(f'{number}', parse_mode='html')
+
+async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    await update.message.reply_text("Введите ответ:")
+    return FIRST
+
+async def cancel2(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    await update.message.reply_text("Ввод ответа отменен.")
+    return ConversationHandler.END
+
 async def check_user_answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if 'current_problem' not in context.user_data:
+        await update.message.reply_text('Похоже, что вы ничего не решаете в данный момент')
+        return ConversationHandler.END
     concept_tg_id_ = ScKeynodes.resolve('concept_tg_id', sc_types.NODE_CONST_CLASS)
     [links_with_tg_id] = get_links_by_content(update.message.chat_id)
     for id in links_with_tg_id:
@@ -545,11 +559,12 @@ async def check_user_answer(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             break
     else:
         await update.message.reply_text('Вы еще не зарегистрированы! (напишите /register чтобы сделать это)')
-        return
+        return ConversationHandler.END
     
     construction = ScConstruction()  # Create link for example
     construction.create_link(sc_types.LINK_CONST, ScLinkContent(context.user_data['current_problem'], ScLinkContentType.STRING))
-    construction.create_link(sc_types.LINK_CONST, ScLinkContent(re.sub("/answer\s*", "", update.message.text), ScLinkContentType.STRING))
+    #construction.create_link(sc_types.LINK_CONST, ScLinkContent(re.sub("/answer\s*", "", update.message.text), ScLinkContentType.STRING))
+    construction.create_link(sc_types.LINK_CONST, ScLinkContent(update.message.text.replace(' ', ""), ScLinkContentType.STRING))
     [arg1, arg2] = create_elements(construction)
     
     kwargs = dict(
@@ -561,7 +576,8 @@ async def check_user_answer(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 
     action, is_successfully = execute_agent(**kwargs, wait_time=3)  # ScAddr(...), bool
     await update.message.reply_text(f'Правильно', parse_mode='html') if is_successfully else await update.message.reply_text(f'Неправильно', parse_mode='html')
-    
+    return ConversationHandler.END
+
 def find_task_number(message):
     # Регулярное выражение для поиска номера задачи
     match = re.search(r'задач[уи]\s*(\d+)', message)
@@ -610,6 +626,14 @@ if __name__ == "__main__":
         fallbacks=[CommandHandler('cancel', cancel)],
     )
 
+    conv_handler2 = ConversationHandler(
+        entry_points=[CommandHandler('answer', answer)],
+        states={
+            FIRST: [MessageHandler(filters.TEXT & ~filters.COMMAND, check_user_answer)],
+        },
+        fallbacks=[CommandHandler('cancel', cancel2)],
+    )
+
     application.add_handler(MessageHandler(filters.Regex('как решать задачу'), get_hint))
     application.add_handler(CommandHandler('hint', get_hint))
     application.add_handler(MessageHandler(filters.Regex('краткое решение задачи'), get_short_solution))
@@ -624,7 +648,7 @@ if __name__ == "__main__":
     application.add_handler(MessageHandler(filters.Regex('ответ на задчу'), get_problem_answer))
     application.add_handler(MessageHandler(filters.Regex('ответ'), get_problem_answer))
     application.add_handler(CommandHandler('get_answer', get_problem_answer))
-    application.add_handler(CommandHandler('answer', check_user_answer))
+    #application.add_handler(CommandHandler('answer', check_user_answer))
     application.add_handler(CommandHandler('recommendation', match_problem))
 
     application.add_handler(CommandHandler('profile', get_user_profile))
@@ -633,6 +657,7 @@ if __name__ == "__main__":
     application.add_handler(CommandHandler('help', help))
     application.add_handler(CallbackQueryHandler(onButton))
     application.add_handler(conv_handler)
+    application.add_handler(conv_handler2)
 
     # Run the bot until you send a signal with Ctrl-C
     application.run_polling()
