@@ -15,6 +15,7 @@ section_subject_domain_of_users = [*
         concept_admin;
         concept_student;
         concept_teacher;
+        concept_tg_id;
     -> rrel_explored_relation:
         nrel_theory_archive;
         nrel_city;
@@ -29,6 +30,7 @@ section_subject_domain_of_users = [*
         nrel_theorem_archive;
         nrel_solved_problems;
         nrel_not_solved_problems;
+        nrel_tg_id;
         nrel_users;;
 *];;
 section_subject_domain_of_users <= nrel_section_decomposition:

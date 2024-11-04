@@ -1,0 +1,9 @@
+trigonometry
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Тригонометрия]
+        (* <- lang_ru;; *);
+    [trigonometry]
+        (* <- lang_en;; *);;

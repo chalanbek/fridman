@@ -1,0 +1,12 @@
+relation_of_equivalence
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [отношение эквивалентности]
+        (* <- lang_ru;; *);
+    [relation_of_equivalence]
+        (* <- lang_en;; *);;
+
+ 

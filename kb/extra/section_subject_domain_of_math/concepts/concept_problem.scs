@@ -23,6 +23,6 @@ concept_problem
             *);;
         <= nrel_using_constants:
             {
-                concept_math_topic
+                concept_topic
             };;
 	*);;

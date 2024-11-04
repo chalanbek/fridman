@@ -1,0 +1,32 @@
+algorithm_theory
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Теория алгоритмов]
+        (* <- lang_ru;; *);
+    [algorithm theory]
+        (* <- lang_en;; *);;
+
+//задачи темы:
+ 
+//теоремы темы:
+ 
+//подтемы темы
+/*=> nrel_subtopic: game_theory;
+=> nrel_subtopic: weighings;
+=> nrel_subtopic: cooperative_algorithms;
+=> nrel_subtopic: crossings;
+=> nrel_subtopic: theory_of_algorithms_other;*/
+
+@game_theory_arc = (algorithm_theory => nrel_subtopic: game_theory);;
+@weighings_arc = (algorithm_theory => nrel_subtopic: weighings);;
+@game_theory_arc => nrel_subtopic_sequence: @weighings_arc;;
+@cooperative_algorithms_arc = (algorithm_theory => nrel_subtopic: cooperative_algorithms);;
+@weighings_arc => nrel_subtopic_sequence: @cooperative_algorithms_arc;;
+@crossings_arc = (algorithm_theory => nrel_subtopic: crossings);;
+@cooperative_algorithms_arc => nrel_subtopic_sequence: @crossings_arc;;
+@theory_of_algorithms_other_arc = (algorithm_theory => nrel_subtopic: theory_of_algorithms_other);;
+@crossings_arc => nrel_subtopic_sequence: @theory_of_algorithms_other_arc;;
+
+//

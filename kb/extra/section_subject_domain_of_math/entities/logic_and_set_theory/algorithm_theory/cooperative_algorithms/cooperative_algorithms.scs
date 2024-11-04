@@ -1,0 +1,12 @@
+cooperative_algorithms
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Кооперативные алгоритмы]
+        (* <- lang_ru;; *);
+    [cooperative algorithms]
+        (* <- lang_en;; *);;
+
+ 
