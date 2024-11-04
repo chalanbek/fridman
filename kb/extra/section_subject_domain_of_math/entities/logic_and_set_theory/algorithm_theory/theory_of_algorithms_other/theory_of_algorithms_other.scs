@@ -1,0 +1,10 @@
+theory_of_algorithms_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Теория алгоритмов прочее]
+        (* <- lang_ru;; *);
+    [theory of algorithms other]
+        (* <- lang_en;; *);;

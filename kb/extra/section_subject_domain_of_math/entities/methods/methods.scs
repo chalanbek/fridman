@@ -1,0 +1,17 @@
+methods
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_first_topic;
+
+=> nrel_main_idtf:
+    [Методы]
+        (* <- lang_ru;; *);
+    [methods]
+        (* <- lang_en;; *);;
+
+//задачи темы:
+ 
+//теоремы темы:
+//подтемы темы
+
+//

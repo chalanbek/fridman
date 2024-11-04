@@ -1,0 +1,15 @@
+tierless
+<- concept_wit_entity;
+=> nrel_main_idtf:
+    [неутомимый]
+        (* <- lang_ru;; *);
+    [tierless]
+        (* <- lang_en;; *);
+=> nrel_aim:
+    [цель.]
+    (* <- lang_ru;; *);
+    [другая цель.]
+    (* <- lang_ru;; *);
+
+
+<- concept_achievements;;

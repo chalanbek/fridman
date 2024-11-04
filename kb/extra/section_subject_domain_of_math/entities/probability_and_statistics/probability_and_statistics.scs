@@ -1,0 +1,17 @@
+probability_and_statistics
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_first_topic;
+
+=> nrel_main_idtf:
+    [Вероятность и статистика]
+        (* <- lang_ru;; *);
+    [probability and statistics]
+        (* <- lang_en;; *);;
+
+//задачи темы:
+ 
+//теоремы темы:
+//подтемы темы
+
+//

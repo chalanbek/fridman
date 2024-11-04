@@ -1,0 +1,12 @@
+rebuses
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [ребусы]
+        (* <- lang_ru;; *);
+    [rebuses]
+        (* <- lang_en;; *);;
+
+ 

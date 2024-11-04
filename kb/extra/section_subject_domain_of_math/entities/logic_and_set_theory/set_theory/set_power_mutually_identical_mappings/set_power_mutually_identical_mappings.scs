@@ -1,0 +1,16 @@
+set_power_mutually_identical_mappings
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [мощность множества]
+        (* <- lang_ru;; *);
+    [set power mutually identical mappings]
+        (* <- lang_en;; *);
+=> nrel_idtf:
+    [мощность множества]
+        (* <- lang_ru;; *);
+    [set power ]
+        (* <- lang_en;; *);;
+ 

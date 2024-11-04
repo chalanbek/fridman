@@ -1,0 +1,15 @@
+sixth_grader
+<- concept_wit_entity;
+=> nrel_main_idtf:
+    [Шестикласник]
+        (* <- lang_ru;; *);
+    [sixth-grader]
+        (* <- lang_en;; *);
+=> nrel_aim:
+    [цель.]
+    (* <- lang_ru;; *);
+    [другая цель.]
+    (* <- lang_ru;; *);
+
+
+<- concept_achievements;;

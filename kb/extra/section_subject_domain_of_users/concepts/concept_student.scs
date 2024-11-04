@@ -1,0 +1,29 @@
+concept_student
+<- sc_node_class;
+=> nrel_main_idtf:
+	[ученик](* <- lang_ru;; *);
+	[student](* <- lang_en;; *);
+<= nrel_inclusion: concept_user;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (ученик)](* <- lang_ru;; *);
+            [Def. (student)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [ученик - пользователь, имеющий доступ к теории, а также к задачам и их решениям.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [student - user who has access to the theory as well as to the problems and their solutions.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_user
+            };;
+	*);;

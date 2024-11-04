@@ -1,0 +1,28 @@
+concept_theory
+<- sc_node_class;
+=> nrel_main_idtf:
+	[теория](* <- lang_ru;; *);
+	[theory](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (теория)](* <- lang_ru;; *);
+            [Def. (theory)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [теория - теоретические знания в определенной математической теме.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [theory - theoretical knowledge in a specific mathematical topic.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_math_topic
+            };;
+	*);;

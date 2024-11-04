@@ -1,0 +1,28 @@
+concept_solution_answer
+<- sc_node_class;
+=> nrel_main_idtf:
+	[ответ задачи](* <- lang_ru;; *);
+	[problem solution answer](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (ученик)](* <- lang_ru;; *);
+            [Def. (student)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [ответ задачи - ответ задачи.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [problem solution answer - answer of the problem solution.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_problem
+            };;
+	*);;

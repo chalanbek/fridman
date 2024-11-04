@@ -1,0 +1,9 @@
+algebraic_inequalitie_and_systems_of_inequalities
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Неравенства и их системы]
+        (* <- lang_ru;; *);
+    [algebraic inequalitie and systems of inequalities]
+        (* <- lang_en;; *);;
