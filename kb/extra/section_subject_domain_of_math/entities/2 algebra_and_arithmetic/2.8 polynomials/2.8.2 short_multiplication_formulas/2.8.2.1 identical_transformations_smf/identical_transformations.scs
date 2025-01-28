@@ -1,0 +1,10 @@
+identical_transformations_smf
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Тождественные преобразования (фсу)]
+        (* <- lang_ru;; *);
+    [identical transformations (smf)]
+        (* <- lang_en;; *);;

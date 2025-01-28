@@ -1,0 +1,9 @@
+square_trinomial
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Квадратный трехчлен]
+        (* <- lang_ru;; *);
+    [square trinomial]
+        (* <- lang_en;; *);;

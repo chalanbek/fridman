@@ -1,0 +1,10 @@
+divisibility_signs_3_9
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Признаки делимости на 3 и 9]
+        (* <- lang_ru;; *);
+    [divisibility signs (3, 9)]
+        (* <- lang_en;; *);;

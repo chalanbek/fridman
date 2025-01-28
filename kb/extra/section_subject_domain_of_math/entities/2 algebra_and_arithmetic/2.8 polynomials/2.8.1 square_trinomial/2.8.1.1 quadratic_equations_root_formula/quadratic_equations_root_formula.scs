@@ -1,0 +1,10 @@
+quadratic_equations_root_formula
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Квадратные уравнения. Формула корней]
+        (* <- lang_ru;; *);
+    [quadratic equations. root formula]
+        (* <- lang_en;; *);;

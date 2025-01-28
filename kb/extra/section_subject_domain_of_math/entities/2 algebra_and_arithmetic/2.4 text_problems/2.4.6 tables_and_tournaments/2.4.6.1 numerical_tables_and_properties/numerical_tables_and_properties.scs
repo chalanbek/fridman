@@ -1,0 +1,10 @@
+numerical_tables_and_properties
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Числовые таблицы и их свойства]
+        (* <- lang_ru;; *);
+    [numerical tables and properties]
+        (* <- lang_en;; *);;

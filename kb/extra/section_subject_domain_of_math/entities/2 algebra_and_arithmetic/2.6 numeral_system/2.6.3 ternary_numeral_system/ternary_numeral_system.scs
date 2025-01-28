@@ -1,0 +1,10 @@
+ternary_numeral_system
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Троичная система счисления]
+        (* <- lang_ru;; *);
+    [ternary numeral system]
+        (* <- lang_en;; *);;

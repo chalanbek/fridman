@@ -1,0 +1,10 @@
+trigonometric_inequalities
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Тригонометрические неравенства]
+        (* <- lang_ru;; *);
+    [Trigonometric inequalities]
+        (* <- lang_en;; *);;

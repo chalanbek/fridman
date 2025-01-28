@@ -1,0 +1,10 @@
+recurrence_relations_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Рекуррентные соотношения (прочее)]
+        (* <- lang_ru;; *);
+    [recurrence relations other]
+        (* <- lang_en;; *);;

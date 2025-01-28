@@ -1,0 +1,10 @@
+trigonometric_equations
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Тригонометрические уравнения]
+        (* <- lang_ru;; *);
+    [Trigonometric equations]
+        (* <- lang_en;; *);;

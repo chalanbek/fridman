@@ -1,0 +1,10 @@
+square_roots_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Квадратные корни (прочее)]
+        (* <- lang_ru;; *);
+    [square roots other]
+        (* <- lang_en;; *);;

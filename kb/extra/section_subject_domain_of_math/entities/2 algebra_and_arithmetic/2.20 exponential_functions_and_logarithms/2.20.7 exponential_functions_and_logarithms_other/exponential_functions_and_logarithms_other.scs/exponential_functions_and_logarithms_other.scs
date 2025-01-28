@@ -1,0 +1,10 @@
+exponential_functions_and_logarithms_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Показательные функции и логарифмы (прочее) ]
+        (* <- lang_ru;; *);
+    [exponential functions and logarithms other]
+        (* <- lang_en;; *);;

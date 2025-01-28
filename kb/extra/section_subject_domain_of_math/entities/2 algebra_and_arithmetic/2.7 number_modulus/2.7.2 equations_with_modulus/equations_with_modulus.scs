@@ -1,0 +1,10 @@
+equations_with_modulus
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Уравнения с модулями]
+        (* <- lang_ru;; *);
+    [equations with modulus]
+        (* <- lang_en;; *);;

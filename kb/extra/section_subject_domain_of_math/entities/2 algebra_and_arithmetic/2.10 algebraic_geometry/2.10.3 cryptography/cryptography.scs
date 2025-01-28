@@ -1,0 +1,10 @@
+cryptography
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Криптография]
+        (* <- lang_ru;; *);
+    [cryptography]
+        (* <- lang_en;; *);;

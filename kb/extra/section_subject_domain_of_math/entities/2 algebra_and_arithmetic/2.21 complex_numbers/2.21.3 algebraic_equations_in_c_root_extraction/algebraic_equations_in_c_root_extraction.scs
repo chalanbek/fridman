@@ -1,0 +1,10 @@
+algebraic_equations_in_c_root_extraction
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Алгебраические уравнения в C. Извлечение корня]
+        (* <- lang_ru;; *);
+    [Algebraic Equations in C. Root Extraction]
+        (* <- lang_en;; *);;

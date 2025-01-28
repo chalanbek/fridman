@@ -1,0 +1,9 @@
+classical_inequalities
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Классические неравенства]
+        (* <- lang_ru;; *);
+    [Classical inequalities]
+        (* <- lang_en;; *);;

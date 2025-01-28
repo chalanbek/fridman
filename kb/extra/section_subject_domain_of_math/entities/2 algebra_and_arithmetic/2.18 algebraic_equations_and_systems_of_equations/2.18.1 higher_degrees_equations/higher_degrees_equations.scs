@@ -1,0 +1,10 @@
+higher_degrees_equations
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Уравнения высших степеней. Возвратные уравнения]
+        (* <- lang_ru;; *);
+    [Equations of higher degrees. Recurrent equations]
+        (* <- lang_en;; *);;

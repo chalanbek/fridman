@@ -1,0 +1,10 @@
+trigonometric_form_moivre_formula
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Тригонометрическая форма. Формула Муавра]
+        (* <- lang_ru;; *);
+    [Trigonometric form. Moivre's formula]
+        (* <- lang_en;; *);;

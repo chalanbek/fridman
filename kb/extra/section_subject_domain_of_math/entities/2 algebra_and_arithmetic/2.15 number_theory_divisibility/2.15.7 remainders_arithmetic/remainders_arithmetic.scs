@@ -1,0 +1,9 @@
+remainders_arithmetic
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Деление с остатком. Арифметика остатков]
+        (* <- lang_ru;; *);
+    [Division with remainder. Arithmetic of remainders]
+        (* <- lang_en;; *);;

@@ -1,0 +1,10 @@
+irreducible_polynomials
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Неприводимые многочлены]
+        (* <- lang_ru;; *);
+    [irreducible polynomials]
+        (* <- lang_en;; *);;

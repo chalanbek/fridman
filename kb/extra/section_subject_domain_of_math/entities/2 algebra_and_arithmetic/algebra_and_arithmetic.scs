@@ -1,0 +1,62 @@
+algebra_and_arithmetic
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_first_topic;
+
+=> nrel_main_idtf:
+    [Алгебра и арифметика]
+        (* <- lang_ru;; *);
+    [algebra and arithmetic]
+        (* <- lang_en;; *);;
+
+//задачи темы:
+ 
+//теоремы темы:
+//подтемы темы
+
+//
+@arithmetic_oral_counting_etc_arc = (algebra_and_arithmetic => nrel_subtopic: arithmetic_oral_counting_etc);;
+@arithmetic_operations_numerical_identities_arc = (algebra_and_arithmetic => nrel_subtopic: arithmetic_operations_numerical_identities);;
+@arithmetic_oral_counting_etc_arc => nrel_subtopic_sequence: @arithmetic_operations_numerical_identities_arc;;
+@averages_arc = (algebra_and_arithmetic => nrel_subtopic: averages);;
+@arithmetic_operations_numerical_identities_arc => nrel_subtopic_sequence: @averages_arc;;
+@text_problems_arc = (algebra_and_arithmetic => nrel_subtopic: text_problems);;
+@averages_arc => nrel_subtopic_sequence: @text_problems_arc;;
+@fractions_arc = (algebra_and_arithmetic => nrel_subtopic: fractions);;
+@text_problems_arc => nrel_subtopic_sequence: @fractions_arc;;
+@numeral_system_arc = (algebra_and_arithmetic => nrel_subtopic: numeral_system);;
+@fractions_arc => nrel_subtopic_sequence: @numeral_system_arc;;
+@number_modulus_arc = (algebra_and_arithmetic => nrel_subtopic: number_modulus);;
+@numeral_system_arc => nrel_subtopic_sequence: @number_modulus_arc;;
+@polynomials_arc = (algebra_and_arithmetic => nrel_subtopic: polynomials);;
+@number_modulus_arc => nrel_subtopic_sequence: @polynomials_arc;;
+@formal_degree_series_arc = (algebra_and_arithmetic => nrel_subtopic: formal_degree_series);;
+@polynomials_arc => nrel_subtopic_sequence: @formal_degree_series_arc;;
+@algebraic_geometry_arc = (algebra_and_arithmetic => nrel_subtopic: algebraic_geometry);;
+@formal_degree_series_arc => nrel_subtopic_sequence: @algebraic_geometry_arc;;
+@rational_functions_arc = (algebra_and_arithmetic => nrel_subtopic: rational_functions);;
+@algebraic_geometry_arc => nrel_subtopic_sequence: @rational_functions_arc;;
+@roots_degree_with_rational_exponent_arc = (algebra_and_arithmetic => nrel_subtopic: roots_degree_with_rational_exponent);;
+@rational_functions_arc => nrel_subtopic_sequence: @roots_degree_with_rational_exponent_arc;;
+@linear_and_polylinear_algebra_arc = (algebra_and_arithmetic => nrel_subtopic: linear_and_polylinear_algebra);;
+@roots_degree_with_rational_exponent_arc => nrel_subtopic_sequence: @linear_and_polylinear_algebra_arc;;
+@group_theory_arc = (algebra_and_arithmetic => nrel_subtopic: group_theory);;
+@linear_and_polylinear_algebra_arc => nrel_subtopic_sequence: @group_theory_arc;;
+@number_theory_divisibility_arc = (algebra_and_arithmetic => nrel_subtopic: number_theory_divisibility);;
+@group_theory_arc => nrel_subtopic_sequence: @number_theory_divisibility_arc;;
+@sequences_arc = (algebra_and_arithmetic => nrel_subtopic: sequences);;
+@number_theory_divisibility_arc => nrel_subtopic_sequence: @sequences_arc;;
+@algebraic_inequalitie_and_systems_of_inequalities_arc = (algebra_and_arithmetic => nrel_subtopic: algebraic_inequalitie_and_systems_of_inequalities);;
+@sequences_arc => nrel_subtopic_sequence: @algebraic_inequalitie_and_systems_of_inequalities_arc;;
+@algebraic_equations_and_systems_of_equations_arc = (algebra_and_arithmetic => nrel_subtopic: algebraic_equations_and_systems_of_equations);;
+@algebraic_inequalitie_and_systems_of_inequalities_arc => nrel_subtopic_sequence: @algebraic_equations_and_systems_of_equations_arc;;
+@trigonometry_arc = (algebra_and_arithmetic => nrel_subtopic: trigonometry);;
+@algebraic_equations_and_systems_of_equations_arc => nrel_subtopic_sequence: @trigonometry_arc;;
+@indicative_functions_and_logarithms_arc = (algebra_and_arithmetic => nrel_subtopic: indicative_functions_and_logarithms);;
+@trigonometry_arc => nrel_subtopic_sequence: @indicative_functions_and_logarithms_arc;;
+@complex_numbers_arc = (algebra_and_arithmetic => nrel_subtopic: complex_numbers);;
+@indicative_functions_and_logarithms_arc => nrel_subtopic_sequence: @complex_numbers_arc;;
+@graphs_and_locus_on_the_coordinate_plane_arc = (algebra_and_arithmetic => nrel_subtopic: graphs_and_locus_on_the_coordinate_plane);;
+@complex_numbers_arc => nrel_subtopic_sequence: @graphs_and_locus_on_the_coordinate_plane_arc;;
+@algebra_and_arithmetic_other_arc = (algebra_and_arithmetic => nrel_subtopic: algebra_and_arithmetic_other);;
+@graphs_and_locus_on_the_coordinate_plane_arc => nrel_subtopic_sequence: @algebra_and_arithmetic_other_arc;;

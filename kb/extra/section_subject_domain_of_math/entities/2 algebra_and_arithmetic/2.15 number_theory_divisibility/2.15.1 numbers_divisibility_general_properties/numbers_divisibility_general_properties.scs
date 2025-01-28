@@ -1,0 +1,10 @@
+numbers_divisibility_general_properties
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Делимость чисел. Общие свойства]
+        (* <- lang_ru;; *);
+    [Divisibility of numbers. General properties]
+        (* <- lang_en;; *);;

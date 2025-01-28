@@ -1,0 +1,10 @@
+polynomials_division_with_remainder
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Деление многочленов с остатком. НОД и НОК многочленов]
+        (* <- lang_ru;; *);
+    [Division of polynomials with remainder. GCD and LCM of polynomials]
+        (* <- lang_en;; *);;

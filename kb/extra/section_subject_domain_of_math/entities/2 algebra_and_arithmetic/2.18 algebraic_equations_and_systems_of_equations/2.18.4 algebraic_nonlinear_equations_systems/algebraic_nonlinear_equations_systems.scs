@@ -1,0 +1,10 @@
+algebraic_nonlinear_equations_systems
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Системы алгебраических нелинейных уравнений]
+        (* <- lang_ru;; *);
+    [ Systems of algebraic nonlinear equations]
+        (* <- lang_en;; *);;

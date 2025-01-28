@@ -1,0 +1,10 @@
+exponential_inequalities
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Показательные неравенства]
+        (* <- lang_ru;; *);
+    [exponential inequalities]
+        (* <- lang_en;; *);;

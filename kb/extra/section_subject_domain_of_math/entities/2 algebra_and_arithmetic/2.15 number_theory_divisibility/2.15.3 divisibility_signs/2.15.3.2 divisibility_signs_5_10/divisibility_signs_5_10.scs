@@ -1,0 +1,10 @@
+divisibility_signs_5_10
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Признаки делимости на 5 и 10]
+        (* <- lang_ru;; *);
+    [divisibility signs (5, 10)]
+        (* <- lang_en;; *);;

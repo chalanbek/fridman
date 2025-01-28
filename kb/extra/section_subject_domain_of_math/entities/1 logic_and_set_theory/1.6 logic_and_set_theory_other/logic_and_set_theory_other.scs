@@ -1,0 +1,12 @@
+logic_and_set_theory_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [логика и теория множеств прочее]
+        (* <- lang_ru;; *);
+    [logic and set theory other]
+        (* <- lang_en;; *);;
+
+ 

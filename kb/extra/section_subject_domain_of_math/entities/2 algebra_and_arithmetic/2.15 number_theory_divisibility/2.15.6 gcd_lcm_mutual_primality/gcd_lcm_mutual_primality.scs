@@ -1,0 +1,10 @@
+gcd_lcm_mutual_primality
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [НОД и НОК. Взаимная простота]
+        (* <- lang_ru;; *);
+    [GCD and LCM. Mutual primality]
+        (* <- lang_en;; *);;

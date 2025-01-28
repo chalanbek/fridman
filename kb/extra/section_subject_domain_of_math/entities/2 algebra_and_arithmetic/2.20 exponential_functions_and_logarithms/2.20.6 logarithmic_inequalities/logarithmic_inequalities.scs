@@ -1,0 +1,10 @@
+logarithmic_inequalities
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Логарифмические неравенства]
+        (* <- lang_ru;; *);
+    [logarithmic inequalities]
+        (* <- lang_en;; *);;

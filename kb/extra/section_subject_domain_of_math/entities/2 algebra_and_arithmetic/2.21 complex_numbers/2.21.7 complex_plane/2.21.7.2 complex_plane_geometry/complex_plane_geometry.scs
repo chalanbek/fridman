@@ -1,0 +1,10 @@
+complex_plane_geometry
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Геометрия комплексной плоскости]
+        (* <- lang_ru;; *);
+    [Geometry of the complex plane]
+        (* <- lang_en;; *);;

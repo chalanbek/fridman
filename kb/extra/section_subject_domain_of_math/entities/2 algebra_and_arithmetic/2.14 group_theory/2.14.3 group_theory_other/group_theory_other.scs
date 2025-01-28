@@ -1,0 +1,10 @@
+group_theory_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Теория групп (прочее)]
+        (* <- lang_ru;; *);
+    [group theory other]
+        (* <- lang_en;; *);;

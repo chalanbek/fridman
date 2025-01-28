@@ -1,0 +1,10 @@
+investigation_of_square_trinomial
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Исследование квадратного трехчлена]
+        (* <- lang_ru;; *);
+    [investigation of square trinomial]
+        (* <- lang_en;; *);;

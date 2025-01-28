@@ -1,0 +1,25 @@
+text_problems
+<- concept_wit_entity;
+<- concept_topic;
+
+
+=> nrel_main_idtf:
+    [Текстовые задачи]
+        (* <- lang_ru;; *);
+    [work problems]
+        (* <- lang_en;; *);;
+
+@percentages_and_ratios_arc = (text_problems => nrel_subtopic: percentages_and_ratios);;
+@motion_problems_arc = (text_problems => nrel_subtopic: motion_problems);;
+@work_problems_arc = (text_problems => nrel_subtopic: work_problems);;
+@mixtures_and_concentrations_arc = (text_problems => nrel_subtopic: mixtures_and_concentrations);;
+@problems_with_Inequalities_arc = (text_problems => nrel_subtopic: problems_with_Inequalities);;
+@tables_and_tournaments_arc = (text_problems => nrel_subtopic: tables_and_tournaments);;
+@text_problems_other_arc = (text_problems => nrel_subtopic: text_problems_other);;
+
+@percentages_and_ratios_arc => nrel_subtopic_sequence: @motion_problems_arc;;
+@motion_problems_arc => nrel_subtopic_sequence: @work_problems_arc;;
+@work_problems_arc => nrel_subtopic_sequence: @mixtures_and_concentrations_arc;;
+@mixtures_and_concentrations_arc => nrel_subtopic_sequence: @problems_with_Inequalities_arc;;
+@problems_with_Inequalities_arc => nrel_subtopic_sequence: @tables_and_tournaments_arc;;
+@tables_and_tournaments_arc => nrel_subtopic_sequence: @text_problems_other_arc;;

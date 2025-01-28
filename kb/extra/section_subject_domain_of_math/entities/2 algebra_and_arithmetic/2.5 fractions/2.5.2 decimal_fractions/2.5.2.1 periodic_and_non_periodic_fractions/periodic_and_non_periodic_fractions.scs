@@ -1,0 +1,10 @@
+periodic_and_non_periodic_fractions
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Таблицы и турниры (прочее)]
+        (* <- lang_ru;; *);
+    [periodic and non-periodic fractions]
+        (* <- lang_en;; *);;

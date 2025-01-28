@@ -1,0 +1,10 @@
+periodicity_and_non_periodicity
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Периодичность и непериодичность]
+        (* <- lang_ru;; *);
+    [periodicity and non-periodicity]
+        (* <- lang_en;; *);;

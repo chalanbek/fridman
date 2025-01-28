@@ -1,0 +1,10 @@
+complex_numbers_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Комплексные числа (прочее)]
+        (* <- lang_ru;; *);
+    [complex numbers other]
+        (* <- lang_en;; *);;

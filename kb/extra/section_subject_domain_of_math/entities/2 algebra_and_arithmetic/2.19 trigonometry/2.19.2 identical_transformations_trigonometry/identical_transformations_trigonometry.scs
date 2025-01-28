@@ -1,0 +1,10 @@
+identical_transformations_trigonometry
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Тождественные преобразования (тригонометрия)]
+        (* <- lang_ru;; *);
+    [identical transformations (trigonometry)]
+        (* <- lang_en;; *);;

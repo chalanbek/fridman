@@ -1,0 +1,10 @@
+complex_exponent
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Комплексная экспонента]
+        (* <- lang_ru;; *);
+    [Complex exponent]
+        (* <- lang_en;; *);;

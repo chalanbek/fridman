@@ -1,0 +1,9 @@
+interpolation_polynomials
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Интерполяционные многочлены]
+        (* <- lang_ru;; *);
+    [interpolation polynomials]
+        (* <- lang_en;; *);;

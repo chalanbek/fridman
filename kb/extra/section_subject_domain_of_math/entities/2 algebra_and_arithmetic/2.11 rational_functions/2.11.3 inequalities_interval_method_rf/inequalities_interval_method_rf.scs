@@ -1,0 +1,10 @@
+inequalities_interval_method_rf
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Неравенства. Метод интервалов (Рациональные функции)]
+        (* <- lang_ru;; *);
+    [Inequalities. Interval Method (Rational Functions)]
+        (* <- lang_en;; *);;

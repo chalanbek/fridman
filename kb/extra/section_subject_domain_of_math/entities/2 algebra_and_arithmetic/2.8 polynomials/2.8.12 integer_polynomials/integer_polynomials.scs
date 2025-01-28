@@ -1,0 +1,10 @@
+integer_polynomials
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Целочисленные и целозначные многочлены]
+        (* <- lang_ru;; *);
+    [integer polynomials]
+        (* <- lang_en;; *);;

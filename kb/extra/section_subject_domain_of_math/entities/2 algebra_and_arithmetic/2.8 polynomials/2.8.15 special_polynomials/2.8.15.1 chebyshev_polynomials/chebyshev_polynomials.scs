@@ -1,0 +1,10 @@
+chebyshev_polynomials
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Многочлены Чебышева]
+        (* <- lang_ru;; *);
+    [chebyshev polynomials]
+        (* <- lang_en;; *);;

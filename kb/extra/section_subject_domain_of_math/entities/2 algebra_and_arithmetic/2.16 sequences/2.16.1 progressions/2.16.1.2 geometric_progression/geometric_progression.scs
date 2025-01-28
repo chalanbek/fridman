@@ -1,0 +1,10 @@
+geometric_progression
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Геометрическая прогрессия]
+        (* <- lang_ru;; *);
+    [geometric progression]
+        (* <- lang_en;; *);;

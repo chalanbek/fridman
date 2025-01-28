@@ -1,0 +1,10 @@
+phase_plane_of_coefficients
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Фазовая плоскость коэффициентов]
+        (* <- lang_ru;; *);
+    [phase plane of coefficients]
+        (* <- lang_en;; *);;

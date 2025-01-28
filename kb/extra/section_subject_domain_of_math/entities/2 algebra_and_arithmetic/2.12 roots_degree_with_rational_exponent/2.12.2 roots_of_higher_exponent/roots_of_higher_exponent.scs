@@ -1,0 +1,9 @@
+roots_of_higher_exponent
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Корни высших показателей]
+        (* <- lang_ru;; *);
+    [roots of higher exponent]
+        (* <- lang_en;; *);;

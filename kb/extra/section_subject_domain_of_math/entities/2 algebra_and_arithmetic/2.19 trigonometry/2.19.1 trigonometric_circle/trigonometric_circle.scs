@@ -1,0 +1,10 @@
+trigonometric_circle
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Тригонометрический круг]
+        (* <- lang_ru;; *);
+    [Trigonometric circle]
+        (* <- lang_en;; *);;

@@ -1,0 +1,10 @@
+inequalities_with_modules
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Неравенства с модулями ]
+        (* <- lang_ru;; *);
+    [inequalities with modules]
+        (* <- lang_en;; *);;

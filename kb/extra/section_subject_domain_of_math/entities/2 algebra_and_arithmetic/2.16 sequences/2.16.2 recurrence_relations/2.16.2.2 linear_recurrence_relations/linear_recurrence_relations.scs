@@ -1,0 +1,10 @@
+linear_recurrence_relations
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Линейные рекуррентные соотношения]
+        (* <- lang_ru;; *);
+    [linear recurrence relations]
+        (* <- lang_en;; *);;

@@ -1,0 +1,10 @@
+algebraic_form_conjugation_module
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Алгебраическая форма, сопряжение, модуль и т.п.]
+        (* <- lang_ru;; *);
+    [Algebraic form, conjugation, module, etc.]
+        (* <- lang_en;; *);;

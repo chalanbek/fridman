@@ -1,0 +1,10 @@
+irrational_inequalities
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Иррациональные неравенства]
+        (* <- lang_ru;; *);
+    [irrational inequalities]
+        (* <- lang_en;; *);;

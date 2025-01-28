@@ -1,0 +1,10 @@
+remainders_arithmetic_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Арифметика остатков (прочее)]
+        (* <- lang_ru;; *);
+    [remainders arithmetic other]
+        (* <- lang_en;; *);;

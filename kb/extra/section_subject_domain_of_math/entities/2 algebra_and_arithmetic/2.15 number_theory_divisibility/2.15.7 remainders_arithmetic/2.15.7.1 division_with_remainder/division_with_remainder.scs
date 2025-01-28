@@ -1,0 +1,10 @@
+division_with_remainder
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Деление с остатком]
+        (* <- lang_ru;; *);
+    [division with remainder]
+        (* <- lang_en;; *);;

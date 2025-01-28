@@ -1,0 +1,10 @@
+linear_inequalities_and_systems_of_inequalities
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Линейные неравенства и системы неравенств ]
+        (* <- lang_ru;; *);
+    [Linear inequalities and systems of inequalities]
+        (* <- lang_en;; *);;

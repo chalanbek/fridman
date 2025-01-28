@@ -1,0 +1,10 @@
+trigonometry_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Тригонометрия (прочее)]
+        (* <- lang_ru;; *);
+    [trigonometry other]
+        (* <- lang_en;; *);;

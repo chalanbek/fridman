@@ -1,0 +1,10 @@
+divisibility_signs_2_4
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Признаки делимости на 2 и 4]
+        (* <- lang_ru;; *);
+    [divisibility signs (2, 4)]
+        (* <- lang_en;; *);;

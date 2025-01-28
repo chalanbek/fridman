@@ -1,0 +1,10 @@
+complex_plane_transformations
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Преобразования комплексной плоскости]
+        (* <- lang_ru;; *);
+    [Transformations of the complex plane]
+        (* <- lang_en;; *);;

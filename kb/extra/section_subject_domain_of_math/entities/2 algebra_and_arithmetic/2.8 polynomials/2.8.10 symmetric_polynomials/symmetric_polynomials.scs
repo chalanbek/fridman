@@ -1,0 +1,10 @@
+symmetric_polynomials
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Симметрические многочлены]
+        (* <- lang_ru;; *);
+    [symmetric polynomials]
+        (* <- lang_en;; *);;

@@ -1,0 +1,10 @@
+algebraic_equations_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Алгебраические уравнения и системы уравнений (прочее)]
+        (* <- lang_ru;; *);
+    [algebraic equations other]
+        (* <- lang_en;; *);;

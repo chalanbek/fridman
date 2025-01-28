@@ -1,0 +1,10 @@
+number_modulus_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Модуль числа (прочее)]
+        (* <- lang_ru;; *);
+    [number modulus other]
+        (* <- lang_en;; *);;

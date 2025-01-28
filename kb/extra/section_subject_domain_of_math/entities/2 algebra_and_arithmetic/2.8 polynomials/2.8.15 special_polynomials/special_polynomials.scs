@@ -1,0 +1,9 @@
+special_polynomials
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Специальные многочлены]
+        (* <- lang_ru;; *);
+    [special polynomials]
+        (* <- lang_en;; *);;

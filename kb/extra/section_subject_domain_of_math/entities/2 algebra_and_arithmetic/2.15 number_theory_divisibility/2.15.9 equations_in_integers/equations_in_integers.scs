@@ -1,0 +1,10 @@
+equations_in_integers
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Уравнения в целых числах]
+        (* <- lang_ru;; *);
+    [equations in integers]
+        (* <- lang_en;; *);;

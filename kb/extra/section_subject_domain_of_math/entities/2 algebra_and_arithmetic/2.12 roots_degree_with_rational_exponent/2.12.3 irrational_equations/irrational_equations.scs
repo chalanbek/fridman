@@ -1,0 +1,10 @@
+irrational_equations
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Иррациональные уравнения]
+        (* <- lang_ru;; *);
+    [irrational equations]
+        (* <- lang_en;; *);;

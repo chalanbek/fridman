@@ -1,0 +1,10 @@
+divisors_number_and_sum
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Количество и сумма делителей числа]
+        (* <- lang_ru;; *);
+    [divisors number and sum]
+        (* <- lang_en;; *);;

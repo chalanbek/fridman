@@ -1,0 +1,10 @@
+symmetric_systems_involutive_transformations
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Симметрические системы. Инволютивные преобразования]
+        (* <- lang_ru;; *);
+    [Symmetric systems. Involutive transformations]
+        (* <- lang_en;; *);;

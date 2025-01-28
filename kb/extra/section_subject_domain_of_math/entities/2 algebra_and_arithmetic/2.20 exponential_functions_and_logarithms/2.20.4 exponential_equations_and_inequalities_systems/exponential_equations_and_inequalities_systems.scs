@@ -1,0 +1,10 @@
+exponential_equations_and_inequalities_systems
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Системы показательных уравнений и неравенств]
+        (* <- lang_ru;; *);
+    [Systems of exponential equations and inequalities]
+        (* <- lang_en;; *);;

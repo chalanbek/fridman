@@ -1,0 +1,10 @@
+modulus_properties_triangle_inequality
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Свойства модуля. Неравенство треугольника]
+        (* <- lang_ru;; *);
+    [Properties of the modulus. Triangle inequality]
+        (* <- lang_en;; *);;

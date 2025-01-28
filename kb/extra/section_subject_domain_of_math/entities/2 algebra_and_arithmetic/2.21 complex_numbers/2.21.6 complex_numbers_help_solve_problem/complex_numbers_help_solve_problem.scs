@@ -1,0 +1,10 @@
+complex_numbers_help_solve_problem
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Комплексные числа помогают решить задачу]
+        (* <- lang_ru;; *);
+    [Complex numbers help solve the problem]
+        (* <- lang_en;; *);;
