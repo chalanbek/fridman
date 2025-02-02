@@ -1,9 +1,0 @@
-fractions
-<- concept_wit_entity;
-<- concept_topic;
-
-=> nrel_main_idtf:
-    [Дроби]
-        (* <- lang_ru;; *);
-    [fractions]
-        (* <- lang_en;; *);;

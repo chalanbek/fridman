@@ -1,9 +1,0 @@
-algebraic_geometry
-<- concept_wit_entity;
-<- concept_topic;
-
-=> nrel_main_idtf:
-    [Алгебраическая геометрия]
-        (* <- lang_ru;; *);
-    [algebraic geometry]
-        (* <- lang_en;; *);;

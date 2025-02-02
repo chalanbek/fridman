@@ -1,9 +1,0 @@
-rational_functions
-<- concept_wit_entity;
-<- concept_topic;
-
-=> nrel_main_idtf:
-    [Рациональные функции]
-        (* <- lang_ru;; *);
-    [rational functions]
-        (* <- lang_en;; *);;

@@ -52,10 +52,10 @@ algebra_and_arithmetic
 @algebraic_inequalitie_and_systems_of_inequalities_arc => nrel_subtopic_sequence: @algebraic_equations_and_systems_of_equations_arc;;
 @trigonometry_arc = (algebra_and_arithmetic => nrel_subtopic: trigonometry);;
 @algebraic_equations_and_systems_of_equations_arc => nrel_subtopic_sequence: @trigonometry_arc;;
-@indicative_functions_and_logarithms_arc = (algebra_and_arithmetic => nrel_subtopic: indicative_functions_and_logarithms);;
-@trigonometry_arc => nrel_subtopic_sequence: @indicative_functions_and_logarithms_arc;;
+@exponential_functions_and_logarithms_arc = (algebra_and_arithmetic => nrel_subtopic: exponential_functions_and_logarithms);;
+@trigonometry_arc => nrel_subtopic_sequence: @exponential_functions_and_logarithms_arc;;
 @complex_numbers_arc = (algebra_and_arithmetic => nrel_subtopic: complex_numbers);;
-@indicative_functions_and_logarithms_arc => nrel_subtopic_sequence: @complex_numbers_arc;;
+@exponential_functions_and_logarithms_arc => nrel_subtopic_sequence: @complex_numbers_arc;;
 @graphs_and_locus_on_the_coordinate_plane_arc = (algebra_and_arithmetic => nrel_subtopic: graphs_and_locus_on_the_coordinate_plane);;
 @complex_numbers_arc => nrel_subtopic_sequence: @graphs_and_locus_on_the_coordinate_plane_arc;;
 @algebra_and_arithmetic_other_arc = (algebra_and_arithmetic => nrel_subtopic: algebra_and_arithmetic_other);;

@@ -4,7 +4,7 @@ periodic_and_non_periodic_fractions
 <- concept_math_topic;
 
 => nrel_main_idtf:
-    [Таблицы и турниры (прочее)]
+    [Периодические и непериодические дроби]
         (* <- lang_ru;; *);
     [periodic and non-periodic fractions]
         (* <- lang_en;; *);;

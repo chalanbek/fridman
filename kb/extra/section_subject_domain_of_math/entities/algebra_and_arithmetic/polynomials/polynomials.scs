@@ -1,9 +1,0 @@
-polynomials
-<- concept_wit_entity;
-<- concept_topic;
-
-=> nrel_main_idtf:
-    [Многочлены]
-        (* <- lang_ru;; *);
-    [polynomials]
-        (* <- lang_en;; *);;
