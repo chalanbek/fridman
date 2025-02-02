@@ -41,7 +41,6 @@ nrel_level_within_grade
 	<= nrel_using_constants:
 		{
 		concept_problem;
-		concept_grade;
-		concept_knowledge_level
+		concept_grade
 		};;
 	*);;
