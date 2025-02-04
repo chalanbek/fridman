@@ -3,7 +3,6 @@ concept_city
 => nrel_main_idtf:
 	[город](* <- lang_ru;; *);
 	[city](* <- lang_en;; *);
-<= nrel_inclusion: concept_user;
 <- rrel_key_sc_element:
 	...
 	(*

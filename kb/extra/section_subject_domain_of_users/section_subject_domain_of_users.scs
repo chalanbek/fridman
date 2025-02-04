@@ -12,32 +12,28 @@ section_subject_domain_of_users = [*
     <- subject_domain;
     -> rrel_maximum_studied_object_class: concept_user;
     -> rrel_not_maximum_studied_object_class:
-        concept_admin;
         concept_student;
         concept_teacher;
+        concept_administrator;
+        concept_surname;
+        concept_name;
+        concept_patronymic;
+        concept_city;
         concept_tg_id;
     -> rrel_explored_relation:
-        nrel_theory_archive;
-        nrel_city;
-        nrel_first_name;
-        nrel_grade;
-        nrel_patronymic;
-        nrel_rating_table;
-        nrel_start_test;
         nrel_surname;
-        nrel_task_archive;
-        nrel_theorem_archive;
-        nrel_theorem_archive;
-        nrel_solved_problems;
-        nrel_not_solved_problems;
+        nrel_first_name;
+        nrel_patronymic;
+        nrel_city;
         nrel_tg_id;
-        nrel_users;;
+        nrel_trainee;;
 *];;
 section_subject_domain_of_users <= nrel_section_decomposition:
 	{
-        section_subject_domain_of_user_progress_indicators;
-        section_subject_domain_of_user_skills;
-        section_subject_domain_of_user_actions
+        section_subject_domain_of_students;
+        section_subject_domain_of_teachers;
+        section_subject_domain_of_administrators;
+        section_subject_domain_of_user_progress_indicators
 	};;
 
 rrel_key_sc_element -> (section_subject_domain_of_users -> subject_domain_of_users)

@@ -3,7 +3,6 @@ concept_patronymic
 => nrel_main_idtf:
 	[отчество](* <- lang_ru;; *);
 	[patronymic](* <- lang_en;; *);
-<= nrel_inclusion: concept_user;
 <- rrel_key_sc_element:
 	...
 	(*

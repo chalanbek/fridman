@@ -3,7 +3,6 @@ concept_surname
 => nrel_main_idtf:
 	[фамилия](* <- lang_ru;; *);
 	[surname](* <- lang_en;; *);
-<= nrel_inclusion: concept_user;
 <- rrel_key_sc_element:
 	...
 	(*

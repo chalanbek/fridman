@@ -37,6 +37,6 @@ nrel_first_name
 		*);;
 	<= nrel_using_constants:
 		{
-			concept_user;
+			concept_user
 		};;
 	*);;
