@@ -1,0 +1,25 @@
+concept_patronymic
+<- sc_node_class;
+=> nrel_main_idtf:
+	[отчество](* <- lang_ru;; *);
+	[patronymic](* <- lang_en;; *);
+<= nrel_inclusion: concept_user;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (отчество)](* <- lang_ru;; *);
+            [Def. (patronymic)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [отчество - отчество пользователя](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [patronymic - a user patronymic](* <- lang_en;; *);;
+            *);;
+	*);;

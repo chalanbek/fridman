@@ -15,12 +15,12 @@ concept_teacher
             ...
             (*
                 -> rrel_example:
-                    [учитель - пользователь, имеющий доступ к прогрессу своих учеников.](* <- lang_ru;; *);;
+                    [учитель - пользователь, способный просматривать прогресс своих учеников.](* <- lang_ru;; *);;
             *);
             ...
             (*
                 -> rrel_example:
-                    [teacher - A user who has access to the progress of their students.](* <- lang_en;; *);;
+                    [teacher - a user who is able to view the progress of their students.](* <- lang_en;; *);;
             *);;
         <= nrel_using_constants:
             {

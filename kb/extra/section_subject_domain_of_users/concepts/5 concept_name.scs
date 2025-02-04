@@ -1,0 +1,25 @@
+concept_name
+<- sc_node_class;
+=> nrel_main_idtf:
+	[имя](* <- lang_ru;; *);
+	[name](* <- lang_en;; *);
+<= nrel_inclusion: concept_user;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (имя)](* <- lang_ru;; *);
+            [Def. (name)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [имя - собственное имя пользователя](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [name - a user name](* <- lang_en;; *);;
+            *);;
+	*);;
