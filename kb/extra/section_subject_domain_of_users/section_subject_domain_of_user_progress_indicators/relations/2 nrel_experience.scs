@@ -1,4 +1,4 @@
-nrel_solution_scores
+nrel_experience
 <-sc_node_norole_relation;
 <-relation;
 <-binary_relation;
@@ -7,9 +7,9 @@ nrel_solution_scores
 <-antitransitive_relation;
 <-asymmetric_relation;
 =>nrel_main_idtf:
-	[баллы за решенные задачи*]
+	[опыт пользователя*]
 	(* <- lang_ru;; *);
-	[solution scores*]
+	[user experience*]
 	(* <- lang_en;; *);
 =>nrel_first_domain: concept_user;
 =>nrel_second_domain: concept_experience;
@@ -17,22 +17,22 @@ nrel_solution_scores
 	...
 	(*
 	=> nrel_main_idtf:
-		[Опр. (баллы за решенные задачи*)]
+		[Опр. (опыт пользователя* )]
 		(* <- lang_ru;; *);
-		[Def. (solution scores*)]
+		[Def. (user experience* )]
 		(* <- lang_en;; *);;
 	<- definition;;
 	<= nrel_sc_text_translation:
 		...
 		(*
 		-> rrel_example:
-			[баллы за решенные задачи* - отношение, связывающее пользователя с его опытом.]
+			[опыт пользователя* - отношение, связывающее пользователя с его опытом.]
 			(* <- lang_ru;; *);;
 		*);
 		...
 		(*
 		-> rrel_example: 
-			[solution scores* is a relationship, that connects user with his experience.]
+			[user experience* is a relationship, that connects user with his experience.]
 			(* <- lang_en;; *);;
 		*);;
 	<= nrel_using_constants:

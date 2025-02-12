@@ -1,0 +1,25 @@
+concept_achievement
+<- sc_node_class;
+=> nrel_main_idtf:
+	[достижение](* <- lang_ru;; *);
+	[achievement](* <- lang_en;; *);
+<= nrel_inclusion: concept_statistical_indicator;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (достижение)](* <- lang_ru;; *);
+            [Def. (achievement)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [достижение - достижение, которое пользователь может получить либо уже получил.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [achievement - the achievement a user can gain or already gained.](* <- lang_en;; *);;
+            *);;
+	*);;

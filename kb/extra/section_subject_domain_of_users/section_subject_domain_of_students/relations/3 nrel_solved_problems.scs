@@ -17,9 +17,9 @@ nrel_solved_problems
 	...
 	(*
 	=> nrel_main_idtf:
-		[Опр. (решенные задачи*)]
+		[Опр. (решенные задачи* )]
 		(* <- lang_ru;; *);
-		[Def. (solved problems*)]
+		[Def. (solved problems* )]
 		(* <- lang_en;; *);;
 	<- definition;;
 	<= nrel_sc_text_translation:

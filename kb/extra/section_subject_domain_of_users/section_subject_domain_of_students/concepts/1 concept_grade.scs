@@ -1,0 +1,24 @@
+concept_grade
+<- sc_node_class;
+=> nrel_main_idtf:
+	[номер класса](* <- lang_ru;; *);
+	[grade number](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (номер класса)](* <- lang_ru;; *);
+            [Def. (grade number)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [номер класса - номер класса пользователя](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [grade number - a users grade number](* <- lang_en;; *);;
+            *);;
+	*);;

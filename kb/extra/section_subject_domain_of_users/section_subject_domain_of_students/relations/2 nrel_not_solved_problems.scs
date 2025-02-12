@@ -17,9 +17,9 @@ nrel_not_solved_problems
 	...
 	(*
 	=> nrel_main_idtf:
-		[Опр. (нерешенные задачи*)]
+		[Опр. (нерешенные задачи* )]
 		(* <- lang_ru;; *);
-		[Def. (not solved problems*)]
+		[Def. (not solved problems* )]
 		(* <- lang_en;; *);;
 	<- definition;;
 	<= nrel_sc_text_translation:

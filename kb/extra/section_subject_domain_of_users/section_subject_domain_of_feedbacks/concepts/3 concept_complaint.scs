@@ -1,0 +1,30 @@
+concept_complaint
+<- sc_node_class;
+=> nrel_main_idtf:
+	[жалоба](* <- lang_ru;; *);
+	[complaint](* <- lang_en;; *);
+<= nrel_inclusion: concept_feedback_type;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (жалоба)](* <- lang_ru;; *);
+            [Def. (complaint)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [жалоба - тип отзыва, предназначенный для выражения недовольства пользователей.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [complaint - type of feedback designed to express user dissatisfaction](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+              concept_feedback;
+              concept_feedback_type
+            };;
+	*);;

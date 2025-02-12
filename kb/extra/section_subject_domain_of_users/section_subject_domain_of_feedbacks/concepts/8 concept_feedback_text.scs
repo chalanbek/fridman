@@ -1,0 +1,28 @@
+concept_feedback_text
+<- sc_node_class;
+=> nrel_main_idtf:
+	[текст отзыва](* <- lang_ru;; *);
+	[feedback text](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (текст отзыва)](* <- lang_ru;; *);
+            [Def. (feedback text)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [текст отзыва - содержимое отзыва, отправленного пользователем.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [feedback text - the content of the feedback sent by the user](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+              concept_feedback
+            };;
+	*);;

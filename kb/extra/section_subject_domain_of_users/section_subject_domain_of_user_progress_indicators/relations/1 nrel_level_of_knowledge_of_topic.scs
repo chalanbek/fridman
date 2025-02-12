@@ -41,7 +41,7 @@ nrel_level_of_knowledge_of_topic
   <= nrel_using_constants:
     {
     concept_user;
-    concept_math_topic;
+    concept_first_topic;
     concept_knowledge_level
     };;
   *);;

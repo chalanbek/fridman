@@ -61,7 +61,7 @@ class AgentCreateUserProfile(ScAgentClassic):
 
             nrel_data = {}
             nrel_data_index = ['nrel_surname', 'nrel_first_name', 'nrel_patronymic', 'nrel_grade', 'nrel_city', 'nrel_tg_id',
-                          'nrel_score_for_the_level_of_solved_problems', 'nrel_solution_scores', 'nrel_activity', 'nrel_statistics', 
+                          'nrel_rating', 'nrel_experience', 'nrel_activity', 'nrel_statistics', 
                           'nrel_solved_problems', 'nrel_not_solved_problems']
             for element in nrel_data_index: 
                 nrel_data[element] = ScKeynodes.resolve(element, sc_types.NODE_CONST_NOROLE)
@@ -107,7 +107,7 @@ class AgentCreateUserProfile(ScAgentClassic):
             construction.create_link(sc_types.LINK_CONST, ScLinkContent(0, ScLinkContentType.INT), 'solution_scores')
             construction.create_link(sc_types.LINK_CONST, ScLinkContent(0, ScLinkContentType.INT), 'score_for_the_level_of_solved_problems_user')
             construction.create_edge(sc_types.EDGE_D_COMMON_CONST, 'user', 'solution_scores', 'nrel_solution_scores_user')
-            construction.create_edge(sc_types.EDGE_D_COMMON_CONST, 'user', 'score_for_the_level_of_solved_problems_user', 'nrel_score_for_the_level_of_solved_problems_user')
+            construction.create_edge(sc_types.EDGE_D_COMMON_CONST, 'user', 'score_for_the_level_of_solved_problems_user', 'nrel_rating_user')
             construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_rating'], 'score_for_the_level_of_solved_problems_user')
             construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_experience'], 'solution_scores')
             

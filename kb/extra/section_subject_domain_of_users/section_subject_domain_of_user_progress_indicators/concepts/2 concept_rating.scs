@@ -15,15 +15,11 @@ concept_rating
             ...
             (*
                 -> rrel_example:
-                    [рейтинг - рейтинг, получаемй пользователем в ходе решения задач.](* <- lang_ru;; *);;
+                    [рейтинг - рейтинг, получаемй пользователем в ходе решения задач и зависящий от уровня знаний пользователя и сложности задачи.](* <- lang_ru;; *);;
             *);
             ...
             (*
                 -> rrel_example:
-                    [rating - the rating gained by the user in the course of solving tasks.](* <- lang_en;; *);;
+                    [rating - the rating gained by the user in the course of solving problems and depends on the user's level of knowledge and the complexity of the problems.](* <- lang_en;; *);;
             *);;
-        <= nrel_using_constants:
-            {
-                concept_statistical_indicator
-            };;
 	*);;

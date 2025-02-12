@@ -1,0 +1,30 @@
+concept_bug_report
+<- sc_node_class;
+=> nrel_main_idtf:
+	[сообщение об ошибке](* <- lang_ru;; *);
+	[bug report](* <- lang_en;; *);
+<= nrel_inclusion: concept_feedback_type;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (сообщение об ошибке)](* <- lang_ru;; *);
+            [Def. (bug report)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [сообщение об ошибке - тип отзыва, позволяющий пользователю сообщить о недостатках системы.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [bug report - A type of feedback that allows the user to report system deficiencies](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+              concept_feedback;
+              concept_feedback_type
+            };;
+	*);;

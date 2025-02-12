@@ -73,8 +73,8 @@ class AgentUpdateUserKnowledgeLevel(ScAgentClassic):
             nrel_grade = ScKeynodes.resolve('nrel_grade', sc_types.NODE_CONST_NOROLE)
             nrel_level_within_grade = ScKeynodes.resolve('nrel_level_within_grade', sc_types.NODE_CONST_NOROLE)
             nrel_grade_comlexity_level = ScKeynodes.resolve('nrel_grade_comlexity_level', sc_types.NODE_CONST_NOROLE)
-            nrel_solution_scores = ScKeynodes.resolve('nrel_solution_scores', sc_types.NODE_CONST_NOROLE)
-            nrel_score_for_the_level_of_solved_problems = ScKeynodes.resolve('nrel_score_for_the_level_of_solved_problems', sc_types.NODE_CONST_NOROLE)
+            nrel_experience = ScKeynodes.resolve('nrel_experience', sc_types.NODE_CONST_NOROLE)
+            nrel_rating = ScKeynodes.resolve('nrel_rating', sc_types.NODE_CONST_NOROLE)
             complexity_knowledge_difference_min = 11
 
             self.logger.info('1')
