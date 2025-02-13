@@ -1,0 +1,30 @@
+concept_solution_hint
+<- sc_node_class;
+=> nrel_main_idtf:
+	[подсказка к задаче](* <- lang_ru;; *);
+	[problem hint](* <- lang_en;; *);
+<= nrel_inclusion: concept_problem_solution;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (подсказка к задаче)](* <- lang_ru;; *);
+            [Def. (problem hint)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [подсказка к задаче - подсказка, способная помочь пользователю при самостоятельном решении задачи.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [problem hint - a hint that can help the user to solve the problem independently.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_problem_solution;
+                concept_problem
+            };;
+	*);;

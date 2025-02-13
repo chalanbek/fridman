@@ -1,0 +1,43 @@
+nrel_theorem_proof
+<-sc_node_norole_relation;
+<-relation;
+<-binary_relation;
+<-oriented_relation;
+<-antireflexive_relation;
+<-antitransitive_relation;
+<-asymmetric_relation;
+=>nrel_main_idtf:
+	[доказательство теоремы*]
+	(* <- lang_ru;; *);
+	[theorem proof*]
+	(* <- lang_en;; *);
+=>nrel_first_domain: concept_theorem;
+=>nrel_second_domain: concept_theorem_proof;
+<-rrel_key_sc_element:
+	...
+	(*
+	=> nrel_main_idtf:
+		[Опр. (доказательство теоремы* )]
+		(* <- lang_ru;; *);
+		[Def. (theorem proof* )]
+		(* <- lang_en;; *);;
+	<- proof;;
+	<= nrel_sc_text_translation:
+		...
+		(*
+		-> rrel_example:
+			[доказательство теоремы* - отношение, связывающее теорему с её доказательством.]
+			(* <- lang_ru;; *);;
+		*);
+		...
+		(*
+		-> rrel_example: 
+			[theorem_proof* - a relation linking a theorem to its proof.]
+			(* <- lang_ru;; *);;
+		*);;
+	<= nrel_using_constants:
+		{
+		concept_theorem;
+		concept_theorem_proof
+		};;
+	*);;

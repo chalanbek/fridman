@@ -1,0 +1,43 @@
+nrel_solution_complete
+<-sc_node_norole_relation;
+<-relation;
+<-binary_relation;
+<-oriented_relation;
+<-antireflexive_relation;
+<-antitransitive_relation;
+<-asymmetric_relation;
+=>nrel_main_idtf:
+	[полное решение*]
+	(* <- lang_ru;; *);
+	[complete solution*]
+	(* <- lang_en;; *);
+=>nrel_first_domain: concept_problem;
+=>nrel_second_domain: concept_solution_complete;
+<-rrel_key_sc_element:
+	...
+	(*
+	=> nrel_main_idtf:
+		[Опр. (полное решение* )]
+		(* <- lang_ru;; *);
+		[Def. (complete solution* )]
+		(* <- lang_en;; *);;
+	<- definition;;
+	<= nrel_sc_text_translation:
+		...
+		(*
+		-> rrel_example:
+			[полное решение* - отношение, связывающее задачу с ее полным решением.]
+			(* <- lang_ru;; *);;
+		*);
+		...
+		(*
+		-> rrel_example: 
+			[complete solution* is a relationship, that connects promlem with it complete solution.]
+			(* <- lang_en;; *);;
+		*);;
+	<= nrel_using_constants:
+		{
+		concept_problem;
+		concept_problem_solution
+		};;
+	*);;

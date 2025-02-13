@@ -1,0 +1,28 @@
+concept_feedback_considered
+<- sc_node_class;
+=> nrel_main_idtf:
+	[рассмотренный отзыв](* <- lang_ru;; *);
+	[feedback considered](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (рассмотренный отзыв)](* <- lang_ru;; *);
+            [Def. (feedback considered)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [рассмотренный отзыв - множество рассмотренных отзывов, которые не отображаются у администрации.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [feedback considered - set of considered feedbacks that are not displayed to the administration](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+              concept_feedback
+            };;
+	*);;

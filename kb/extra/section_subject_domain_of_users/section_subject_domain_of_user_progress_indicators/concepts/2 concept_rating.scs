@@ -1,0 +1,25 @@
+concept_rating
+<- sc_node_class;
+=> nrel_main_idtf:
+	[рейтинг](* <- lang_ru;; *);
+	[rating](* <- lang_en;; *);
+<= nrel_inclusion: concept_statistical_indicator;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (рейтинг)](* <- lang_ru;; *);
+            [Def. (rating)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [рейтинг - рейтинг, получаемй пользователем в ходе решения задач и зависящий от уровня знаний пользователя и сложности задачи.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [rating - the rating gained by the user in the course of solving problems and depends on the user's level of knowledge and the complexity of the problems.](* <- lang_en;; *);;
+            *);;
+	*);;

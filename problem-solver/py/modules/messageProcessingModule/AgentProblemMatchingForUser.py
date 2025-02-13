@@ -66,7 +66,7 @@ class AgentProblemMatchingForUser(ScAgentClassic):
             rrel_problem_topic = ScKeynodes.resolve('rrel_problem_topic', sc_types.NODE_CONST_ROLE)
             nrel_level_within_grade = ScKeynodes.resolve('nrel_level_within_grade', sc_types.NODE_CONST_NOROLE)
             nrel_saw_answer = ScKeynodes.resolve('nrel_saw_answer', sc_types.NODE_CONST_NOROLE)
-            nrel_grade_comlexity_level = ScKeynodes.resolve('nrel_grade_comlexity_level', sc_types.NODE_CONST_NOROLE)
+            nrel_complexity_level = ScKeynodes.resolve('nrel_complexity_level', sc_types.NODE_CONST_NOROLE)
             nrel_problem_number = ScKeynodes.resolve('nrel_problem_number', sc_types.NODE_CONST_NOROLE)
             nrel_problem_text = ScKeynodes.resolve('nrel_problem_text', sc_types.NODE_CONST_NOROLE)
             nrel_solved_problems = ScKeynodes.resolve('nrel_solved_problems', sc_types.NODE_CONST_NOROLE)
@@ -179,7 +179,7 @@ class AgentProblemMatchingForUser(ScAgentClassic):
                             grade_level_pair_addr,
                             (sc_types.LINK_VAR, '_problem_grade_complexity'),
                             sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                            nrel_grade_comlexity_level
+                            nrel_complexity_level
                         )
                         problem_grade_addr = template_search(template)[0].get('_problem_grade')
                         problem_grade = get_link_content_data(problem_grade_addr)
@@ -232,7 +232,7 @@ class AgentProblemMatchingForUser(ScAgentClassic):
                                 grade_level_pair_addr,
                                 (sc_types.LINK_VAR, '_problem_grade_complexity'),
                                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                                nrel_grade_comlexity_level
+                                nrel_complexity_level
                             )
                             problem_grade_addr = template_search(template)[0].get('_problem_grade')
                             problem_grade = get_link_content_data(problem_grade_addr)

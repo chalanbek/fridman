@@ -1,0 +1,28 @@
+concept_problem_solution
+<- sc_node_class;
+=> nrel_main_idtf:
+	[решение задачи](* <- lang_ru;; *);
+	[problem solution](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (решение задачи)](* <- lang_ru;; *);
+            [Def. (problem solution)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [решение задачи - текст, так или иначе помогающий пользователю в решении и понимании задачи.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [problem solution - text that in one way or another assists the user in solving and understanding the problem.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_problem
+            };;
+	*);;

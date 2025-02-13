@@ -1,0 +1,43 @@
+nrel_feedback_type
+<-sc_node_norole_relation;
+<-relation;
+<-binary_relation;
+<-oriented_relation;
+<-antireflexive_relation;
+<-antitransitive_relation;
+<-asymmetric_relation;
+=>nrel_main_idtf:
+	[тип отзыва*]
+	(* <- lang_ru;; *);
+	[feedbsck type*]
+	(* <- lang_en;; *);
+=>nrel_first_domain: concept_feedback;
+=>nrel_second_domain: concept_feedback_type;
+<-rrel_key_sc_element:
+	...
+	(*
+	=> nrel_main_idtf:
+		[Опр. (тип отзыва* )]
+		(* <- lang_ru;; *);
+		[Def. (feedbsck type* )]
+		(* <- lang_en;; *);;
+	<- definition;;
+	<= nrel_sc_text_translation:
+		...
+		(*
+		-> rrel_example:
+			[тип отзыва* - отношение, связывающее отправленный отзыв с его типом.]
+			(* <- lang_ru;; *);;
+		*);
+		...
+		(*
+		-> rrel_example: 
+			[feedbsck type* is a relation linking the sent feedback to its type.]
+			(* <- lang_en;; *);;
+		*);;
+	<= nrel_using_constants:
+		{
+			concept_feedback;
+      concept_feedback_type
+		};;
+	*);;

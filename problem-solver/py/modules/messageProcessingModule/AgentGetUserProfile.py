@@ -58,7 +58,7 @@ class AgentGetUserProfile(ScAgentClassic):
             #nrel's
             self.nrel_data = {}
             nrel_data_index = ['nrel_surname', 'nrel_first_name', 'nrel_patronymic', 'nrel_grade', 'nrel_city',
-                          'nrel_score_for_the_level_of_solved_problems', 'nrel_solution_scores', 'nrel_level_of_knowledge_of_topic', 
+                          'nrel_rating', 'nrel_experience', 'nrel_level_of_knowledge_of_topic', 
                           'nrel_solved_problems', 'nrel_not_solved_problems']
             for element in nrel_data_index: 
                 self.nrel_data[element] = ScKeynodes.resolve(element, sc_types.NODE_CONST_NOROLE)

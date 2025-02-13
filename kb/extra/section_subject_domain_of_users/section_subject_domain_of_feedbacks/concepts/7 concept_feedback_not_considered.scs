@@ -1,0 +1,28 @@
+concept_feedback_not_considered
+<- sc_node_class;
+=> nrel_main_idtf:
+	[нерассмотренный отзыв](* <- lang_ru;; *);
+	[feedback not considered](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (нерассмотренный отзыв)](* <- lang_ru;; *);
+            [Def. (feedback not considered)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [нерассмотренный отзыв - множество нерассмотренных отзывов, которые отображаются у администрации.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [feedback not considered - set of unconsindered feedbacks that are displayed to the administration](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+              concept_feedback
+            };;
+	*);;

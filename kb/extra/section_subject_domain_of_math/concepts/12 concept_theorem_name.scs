@@ -1,0 +1,28 @@
+concept_theorem_name
+<- sc_node_class;
+=> nrel_main_idtf:
+	[название теоремы](* <- lang_ru;; *);
+	[theorem name](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (название теоремы)](* <- lang_ru;; *);
+            [Def. (theorem name)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [название теоремы - текст, содержащий в себе название теоремы.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [theorem name - text containing the name of the theorem.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_theorem
+            };;
+	*);;

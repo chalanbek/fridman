@@ -1,0 +1,28 @@
+concept_feedback_type
+<- sc_node_class;
+=> nrel_main_idtf:
+	[тип отзыва](* <- lang_ru;; *);
+	[feedback type](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (тип отзыва)](* <- lang_ru;; *);
+            [Def. (feedback type)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [тип отзыва - тип отправляемого пользователем отзыва, влияющий на оттображение у администрации.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [feedback type - the type of feedback sent by the user, which affects how it is displayed by the administration.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+              concept_feedback
+            };;
+	*);;

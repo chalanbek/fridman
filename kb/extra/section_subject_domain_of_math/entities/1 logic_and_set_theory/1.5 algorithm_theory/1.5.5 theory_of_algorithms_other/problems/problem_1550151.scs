@@ -10,8 +10,8 @@ problem_1550151
 
 => nrel_problem_number: [1550151](* <- concept_problem_number;; *);
 => nrel_problem_text: [Имеется три кучки камней: в первой – 10, во второй – 15, в третьей – 20. За ход разрешается разбить любую кучку на две меньшие. Проигрывает тот, кто не сможет сделать ход. Кто выиграет? (ответ запишите числом, например "1" или "2")](* <- concept_problem_text;; *);
-=> nrel_complete_solution: [После каждого хода какая-то одна кучка разбивается на две, то есть количество кучек увеличивается на 1 с каждым ходом. Сначала их было 3, в конце – 10+15+20=45. Таким образом, всего будет сделано 45-3=42 хода. Последний выигрывающий 42-й ход сделает второй игрок.](* <- concept_problem_solution;; *);
-=> nrel_short_solution: [После каждого хода количество кучек увеличивается на 1. Сначала их было 3, в конце – 45. Таким образом, всего будет сделано 42 хода. Последний выигрывающий 42-й ход сделает второй игрок.](* <- concept_problem_solution;; *);
+=> nrel_solution_complete: [После каждого хода какая-то одна кучка разбивается на две, то есть количество кучек увеличивается на 1 с каждым ходом. Сначала их было 3, в конце – 10+15+20=45. Таким образом, всего будет сделано 45-3=42 хода. Последний выигрывающий 42-й ход сделает второй игрок.](* <- concept_problem_solution;; *);
+=> nrel_solution_short: [После каждого хода количество кучек увеличивается на 1. Сначала их было 3, в конце – 45. Таким образом, всего будет сделано 42 хода. Последний выигрывающий 42-й ход сделает второй игрок.](* <- concept_problem_solution;; *);
 => nrel_hint: [Рассмотрите количество ходов.](* <- concept_hint;; *);
 => nrel_solution_answer: [2](* <- concept_solution_answer;; *);
 => nrel_problem_source: [Генкин С.А., Итенберг И.В., Фомин Д.В. - Ленинградские математические кружки (8.002)];
@@ -24,11 +24,11 @@ problem_1550151
 @seven_first_link = [7];;
 @one_second_link = [1];;
 (@five_first_link => @one_second_link)
-    <- nrel_grade_comlexity_level;
+    <- nrel_complexity_level;
     <= nrel_level_within_grade: problem_1550151;;
 (@six_first_link => @one_second_link)
-    <- nrel_grade_comlexity_level;
+    <- nrel_complexity_level;
     <= nrel_level_within_grade: problem_1550151;;
 (@seven_first_link => @one_second_link)
-    <- nrel_grade_comlexity_level;
+    <- nrel_complexity_level;
     <= nrel_level_within_grade: problem_1550151;;
