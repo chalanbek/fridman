@@ -3,7 +3,7 @@ concept_solution_short
 => nrel_main_idtf:
 	[краткое решение задачи](* <- lang_ru;; *);
 	[problem short solution](* <- lang_en;; *);
-<- nrel_inclusion: concept_problem_solution;
+<= nrel_inclusion: concept_problem_solution;
 <- rrel_key_sc_element:
 	...
 	(*
