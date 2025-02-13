@@ -95,15 +95,15 @@ class AgentGetShortSolution(ScAgentClassic):
             result = results[0]
             problem_addr = result.get('_problem')
 
-            nrel_short_solution = ScKeynodes.resolve('nrel_short_solution', sc_types.NODE_CONST_NOROLE)
+            nrel_solution_short = ScKeynodes.resolve('nrel_solution_short', sc_types.NODE_CONST_NOROLE)
 
             template = ScTemplate()
             template.triple_with_relation(
                 problem_addr,
                 sc_types.EDGE_D_COMMON_VAR,
-                (sc_types.LINK_VAR, '_nrel_short_solution'),
+                (sc_types.LINK_VAR, '_nrel_solution_short'),
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                nrel_short_solution
+                nrel_solution_short
             )
 
             results = template_search(template)
@@ -112,13 +112,13 @@ class AgentGetShortSolution(ScAgentClassic):
                 return ScResult.ERROR
 
             result = results[0]
-            nrel_short_solution_addr = result.get('_nrel_short_solution')
+            nrel_solution_short_addr = result.get('_nrel_solution_short')
 
         except Exception as e:
             self.logger.info(f"AgentGetShortSolution: finished with an error {e}")
             return ScResult.ERROR
 
-        create_action_answer(action_node, nrel_short_solution_addr)
+        create_action_answer(action_node, nrel_solution_short_addr)
 
         return ScResult.OK
     

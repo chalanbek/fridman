@@ -14,12 +14,12 @@ concept_theorem_name
             ...
             (*
                 -> rrel_example:
-                    [название теоремы - название теоремы.](* <- lang_ru;; *);;
+                    [название теоремы - текст, содержащий в себе название теоремы.](* <- lang_ru;; *);;
             *);
             ...
             (*
                 -> rrel_example:
-                    [theorem name - theorem name.](* <- lang_en;; *);;
+                    [theorem name - text containing the name of the theorem.](* <- lang_en;; *);;
             *);;
         <= nrel_using_constants:
             {

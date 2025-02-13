@@ -14,12 +14,12 @@ concept_theorem_definition
             ...
             (*
                 -> rrel_example:
-                    [определение теоремы - определение теоремы.](* <- lang_ru;; *);;
+                    [определение теоремы - текст, содержащий в себе само определение теоремы.](* <- lang_ru;; *);;
             *);
             ...
             (*
                 -> rrel_example:
-                    [theorem definition - theorem definition.](* <- lang_en;; *);;
+                    [theorem definition - a text containing the definition of the theorem itself.](* <- lang_en;; *);;
             *);;
         <= nrel_using_constants:
             {

@@ -2,23 +2,23 @@ concept_math_topic
 <- sc_node_class;
 => nrel_main_idtf:
 	[конечная тема математики](* <- lang_ru;; *);
-	[final mathematics theme](* <- lang_en;; *);
+	[math topic](* <- lang_en;; *);
 <- rrel_key_sc_element:
 	...
 	(*
         => nrel_main_idtf:
             [Опр. (конечная тема математики)](* <- lang_ru;; *);
-            [Def. (final mathematics theme)](* <- lang_en;; *);;
+            [Def. (math topic)](* <- lang_en;; *);;
         <- definition;;
         <= nrel_sc_text_translation:
             ...
             (*
                 -> rrel_example:
-                    [конечная тема математики - последняя тема определённого математического раздела.](* <- lang_ru;; *);;
+                    [конечная тема математики - тема математики, не имеющая подтем.](* <- lang_ru;; *);;
             *);
             ...
             (*
                 -> rrel_example:
-                    [final mathematics theme - a final subtopic of some mathematical section.](* <- lang_en;; *);;
+                    [math topic -  a math topic that has no subtopics.](* <- lang_en;; *);;
             *);;
 	*);;

@@ -10,24 +10,46 @@ section_subject_domain_of_math = [*
         [Предметная область математики](* <- lang_ru;; *);
         [Subject domain of math](* <- lang_en;; *);
     <- subject_domain;
-    -> rrel_maximum_studied_object_class: concept_math_topic;
+    -> rrel_maximum_studied_object_class: concept_topic;
     -> rrel_not_maximum_studied_object_class:
-        concept_problem_solution;
         concept_problem;
-        concept_hint;
-        concept_theory;
         concept_problem_number;
         concept_problem_text;
-        concept_attempts;
+        concept_problem_solution;
+        concept_solution_complete;
+        concept_solution_short;
+        concept_solution_hint;
         concept_solution_answer;
+        concept_problem_source;
+        concept_solvable_problem;
+        concept_theorem;
+        concept_theorem_name;
+        concept_theorem_definition;
+        concept_theorem_proof;
+        concept_attempts;
+        concept_first_topic;
+        concept_math_topic;
     -> rrel_explored_relation:
-        nrel_complete_solution;
-        nrel_hint;
         nrel_problem_number;
         nrel_problem_text;
+        nrel_solution_complete;
+        nrel_solution_short;
+        nrel_solution_hint;
         nrel_solution_answer;
-        nrel_solution_attempts_number;
-        nrel_short_solution;;
+        rrel_problem_topic;
+        rrel_problem_first_topic;
+        nrel_problem_source;
+        nrel_theorem_name;
+        nrel_theorem_definition;
+        nrel_theorem_proof;
+        rrel_theorem_topic;
+        rrel_theorem_first_topic;
+        nrel_subtopic;
+        nrel_subtopic_sequence;
+        nrel_saw_answer;
+        nrel_complexity_level;
+        nrel_level_within_grade;
+        nrel_attempts;;
 *];;
 
 section_subject_domain_of_math <= nrel_section_decomposition:
@@ -38,21 +60,21 @@ section_subject_domain_of_math <= nrel_section_decomposition:
 
 rrel_key_sc_element -> (section_subject_domain_of_math -> subject_domain_of_math)
 (*
-	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> concept_math_topic)
-(*
-	<- rrel_key_sc_element;;
-	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> concept_problem_solution)
+	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> concept_topic)
 (*
 	<- rrel_key_sc_element;;
 	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> concept_problem)
 (*
 	<- rrel_key_sc_element;;
-	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> nrel_complete_solution)
+	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> concept_theorem)
 (*
 	<- rrel_key_sc_element;;
-	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> nrel_hint)
+	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> nrel_subtopic)
 (*
 	<- rrel_key_sc_element;;
-	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> nrel_short_solution)
+	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> nrel_complexity_level)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_math -> nrel_level_within_grade)
 	(* <- rrel_key_sc_element;; *);;
 *);;*);;*);;*);;*);;*);;

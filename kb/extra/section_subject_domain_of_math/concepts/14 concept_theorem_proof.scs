@@ -1,0 +1,28 @@
+concept_theorem_proof
+<- sc_node_class;
+=> nrel_main_idtf:
+	[доказательство теоремы](* <- lang_ru;; *);
+	[theorem proof](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (доказательство теоремы)](* <- lang_ru;; *);
+            [Def. (theorem proof)](* <- lang_en;; *);;
+        <- proof;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [доказательство теоремы - текст, содержащий в себе само доказательство теоремы.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [theorem proof - a text containing the proof of the theorem.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_theorem
+            };;
+	*);;

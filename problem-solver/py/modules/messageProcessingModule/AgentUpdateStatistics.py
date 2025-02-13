@@ -60,7 +60,7 @@ class AgentUpdateStatistics(ScAgentClassic):
             nrel_level_of_knowledge_of_topic = ScKeynodes.resolve('nrel_level_of_knowledge_of_topic', sc_types.NODE_CONST_NOROLE)
             nrel_grade = ScKeynodes.resolve('nrel_grade', sc_types.NODE_CONST_NOROLE)
             nrel_level_within_grade = ScKeynodes.resolve('nrel_level_within_grade', sc_types.NODE_CONST_NOROLE)
-            nrel_grade_comlexity_level = ScKeynodes.resolve('nrel_grade_comlexity_level', sc_types.NODE_CONST_NOROLE)
+            nrel_complexity_level = ScKeynodes.resolve('nrel_complexity_level', sc_types.NODE_CONST_NOROLE)
             nrel_experience = ScKeynodes.resolve('nrel_experience', sc_types.NODE_CONST_NOROLE)
             nrel_rating = ScKeynodes.resolve('nrel_rating', sc_types.NODE_CONST_NOROLE)
             complexity_knowledge_difference_min = 11
@@ -137,7 +137,7 @@ class AgentUpdateStatistics(ScAgentClassic):
                     grade_level_pair_addr,
                     (sc_types.LINK_VAR, '_problem_grade_complexity'),
                     sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                    nrel_grade_comlexity_level
+                    nrel_complexity_level
                 )
                 problem_grade_addr = template_search(template)[0].get('_problem_grade')
                 problem_grade = float(get_link_content_data(problem_grade_addr))

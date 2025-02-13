@@ -1,0 +1,28 @@
+concept_problem_source
+<- sc_node_class;
+=> nrel_main_idtf:
+	[источник задачи](* <- lang_ru;; *);
+	[problem source](* <- lang_en;; *);
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (источник задачи)](* <- lang_ru;; *);
+            [Def. (problem source)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [источник задачи - книга/сборник/олимпиада, откуда была взята задача.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [problem source - the book/compilation/ olympiad from which the problem was taken.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_problem
+            };;
+	*);;

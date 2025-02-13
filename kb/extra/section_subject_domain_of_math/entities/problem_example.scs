@@ -9,8 +9,8 @@ problem_example
 
 => nrel_problem_number: [номер задачи](* <- concept_problem_number;; *);
 => nrel_problem_text: [пример условия задачи](* <- concept_problem_text;; *);
-=> nrel_complete_solution: [полное решение задачи](* <- concept_problem_solution;; *);
-=> nrel_short_solution: [краткое решение задачи](* <- concept_problem_solution;; *);
+=> nrel_solution_complete: [полное решение задачи](* <- concept_problem_solution;; *);
+=> nrel_solution_short: [краткое решение задачи](* <- concept_problem_solution;; *);
 => nrel_hint: [подсказка](* <- concept_hint;; *);
 => nrel_solution_answer: [ответ](* <- concept_solution_answer;; *);
 => nrel_problem_source: [источник задачи];
@@ -18,5 +18,5 @@ problem_example
 @five_first_link = [5];;
 @one_second_link = [1];;
 (@five_first_link => @one_second_link)
-    <- nrel_grade_comlexity_level;
+    <- nrel_complexity_level;
     <= nrel_level_within_grade: problem_example;;

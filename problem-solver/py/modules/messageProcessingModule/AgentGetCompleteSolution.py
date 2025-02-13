@@ -95,15 +95,15 @@ class AgentGetCompleteSolution(ScAgentClassic):
             result = results[0]
             problem_addr = result.get('_problem')
 
-            nrel_complete_solution = ScKeynodes.resolve('nrel_complete_solution', sc_types.NODE_CONST_NOROLE)
+            nrel_solution_complete = ScKeynodes.resolve('nrel_solution_complete', sc_types.NODE_CONST_NOROLE)
 
             template = ScTemplate()
             template.triple_with_relation(
                 problem_addr,
                 sc_types.EDGE_D_COMMON_VAR,
-                (sc_types.LINK_VAR, '_nrel_complete_solution'),
+                (sc_types.LINK_VAR, '_nrel_solution_complete'),
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                nrel_complete_solution
+                nrel_solution_complete
             )
 
             results = template_search(template)
@@ -112,13 +112,13 @@ class AgentGetCompleteSolution(ScAgentClassic):
                 return ScResult.ERROR
 
             result = results[0]
-            nrel_complete_solution_addr = result.get('_nrel_complete_solution')
+            nrel_solution_complete_addr = result.get('_nrel_solution_complete')
 
         except Exception as e:
             self.logger.info(f"AgentGetCompleteSolution: finished with an error {e}")
             return ScResult.ERROR
 
-        create_action_answer(action_node, nrel_complete_solution_addr)
+        create_action_answer(action_node, nrel_solution_complete_addr)
 
         return ScResult.OK
     

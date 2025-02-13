@@ -2,13 +2,13 @@ concept_topic
 <- sc_node_class;
 => nrel_main_idtf:
 	[тема математики](* <- lang_ru;; *);
-	[mathematics theme](* <- lang_en;; *);
+	[topic](* <- lang_en;; *);
 <- rrel_key_sc_element:
 	...
 	(*
         => nrel_main_idtf:
             [Опр. (тема математики)](* <- lang_ru;; *);
-            [Def. (mathematics theme)](* <- lang_en;; *);;
+            [Def. (topic)](* <- lang_en;; *);;
         <- definition;;
         <= nrel_sc_text_translation:
             ...
@@ -19,6 +19,6 @@ concept_topic
             ...
             (*
                 -> rrel_example:
-                    [mathematics theme - a specific mathematical section.](* <- lang_en;; *);;
+                    [topic - a specific mathematical section.](* <- lang_en;; *);;
             *);;
 	*);;

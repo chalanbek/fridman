@@ -19,7 +19,7 @@ concept_problem_number
             ...
             (*
                 -> rrel_example:
-                    [problem number- ...](* <- lang_en;; *);;
+                    [problem number - problem id in catalog.](* <- lang_en;; *);;
             *);;
         <= nrel_using_constants:
             {

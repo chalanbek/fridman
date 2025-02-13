@@ -14,12 +14,12 @@ concept_problem_text
             ...
             (*
                 -> rrel_example:
-                    [условие задачи - условие задачи каталга.](* <- lang_ru;; *);;
+                    [условие задачи - текст условия задачи.](* <- lang_ru;; *);;
             *);
             ...
             (*
                 -> rrel_example:
-                    [problem text- ...](* <- lang_en;; *);;
+                    [problem text- prolem condition text](* <- lang_en;; *);;
             *);;
         <= nrel_using_constants:
             {

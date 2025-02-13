@@ -1,4 +1,4 @@
-nrel_problem_text
+nrel_solution_short
 <-sc_node_norole_relation;
 <-relation;
 <-binary_relation;
@@ -7,37 +7,37 @@ nrel_problem_text
 <-antitransitive_relation;
 <-asymmetric_relation;
 =>nrel_main_idtf:
-	[условие задачи*]
+	[краткое решение*]
 	(* <- lang_ru;; *);
-	[problem text*]
+	[short solution*]
 	(* <- lang_en;; *);
 =>nrel_first_domain: concept_problem;
-=>nrel_second_domain: concept_problem_text;
+=>nrel_second_domain: concept_solution_short;
 <-rrel_key_sc_element:
 	...
 	(*
 	=> nrel_main_idtf:
-		[Опр. (условие задачи*)]
+		[Опр. (краткое решение* )]
 		(* <- lang_ru;; *);
-		[Def. (problem text*)]
+		[Def. (short solution* )]
 		(* <- lang_en;; *);;
 	<- definition;;
 	<= nrel_sc_text_translation:
 		...
 		(*
 		-> rrel_example:
-			[условие задачи* - отношение, связывающее задачу с ее условием.]
+			[краткое решение* - отношение, связывающее задачу с ее кратким решением.]
 			(* <- lang_ru;; *);;
 		*);
 		...
 		(*
 		-> rrel_example: 
-			[условие задачи* - отношение, связывающее задачу с ее условием.]
-			(* <- lang_ru;; *);;
+			[short solution* is a relationship, that connects promlem with it short solution.]
+			(* <- lang_en;; *);;
 		*);;
 	<= nrel_using_constants:
 		{
 		concept_problem;
-		concept_problem_text
+		concept_problem_solution
 		};;
 	*);;

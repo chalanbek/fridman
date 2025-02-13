@@ -1,4 +1,4 @@
-nrel_complete_solution
+nrel_problem_number
 <-sc_node_norole_relation;
 <-relation;
 <-binary_relation;
@@ -7,37 +7,37 @@ nrel_complete_solution
 <-antitransitive_relation;
 <-asymmetric_relation;
 =>nrel_main_idtf:
-	[полное решение*]
+	[номер задачи*]
 	(* <- lang_ru;; *);
-	[complete solution*]
+	[problem number*]
 	(* <- lang_en;; *);
 =>nrel_first_domain: concept_problem;
-=>nrel_second_domain: concept_problem_solution;
+=>nrel_second_domain: concept_problem_number;
 <-rrel_key_sc_element:
 	...
 	(*
 	=> nrel_main_idtf:
-		[Опр. (полное решение*)]
+		[Опр. (номер задачи* )]
 		(* <- lang_ru;; *);
-		[Def. (complete solution*)]
+		[Def. (problem number* )]
 		(* <- lang_en;; *);;
 	<- definition;;
 	<= nrel_sc_text_translation:
 		...
 		(*
 		-> rrel_example:
-			[полное решение* - отношение, связывающее задачу с ее полным решением.]
+			[номер задачи* - отношение, связывающее задачу с ее номером.]
 			(* <- lang_ru;; *);;
 		*);
 		...
 		(*
 		-> rrel_example: 
-			[complete solution* is a relationship, that connects promlem with it complete solution.]
+			[problem number* is a relation, that connect a task with it number.]
 			(* <- lang_en;; *);;
 		*);;
 	<= nrel_using_constants:
 		{
 		concept_problem;
-		concept_problem_solution
+		concept_problem_number
 		};;
 	*);;

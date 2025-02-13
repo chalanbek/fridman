@@ -1,4 +1,4 @@
-nrel_grade_comlexity_level
+nrel_complexity_level
 <-sc_node_norole_relation;
 <-relation;
 <-binary_relation;
@@ -17,9 +17,9 @@ nrel_grade_comlexity_level
 	...
 	(*
 	=> nrel_main_idtf:
-		[Опр. (уровень сложности данного класса*)]
+		[Опр. (уровень сложности данного класса* )]
 		(* <- lang_ru;; *);
-		[Def. (complexity level*)]
+		[Def. (complexity level* )]
 		(* <- lang_en;; *);;
 	<- definition;;
 	<= nrel_sc_text_translation:

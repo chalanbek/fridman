@@ -1,4 +1,4 @@
-nrel_solution_attempts_number
+nrel_attempts
 <-sc_node_norole_relation;
 <-relation;
 <-binary_relation;
@@ -17,9 +17,9 @@ nrel_solution_attempts_number
 	...
 	(*
 	=> nrel_main_idtf:
-		[Опр. (попытки решения задачи*)]
+		[Опр. (попытки решения задачи* )]
 		(* <- lang_ru;; *);
-		[Def. (attempts of solution the problem*)]
+		[Def. (attempts of solution the problem* )]
 		(* <- lang_en;; *);;
 	<- definition;;
 	<= nrel_sc_text_translation:

@@ -1,4 +1,4 @@
-nrel_theorem_definition
+nrel_theorem_name
 <-sc_node_norole_relation;
 <-relation;
 <-binary_relation;
@@ -7,37 +7,37 @@ nrel_theorem_definition
 <-antitransitive_relation;
 <-asymmetric_relation;
 =>nrel_main_idtf:
-	[определение теоремы*]
+	[название теоремы*]
 	(* <- lang_ru;; *);
-	[theorem definition*]
+	[theorem name*]
 	(* <- lang_en;; *);
 =>nrel_first_domain: concept_theorem;
-=>nrel_second_domain: concept_theorem_definition;
+=>nrel_second_domain: concept_theorem_name;
 <-rrel_key_sc_element:
 	...
 	(*
 	=> nrel_main_idtf:
-		[Опр. (определение теоремы*)]
+		[Опр. (название теоремы* )]
 		(* <- lang_ru;; *);
-		[Def. (theorem definition*)]
+		[Def. (theorem name* )]
 		(* <- lang_en;; *);;
 	<- definition;;
 	<= nrel_sc_text_translation:
 		...
 		(*
 		-> rrel_example:
-			[определение теоремы* - отношение, связывающее теорему с её определением.]
+			[название теоремы* - отношение, связывающее теорему с её названием.]
 			(* <- lang_ru;; *);;
 		*);
 		...
 		(*
 		-> rrel_example: 
-			[определение теоремы* - отношение, связывающее теорему с её определением.]
+			[условие задачи* - отношение, связывающее теорему с её названием.]
 			(* <- lang_ru;; *);;
 		*);;
 	<= nrel_using_constants:
 		{
 		concept_theorem;
-		concept_theorem_definition
+		concept_theorem_name
 		};;
 	*);;

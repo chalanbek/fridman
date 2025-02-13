@@ -7,19 +7,19 @@ concept_problem_solution
 	...
 	(*
         => nrel_main_idtf:
-            [Опр. (ученик)](* <- lang_ru;; *);
-            [Def. (student)](* <- lang_en;; *);;
+            [Опр. (решение задачи)](* <- lang_ru;; *);
+            [Def. (problem solution)](* <- lang_en;; *);;
         <- definition;;
         <= nrel_sc_text_translation:
             ...
             (*
                 -> rrel_example:
-                    [решение задачи - алгоритм решения задачи.](* <- lang_ru;; *);;
+                    [решение задачи - текст, так или иначе помогающий пользователю в решении и понимании задачи.](* <- lang_ru;; *);;
             *);
             ...
             (*
                 -> rrel_example:
-                    [problem solution - algorithm for solving the problem.](* <- lang_en;; *);;
+                    [problem solution - text that in one way or another assists the user in solving and understanding the problem.](* <- lang_en;; *);;
             *);;
         <= nrel_using_constants:
             {

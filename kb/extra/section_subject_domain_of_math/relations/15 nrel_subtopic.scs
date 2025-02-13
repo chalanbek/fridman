@@ -1,4 +1,4 @@
-nrel_short_solution
+nrel_subtopic
 <-sc_node_norole_relation;
 <-relation;
 <-binary_relation;
@@ -7,37 +7,36 @@ nrel_short_solution
 <-antitransitive_relation;
 <-asymmetric_relation;
 =>nrel_main_idtf:
-	[краткое решение*]
+	[подтема*]
 	(* <- lang_ru;; *);
-	[short solution*]
+	[subtopic*]
 	(* <- lang_en;; *);
-=>nrel_first_domain: concept_problem;
-=>nrel_second_domain: concept_problem_solution;
+=>nrel_first_domain: concept_topic;
+=>nrel_second_domain: concept_topic;
 <-rrel_key_sc_element:
 	...
 	(*
 	=> nrel_main_idtf:
-		[Опр. (краткое решение*)]
+		[Опр. (подтема* )]
 		(* <- lang_ru;; *);
-		[Def. (short solution*)]
+		[Def. (subtopic* )]
 		(* <- lang_en;; *);;
 	<- definition;;
 	<= nrel_sc_text_translation:
 		...
 		(*
 		-> rrel_example:
-			[краткое решение* - отношение, связывающее задачу с ее кратким решением.]
+			[подтема* - отношение, связывающее тему с ее подтемой.]
 			(* <- lang_ru;; *);;
 		*);
 		...
 		(*
 		-> rrel_example: 
-			[short solution* is a relationship, that connects promlem with it short solution.]
+			[subtopic* is a relationship, that connects topic with its subtopics.]
 			(* <- lang_en;; *);;
 		*);;
 	<= nrel_using_constants:
 		{
-		concept_problem;
-		concept_problem_solution
+		concept_topic
 		};;
 	*);;

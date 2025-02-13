@@ -10,7 +10,7 @@ nrel_level_within_grade
 	[level within grade*]
 	(* <- lang_en;; *);
 =>nrel_first_domain: concept_problem;
-=>nrel_second_domain: sc_arc_common;
+=>nrel_second_domain: nrel_complexity_level;
  ...
  (*
   <= nrel_inclusion: pair_set;;
@@ -20,9 +20,9 @@ nrel_level_within_grade
 	...
 	(*
 	=> nrel_main_idtf:
-		[Опр. (уровень в рамках класса*)]
+		[Опр. (уровень в рамках класса* )]
 		(* <- lang_ru;; *);
-		[Def. (level within grade*)]
+		[Def. (level within grade* )]
 		(* <- lang_en;; *);;
 	<- definition;;
 	<= nrel_sc_text_translation:
@@ -40,7 +40,7 @@ nrel_level_within_grade
 		*);;
 	<= nrel_using_constants:
 		{
-		concept_problem;
-		concept_grade
+			concept_problem;
+			concept_grade
 		};;
 	*);;
