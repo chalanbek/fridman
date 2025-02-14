@@ -1,0 +1,10 @@
+algebraic_curves
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Алгебраические кривые]
+        (* <- lang_ru;; *);
+    [algebraic curves]
+        (* <- lang_en;; *);;

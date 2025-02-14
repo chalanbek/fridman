@@ -1,0 +1,30 @@
+concept_solution_short
+<- sc_node_class;
+=> nrel_main_idtf:
+	[краткое решение задачи](* <- lang_ru;; *);
+	[problem short solution](* <- lang_en;; *);
+<= nrel_inclusion: concept_problem_solution;
+<- rrel_key_sc_element:
+	...
+	(*
+        => nrel_main_idtf:
+            [Опр. (краткое решение задачи)](* <- lang_ru;; *);
+            [Def. (problem short solution)](* <- lang_en;; *);;
+        <- definition;;
+        <= nrel_sc_text_translation:
+            ...
+            (*
+                -> rrel_example:
+                    [краткое решение задачи - менее подробный вариант решения задачи, где в общих чертах описаны основные этапы решения.](* <- lang_ru;; *);;
+            *);
+            ...
+            (*
+                -> rrel_example:
+                    [problem short solution - a less detailed version of the solution of the problem, which describes in general terms the main stages of the solution.](* <- lang_en;; *);;
+            *);;
+        <= nrel_using_constants:
+            {
+                concept_problem_solution;
+                concept_problem
+            };;
+	*);;

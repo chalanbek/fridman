@@ -1,0 +1,10 @@
+fundamental_algebra_theorem
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Основная теорема алгебры и ее следствия]
+        (* <- lang_ru;; *);
+    [fundamental_algebra_theorem]
+        (* <- lang_en;; *);;

@@ -1,0 +1,10 @@
+sequences_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Последовательности (прочее)]
+        (* <- lang_ru;; *);
+    [sequences other]
+        (* <- lang_en;; *);;

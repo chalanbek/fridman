@@ -1,0 +1,10 @@
+factorization
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Разложение на множители]
+        (* <- lang_ru;; *);
+    [factorization]
+        (* <- lang_en;; *);;

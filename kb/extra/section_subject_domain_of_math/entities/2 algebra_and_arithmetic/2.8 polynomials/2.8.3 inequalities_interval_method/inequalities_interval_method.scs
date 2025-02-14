@@ -1,0 +1,10 @@
+inequalities_interval_method
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Неравенства. Метод интервалов]
+        (* <- lang_ru;; *);
+    [inequalities_interval_method]
+        (* <- lang_en;; *);;

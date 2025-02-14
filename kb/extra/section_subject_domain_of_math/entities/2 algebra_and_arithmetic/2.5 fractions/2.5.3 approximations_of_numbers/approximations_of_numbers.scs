@@ -1,0 +1,10 @@
+approximations_of_numbers
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Приближения чисел]
+        (* <- lang_ru;; *);
+    [approximations of numbers]
+        (* <- lang_en;; *);;

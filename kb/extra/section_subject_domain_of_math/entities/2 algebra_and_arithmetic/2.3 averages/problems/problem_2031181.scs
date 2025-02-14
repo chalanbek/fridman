@@ -1,0 +1,29 @@
+problem_2031181
+<- concept_wit_entity;
+<- concept_problem;
+<- concept_solvable_problem;
+=> nrel_main_idtf:
+    [2031181]
+        (* <- lang_ru;; *);
+    [2031181]
+        (* <- lang_en;; *);
+
+=> nrel_problem_number: [2031181](* <- concept_problem_number;; *);
+=> nrel_problem_text: [Пешеход шёл 3,5 часа, причём за каждый промежуток времени в один час он проходил ровно 5 км.Следует ли из этого, что его средняя скорость за всё время равна 5 км/час? (введите "1" если ответ "да" или "2" если ответ "нет".)](* <- concept_problem_text;; *);
+=> nrel_solution_complete: [Пусть пешеход идет 1 час со средней скоростью 5 км/ч. Он может идти с постоянной скоростью 5 км/ч, а может и с разной. Пусть пешеход идёт полчаса со скоростью 10 км/ч, затем полчаса отдыхает и т. д. Тогда за каждый час он будет проходить ровно 5 км, а всего пройдёт 20 км (поскольку идти он будет четыре получасовых интервала). Средняя скорость при этом равна  20 : 3,5 > 5 км/ч.](* <- concept_problem_solution;; *);
+=> nrel_solution_short: [Пусть пешеход идёт полчаса со скоростью 10 км/ч, затем полчаса отдыхает и т. д. Тогда за каждый час он будет проходить ровно 5 км, а всего пройдёт 20 км (поскольку идти он будет четыре получасовых интервала). Средняя скорость при этом равна  20 : 3,5 > 5 км/ч.](* <- concept_problem_solution;; *);
+=> nrel_hint: [Рассмотрите, какое расстояние мог проходить пешеход за меньший промежуток времени, например полчаса.](* <- concept_hint;; *);
+=> nrel_solution_answer: [2](* <- concept_solution_answer;; *);
+=> nrel_problem_source: [Турнир городов, 1982/1983 N 4, второй тур, 7-8 класс, N 1];
+<- rrel_problem_first_topic: algebra_and_arithmetic;
+<- rrel_problem_topic: algebra_and_arithmetic;
+<- rrel_problem_topic: averages;;
+@eight_first_link = [8];;
+@nine_first_link = [9];;
+@one_second_link = [1];;
+(@eight_first_link => @one_second_link)
+    <- nrel_complexity_level;
+    <= nrel_level_within_grade: problem_2031181;;
+(@nine_first_link => @one_second_link)
+    <- nrel_complexity_level;
+    <= nrel_level_within_grade: problem_2031181;;

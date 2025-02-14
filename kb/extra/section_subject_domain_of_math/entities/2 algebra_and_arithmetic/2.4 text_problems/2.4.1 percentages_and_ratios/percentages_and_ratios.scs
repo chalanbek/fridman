@@ -1,0 +1,10 @@
+percentages_and_ratios
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Задачи на проценты и отношения]
+        (* <- lang_ru;; *);
+    [percentages and ratios]
+        (* <- lang_en;; *);;

@@ -1,0 +1,10 @@
+fibonacci_numbers
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Числа Фибоначчи]
+        (* <- lang_ru;; *);
+    [fibonacci numbers]
+        (* <- lang_en;; *);;

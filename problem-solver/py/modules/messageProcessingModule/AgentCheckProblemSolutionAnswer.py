@@ -150,7 +150,7 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
             result = results[0]
             problem_solution_answer = str(get_link_content_data(result.get('_problem_solution_answer'))).split(',')
             
-            nrel_solution_attempts_number = ScKeynodes.resolve('nrel_solution_attempts_number', sc_types.NODE_CONST_NOROLE)
+            nrel_attempts = ScKeynodes.resolve('nrel_attempts', sc_types.NODE_CONST_NOROLE)
 
             template = ScTemplate()
             template.triple_with_relation(
@@ -192,7 +192,7 @@ class AgentCheckProblemSolutionAnswer(ScAgentClassic):
                         construction.create_link(sc_types.LINK_CONST, link_content, 'link')
 
                         construction.create_edge(sc_types.EDGE_D_COMMON_CONST, problem_addr, 'link', 'problem_attempts_edge')
-                        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, nrel_solution_attempts_number, 'problem_attempts_edge')
+                        construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, nrel_attempts, 'problem_attempts_edge')
 
                     if problem_solution_answer == user_problem_solution_answer and len(results3) == 0:
                         #add the problem to solved, make the value of attempts "1", call the 3rd agent

@@ -1,0 +1,10 @@
+even_and_odd
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Четность и нечетность]
+        (* <- lang_ru;; *);
+    [even and odd]
+        (* <- lang_en;; *);;

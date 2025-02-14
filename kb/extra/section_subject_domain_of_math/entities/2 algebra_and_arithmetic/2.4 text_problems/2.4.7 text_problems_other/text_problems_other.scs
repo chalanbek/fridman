@@ -1,0 +1,10 @@
+text_problems_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Текстовые задачи (прочее)]
+        (* <- lang_ru;; *);
+    [text problems other]
+        (* <- lang_en;; *);;

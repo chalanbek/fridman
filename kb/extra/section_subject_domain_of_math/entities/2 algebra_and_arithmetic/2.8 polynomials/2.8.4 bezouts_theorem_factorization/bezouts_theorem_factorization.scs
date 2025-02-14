@@ -1,0 +1,10 @@
+bezouts_theorem_factorization
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Теорема Безу. Разложение на множители]
+        (* <- lang_ru;; *);
+    [Bezout's theorem. Factorization]
+        (* <- lang_en;; *);;

@@ -1,0 +1,10 @@
+tables_and_tournaments_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Таблицы и турниры (прочее)]
+        (* <- lang_ru;; *);
+    [tables and tournaments other]
+        (* <- lang_en;; *);;

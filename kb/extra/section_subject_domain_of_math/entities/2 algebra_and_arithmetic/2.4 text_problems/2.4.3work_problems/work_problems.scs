@@ -1,0 +1,10 @@
+work_problems
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Задачи на работу]
+        (* <- lang_ru;; *);
+    [work problems]
+        (* <- lang_en;; *);;

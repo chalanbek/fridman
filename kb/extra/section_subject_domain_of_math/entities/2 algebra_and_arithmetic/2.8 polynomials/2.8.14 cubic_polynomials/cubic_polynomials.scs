@@ -1,0 +1,9 @@
+cubic_polynomials
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Кубические многочлены]
+        (* <- lang_ru;; *);
+    [cubic polynomials]
+        (* <- lang_en;; *);;

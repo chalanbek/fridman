@@ -1,0 +1,10 @@
+permutation_group
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Группа перестановок]
+        (* <- lang_ru;; *);
+    [permutation group]
+        (* <- lang_en;; *);;

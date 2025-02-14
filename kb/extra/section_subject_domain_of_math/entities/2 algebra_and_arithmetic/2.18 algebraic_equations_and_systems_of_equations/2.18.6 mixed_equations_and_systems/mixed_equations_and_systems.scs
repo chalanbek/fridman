@@ -1,0 +1,10 @@
+mixed_equations_and_systems
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Смешанные уравнения и системы уравнений]
+        (* <- lang_ru;; *);
+    [Mixed equations and systems of equations]
+        (* <- lang_en;; *);;

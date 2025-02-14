@@ -1,0 +1,10 @@
+lagrange_interpolation_polynomial
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Интерполяционный многочлен Лагранжа]
+        (* <- lang_ru;; *);
+    [lagrange interpolation polynomial]
+        (* <- lang_en;; *);;

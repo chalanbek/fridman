@@ -1,0 +1,10 @@
+continued_fractions
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Цепные (непрерывные) дроби]
+        (* <- lang_ru;; *);
+    [continued fractions]
+        (* <- lang_en;; *);;

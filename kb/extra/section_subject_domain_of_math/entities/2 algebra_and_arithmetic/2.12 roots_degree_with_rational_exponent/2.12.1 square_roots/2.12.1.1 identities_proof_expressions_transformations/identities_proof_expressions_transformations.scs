@@ -1,0 +1,10 @@
+identities_proof_expressions_transformations
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Доказательство тождеств. Преобразования выражений]
+        (* <- lang_ru;; *);
+    [Proof of Identities. Transformations of Expressions]
+        (* <- lang_en;; *);;

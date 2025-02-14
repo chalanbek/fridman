@@ -1,0 +1,10 @@
+ n_degree_polynomial_no_more_n_roots
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Многочлен n-й степени имеет не более n корней]
+        (* <- lang_ru;; *);
+    [A polynomial of degree n has no more than n roots]
+        (* <- lang_en;; *);;

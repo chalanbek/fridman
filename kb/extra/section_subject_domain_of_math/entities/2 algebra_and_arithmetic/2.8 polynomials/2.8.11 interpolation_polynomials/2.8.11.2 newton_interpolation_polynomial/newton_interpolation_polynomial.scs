@@ -1,0 +1,10 @@
+newton_interpolation_polynomial
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Интерполяционный многочлен Ньютона]
+        (* <- lang_ru;; *);
+    [newton's interpolation polynomial]
+        (* <- lang_en;; *);;

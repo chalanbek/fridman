@@ -1,0 +1,10 @@
+numerical_sequences_sums
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Суммы числовых последовательностей и ряды разностей]
+        (* <- lang_ru;; *);
+    [Sums of numerical sequences and series of differences]
+        (* <- lang_en;; *);;

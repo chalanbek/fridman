@@ -1,0 +1,10 @@
+chinese_remainder_theorem
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Китайская теорема об остатках]
+        (* <- lang_ru;; *);
+    [chinese remainder theorem]
+        (* <- lang_en;; *);;

@@ -1,0 +1,49 @@
+section_subject_domain_of_feedbacks => nrel_main_idtf: [Раздел. Предметная область отзывов] (* <- lang_ru;; *);;
+section_subject_domain_of_feedbacks => nrel_main_idtf: [Section. Subject domain of feedbacks] (* <- lang_en;; *);;
+section_subject_domain_of_feedbacks <- sc_node_class;;
+
+non_atomic_section -> section_subject_domain_of_feedbacks;;
+
+section_subject_domain_of_feedbacks = [*
+    subject_domain_of_users
+    =>nrel_main_idtf:
+        [Предметная область отзывов](* <- lang_ru;; *);
+        [Subject domain of feedbacks](* <- lang_en;; *);
+    <- subject_domain;
+    -> rrel_maximum_studied_object_class: concept_feedback;
+    -> rrel_not_maximum_studied_object_class:
+      concept_feedback_type;
+      concept_complaint;
+      concept_improvement_suggestion;
+      concept_bug_report;
+      concept_feedback_considered;
+      concept_feedback_not_considered;
+      concept_feedback_text;
+      concept_feedback_sender_tg_id;
+    -> rrel_explored_relation:
+      nrel_feedback_type;
+      nrel_feedback_text;
+      nrel_feedback_sender_tg_id;;
+
+*];;
+
+rrel_key_sc_element -> (section_subject_domain_of_feedbacks -> subject_domain_of_feedbacks)
+(*
+	=> nrel_key_sc_element_order: (section_subject_domain_of_feedbacks -> concept_feedback)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_feedbacks -> concept_feedback_type)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_feedbacks -> concept_complaint)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_feedbacks -> concept_improvement_suggestion)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_feedbacks -> concept_bug_report)
+(*
+	<- rrel_key_sc_element;;
+	=> nrel_key_sc_element_order: (section_subject_domain_of_feedbacks -> nrel_feedback_type)
+	(* <- rrel_key_sc_element;; *);;
+*);;*);;*);;*);;*);;*);;

@@ -1,0 +1,10 @@
+gaussian_polynomials
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Многочлены Гаусса]
+        (* <- lang_ru;; *);
+    [gaussian polynomials]
+        (* <- lang_en;; *);;

@@ -1,0 +1,10 @@
+logarithmic_equations
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Логарифмические уравнения ]
+        (* <- lang_ru;; *);
+    [logarithmic equations]
+        (* <- lang_en;; *);;

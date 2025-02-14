@@ -1,0 +1,10 @@
+chessboards_and_chess_pieces
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Шахматные доски и шахматные фигуры]
+        (* <- lang_ru;; *);
+    [chessboards and chess pieces]
+        (* <- lang_en;; *);;

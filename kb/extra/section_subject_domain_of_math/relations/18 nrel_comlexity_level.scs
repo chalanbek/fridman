@@ -1,0 +1,38 @@
+nrel_complexity_level
+<-sc_node_norole_relation;
+<-relation;
+<-binary_relation;
+<-oriented_relation;
+<-antireflexive_relation;
+<-antitransitive_relation;
+<-asymmetric_relation;
+=>nrel_main_idtf:
+	[уровень сложности*]
+	(* <- lang_ru;; *);
+	[complexity level*]
+	(* <- lang_en;; *);
+=>nrel_first_domain: sc_link;
+=>nrel_second_domain: sc_link;
+<-rrel_key_sc_element:
+	...
+	(*
+	=> nrel_main_idtf:
+		[Опр. (уровень сложности данного класса* )]
+		(* <- lang_ru;; *);
+		[Def. (complexity level* )]
+		(* <- lang_en;; *);;
+	<- definition;;
+	<= nrel_sc_text_translation:
+		...
+		(*
+		-> rrel_example:
+			[уровень сложности данного класса* - отношение, связывающее класс с его уровнем сложности.]
+			(* <- lang_ru;; *);;
+		*);
+		...
+		(*
+		-> rrel_example: 
+			[complexity level* is a relationship, that connects grade with it complexity level.]
+			(* <- lang_en;; *);;
+		*);;
+	*);;

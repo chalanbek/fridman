@@ -1,0 +1,10 @@
+euler_function
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Функция Эйлера]
+        (* <- lang_ru;; *);
+    [euler function]
+        (* <- lang_en;; *);;

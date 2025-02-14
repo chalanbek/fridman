@@ -1,0 +1,10 @@
+polynomial_coefficients_properties
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Свойства коэффициентов многочлена]
+        (* <- lang_ru;; *);
+    [Properties of the coefficients of a polynomial]
+        (* <- lang_en;; *);;

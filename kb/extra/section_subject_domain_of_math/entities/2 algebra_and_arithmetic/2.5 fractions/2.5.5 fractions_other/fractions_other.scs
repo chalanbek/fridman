@@ -1,0 +1,10 @@
+fractions_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Дроби (прочее)]
+        (* <- lang_ru;; *);
+    [fractions other]
+        (* <- lang_en;; *);;

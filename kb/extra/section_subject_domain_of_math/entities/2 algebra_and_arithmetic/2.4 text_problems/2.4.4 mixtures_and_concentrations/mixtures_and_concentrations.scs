@@ -1,0 +1,13 @@
+mixtures_and_concentrations
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Cмеси и концентрации]
+        (* <- lang_ru;; *);
+    [mixtures and concentrations]
+        (* <- lang_en;; *);
+=> nrel_idtf:
+    [Задачи на смеси и концентрации]
+        (* <- lang_ru;; *);;

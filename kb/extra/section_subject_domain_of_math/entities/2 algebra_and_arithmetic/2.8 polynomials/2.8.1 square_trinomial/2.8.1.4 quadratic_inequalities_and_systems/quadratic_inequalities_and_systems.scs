@@ -1,0 +1,10 @@
+quadratic_inequalities_and_systems
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Квадратные неравенства и системы неравенств]
+        (* <- lang_ru;; *);
+    [quadratic inequalities and systems of inequalities]
+        (* <- lang_en;; *);;

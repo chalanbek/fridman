@@ -1,0 +1,10 @@
+roots_degree_with_rational_exponent_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Приближения чисел]
+        (* <- lang_ru;; *);
+    [roots, degree with rational exponent other]
+        (* <- lang_en;; *);;

@@ -1,0 +1,46 @@
+nrel_level_within_grade
+<-sc_node_norole_relation;
+<-relation;
+<-ternary_relation;
+<-oriented_relation;
+
+=>nrel_main_idtf:
+	[уровень в рамках класса*]
+	(* <- lang_ru;; *);
+	[level within grade*]
+	(* <- lang_en;; *);
+=>nrel_first_domain: concept_problem;
+=>nrel_second_domain: nrel_complexity_level;
+ ...
+ (*
+  <= nrel_inclusion: pair_set;;
+ *);
+
+<-rrel_key_sc_element:
+	...
+	(*
+	=> nrel_main_idtf:
+		[Опр. (уровень в рамках класса* )]
+		(* <- lang_ru;; *);
+		[Def. (level within grade* )]
+		(* <- lang_en;; *);;
+	<- definition;;
+	<= nrel_sc_text_translation:
+		...
+		(*
+		-> rrel_example:
+			[уровень в рамках класса* - отношение, связывающее задачу, школьный класс и уровень знаний.]
+			(* <- lang_ru;; *);;
+		*);
+		...
+		(*
+		-> rrel_example: 
+			[level within grade* is a relationship, that connects promlem, grade and knowledge level.]
+			(* <- lang_en;; *);;
+		*);;
+	<= nrel_using_constants:
+		{
+			concept_problem;
+			concept_grade
+		};;
+	*);;

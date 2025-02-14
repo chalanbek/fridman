@@ -1,0 +1,10 @@
+nim_sum
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Ним-сумма]
+        (* <- lang_ru;; *);
+    [nim-sum]
+        (* <- lang_en;; *);;

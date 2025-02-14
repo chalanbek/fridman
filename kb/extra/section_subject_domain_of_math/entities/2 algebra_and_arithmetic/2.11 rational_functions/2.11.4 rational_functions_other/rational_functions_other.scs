@@ -1,0 +1,10 @@
+rational_functions_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Рациональные функции (прочее)]
+        (* <- lang_ru;; *);
+    [rational functions other]
+        (* <- lang_en;; *);;

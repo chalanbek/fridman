@@ -1,0 +1,10 @@
+numerical_inequalities_numbers_comparisons
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Числовые неравенства. Сравнения чисел. ]
+        (* <- lang_ru;; *);
+    [Numerical inequalities. Comparisons of numbers.]
+        (* <- lang_en;; *);;

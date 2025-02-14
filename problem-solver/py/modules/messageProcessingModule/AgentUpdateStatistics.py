@@ -60,9 +60,9 @@ class AgentUpdateStatistics(ScAgentClassic):
             nrel_level_of_knowledge_of_topic = ScKeynodes.resolve('nrel_level_of_knowledge_of_topic', sc_types.NODE_CONST_NOROLE)
             nrel_grade = ScKeynodes.resolve('nrel_grade', sc_types.NODE_CONST_NOROLE)
             nrel_level_within_grade = ScKeynodes.resolve('nrel_level_within_grade', sc_types.NODE_CONST_NOROLE)
-            nrel_grade_comlexity_level = ScKeynodes.resolve('nrel_grade_comlexity_level', sc_types.NODE_CONST_NOROLE)
-            nrel_solution_scores = ScKeynodes.resolve('nrel_solution_scores', sc_types.NODE_CONST_NOROLE)
-            nrel_score_for_the_level_of_solved_problems = ScKeynodes.resolve('nrel_score_for_the_level_of_solved_problems', sc_types.NODE_CONST_NOROLE)
+            nrel_complexity_level = ScKeynodes.resolve('nrel_complexity_level', sc_types.NODE_CONST_NOROLE)
+            nrel_experience = ScKeynodes.resolve('nrel_experience', sc_types.NODE_CONST_NOROLE)
+            nrel_rating = ScKeynodes.resolve('nrel_rating', sc_types.NODE_CONST_NOROLE)
             complexity_knowledge_difference_min = 11
 
             if not user_addr.is_valid():
@@ -137,7 +137,7 @@ class AgentUpdateStatistics(ScAgentClassic):
                     grade_level_pair_addr,
                     (sc_types.LINK_VAR, '_problem_grade_complexity'),
                     sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                    nrel_grade_comlexity_level
+                    nrel_complexity_level
                 )
                 problem_grade_addr = template_search(template)[0].get('_problem_grade')
                 problem_grade = float(get_link_content_data(problem_grade_addr))
@@ -154,7 +154,7 @@ class AgentUpdateStatistics(ScAgentClassic):
                 sc_types.EDGE_D_COMMON_VAR,
                 sc_types.LINK_VAR >> '_experience',
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                nrel_solution_scores
+                nrel_experience
             )
             experience_addr = template_search(template)[0].get('_experience')
             experience = float(get_link_content_data(experience_addr))
@@ -165,7 +165,7 @@ class AgentUpdateStatistics(ScAgentClassic):
                 sc_types.EDGE_D_COMMON_VAR,
                 sc_types.LINK_VAR >> '_rating',
                 sc_types.EDGE_ACCESS_VAR_POS_PERM,
-                nrel_score_for_the_level_of_solved_problems
+                nrel_rating
             )
             rating_addr = template_search(template)[0].get('_rating')
             rating = float(get_link_content_data(rating_addr))

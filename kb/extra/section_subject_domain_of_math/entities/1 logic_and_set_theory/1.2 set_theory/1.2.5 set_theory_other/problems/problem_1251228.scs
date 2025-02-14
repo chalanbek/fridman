@@ -1,0 +1,40 @@
+problem_1251228
+<- concept_wit_entity;
+<- concept_problem;
+<- concept_solvable_problem;
+=> nrel_main_idtf:
+    [1251228]
+        (* <- lang_ru;; *);
+    [1251228]
+        (* <- lang_en;; *);
+
+=> nrel_problem_number: [1251228](* <- concept_problem_number;; *);
+=> nrel_problem_text: [Аня ждёт автобус. Какое событие имеет наибольшую вероятность? А = {Аня ждёт автобус не меньше минуты}, В = {Аня ждёт автобус не меньше двух минут}, С = {Аня ждёт автобус не меньше пяти минут}. (введите "A", "B", или "C".)](* <- concept_problem_text;; *);
+=> nrel_solution_complete: [В событии C Аня ждёт как минимум 5 минут, в событии B минимум 3, в событии C - минимум 1. Значит событие A включает в себя событие B, а событие B включает в себя событие C, а значит событие A включает в себя события B и C, то есть событие A наиболее обширное:  C ⊂ B ⊂ A.  Следовательно, P(C) ≤ P(B) ≤ P(A).](* <- concept_problem_solution;; *);
+=> nrel_solution_short: [Событие A включает в себя событие B, а событие B включает в себя событие C, то есть событие A наиболее обширное:  C ⊂ B ⊂ A.  Следовательно, P(C) ≤ P(B) ≤ P(A).](* <- concept_problem_solution;; *);
+=> nrel_hint: [Некоторые события уже включают в себя другие. Рассмотрите какие.](* <- concept_hint;; *);
+=> nrel_solution_answer: [A](* <- concept_solution_answer;; *);
+=> nrel_problem_source: [Заочная олимпиада по теории вероятностей и статистике 2012, N4];
+<- rrel_problem_first_topic: logic_and_set_theory;
+<- rrel_problem_topic: logic_and_set_theory;
+<- rrel_problem_topic: set_theory;
+<- rrel_problem_topic: set_theory_other;;
+
+@eight_first_link = [8];;
+@nine_first_link = [9];;
+@ten_first_link = [10];;
+@eleven_first_link = [11];;
+@one_second_link = [1];;
+@two_second_link = [2];;
+(@eight_first_link => @two_second_link)
+    <- nrel_complexity_level;
+    <= nrel_level_within_grade: problem_1251228;;
+(@nine_first_link => @two_second_link)
+    <- nrel_complexity_level;
+    <= nrel_level_within_grade: problem_1251228;;
+(@ten_first_link => @one_second_link)
+    <- nrel_complexity_level;
+    <= nrel_level_within_grade: problem_1251228;;
+(@eleven_first_link => @one_second_link)
+    <- nrel_complexity_level;
+    <= nrel_level_within_grade: problem_1251228;;

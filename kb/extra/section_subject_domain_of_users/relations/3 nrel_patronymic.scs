@@ -1,0 +1,42 @@
+nrel_patronymic
+<-sc_node_norole_relation;
+<-relation;
+<-binary_relation;
+<-oriented_relation;
+<-antireflexive_relation;
+<-antitransitive_relation;
+<-asymmetric_relation;
+=>nrel_main_idtf:
+	[отчество*]
+	(* <- lang_ru;; *);
+	[patronymic*]
+	(* <- lang_en;; *);
+=>nrel_first_domain: concept_user;
+=>nrel_second_domain: sc_link;
+<-rrel_key_sc_element:
+	...
+	(*
+	=> nrel_main_idtf:
+		[Опр. (отчество* )]
+		(* <- lang_ru;; *);
+		[Def. (patronymic* )]
+		(* <- lang_en;; *);;
+	<- definition;;
+	<= nrel_sc_text_translation:
+		...
+		(*
+		-> rrel_example:
+			[отчество* - отношение, связывающее пользователя с его отчеством.]
+			(* <- lang_ru;; *);;
+		*);
+		...
+		(*
+		-> rrel_example: 
+			[patronymic* is a relationship, that connects user with his patronymic.]
+			(* <- lang_en;; *);;
+		*);;
+	<= nrel_using_constants:
+		{
+			concept_user
+		};;
+	*);;

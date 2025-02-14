@@ -1,0 +1,10 @@
+odd_degree_polynomial_has_real_root
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Многочлен нечетной степени имеет действительный корень]
+        (* <- lang_ru;; *);
+    [A polynomial of odd degree has a real root]
+        (* <- lang_en;; *);;

@@ -1,0 +1,10 @@
+prime_numbers_and_properties
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Простые числа и их свойства]
+        (* <- lang_ru;; *);
+    [prime numbers and their properties]
+        (* <- lang_en;; *);;

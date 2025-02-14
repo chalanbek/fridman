@@ -1,0 +1,10 @@
+motion_problems
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Задачи на движение]
+        (* <- lang_ru;; *);
+    [motion problems]
+        (* <- lang_en;; *);;

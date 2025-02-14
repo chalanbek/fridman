@@ -1,0 +1,10 @@
+common_fractions
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Обыкновенные дроби]
+        (* <- lang_ru;; *);
+    [common fractions]
+        (* <- lang_en;; *);;

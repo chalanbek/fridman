@@ -1,0 +1,10 @@
+decimal_fractions_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Десятичные дроби (прочее)]
+        (* <- lang_ru;; *);
+    [decimal fractions other]
+        (* <- lang_en;; *);;

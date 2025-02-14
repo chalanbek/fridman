@@ -1,0 +1,43 @@
+nrel_grade
+<-sc_node_norole_relation;
+<-relation;
+<-binary_relation;
+<-oriented_relation;
+<-antireflexive_relation;
+<-antitransitive_relation;
+<-asymmetric_relation;
+=>nrel_main_idtf:
+	[номер классса*]
+	(* <- lang_ru;; *);
+	[grade_number*]
+	(* <- lang_en;; *);
+=>nrel_first_domain: concept_user;
+=>nrel_second_domain: sc_link;
+<-rrel_key_sc_element:
+	...
+	(*
+	=> nrel_main_idtf:
+		[Опр. (номер классса* )]
+		(* <- lang_ru;; *);
+		[Def. (grade_number* )]
+		(* <- lang_en;; *);;
+	<- definition;;
+	<= nrel_sc_text_translation:
+		...
+		(*
+		-> rrel_example:
+			[номер классса* - отношение, связывающее пользователя с его номер класссаом.]
+			(* <- lang_ru;; *);;
+		*);
+		...
+		(*
+		-> rrel_example: 
+			[grade_number* is a relationship, that connects user with his grade.]
+			(* <- lang_en;; *);;
+		*);;
+	<= nrel_using_constants:
+		{
+		concept_user;
+		relation
+		};;
+	*);;

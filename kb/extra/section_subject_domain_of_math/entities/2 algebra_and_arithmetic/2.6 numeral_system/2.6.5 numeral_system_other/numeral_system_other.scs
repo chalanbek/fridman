@@ -1,0 +1,10 @@
+numeral_system_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Системы счисления (прочее)]
+        (* <- lang_ru;; *);
+    [numeral system other]
+        (* <- lang_en;; *);;

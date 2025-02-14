@@ -1,0 +1,19 @@
+tables_and_tournaments
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Таблицы и турниры]
+        (* <- lang_ru;; *);
+    [tables and tournaments]
+        (* <- lang_en;; *);;
+
+@numerical_tables_and_properties_arc = (tables_and_tournaments => nrel_subtopic: numerical_tables_and_properties);;
+@tournaments_and_tournament_tables_arc = (tables_and_tournaments => nrel_subtopic: tournaments_and_tournament_tables);;
+@chessboards_and_chess_pieces_arc = (tables_and_tournaments => nrel_subtopic: chessboards_and_chess_pieces);;
+@tables_and_tournaments_other_arc = (tables_and_tournaments => nrel_subtopic: tables_and_tournaments_other);;
+
+@numerical_tables_and_properties_arc => nrel_subtopic_sequence: @tournaments_and_tournament_tables_arc;;
+@tournaments_and_tournament_tables_arc => nrel_subtopic_sequence: @chessboards_and_chess_pieces_arc;;
+@chessboards_and_chess_pieces_arc => nrel_subtopic_sequence: @tables_and_tournaments_other_arc;;
+

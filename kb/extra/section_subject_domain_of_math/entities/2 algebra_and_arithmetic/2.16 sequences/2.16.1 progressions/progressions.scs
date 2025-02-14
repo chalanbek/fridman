@@ -1,0 +1,9 @@
+progressions
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Прогрессии]
+        (* <- lang_ru;; *);
+    [progressions]
+        (* <- lang_en;; *);;

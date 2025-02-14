@@ -1,0 +1,10 @@
+divisibility_signs_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Признаки делимости (прочее)]
+        (* <- lang_ru;; *);
+    [divisibility signs other]
+        (* <- lang_en;; *);;

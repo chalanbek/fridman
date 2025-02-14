@@ -1,0 +1,10 @@
+exponential_equations
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Показательные уравнения]
+        (* <- lang_ru;; *);
+    [Exponential equations]
+        (* <- lang_en;; *);;

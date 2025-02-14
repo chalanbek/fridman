@@ -1,0 +1,10 @@
+fundamental_arithmetic_theorem
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Основная теорема арифметики. Разложение на простые сомножители]
+        (* <- lang_ru;; *);
+    [Fundamental Theorem of Arithmetic. Factorization into Prime Factors]
+        (* <- lang_en;; *);;

@@ -1,0 +1,10 @@
+lagrange_theorem
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Теорема Лагранжа]
+        (* <- lang_ru;; *);
+    [lagrange theorem]
+        (* <- lang_en;; *);;

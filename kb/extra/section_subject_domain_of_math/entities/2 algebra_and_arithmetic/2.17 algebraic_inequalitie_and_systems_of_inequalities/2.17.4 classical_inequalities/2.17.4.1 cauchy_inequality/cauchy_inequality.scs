@@ -1,0 +1,10 @@
+cauchy_inequality
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Неравенство Коши]
+        (* <- lang_ru;; *);
+    [cauchy inequality]
+        (* <- lang_en;; *);;

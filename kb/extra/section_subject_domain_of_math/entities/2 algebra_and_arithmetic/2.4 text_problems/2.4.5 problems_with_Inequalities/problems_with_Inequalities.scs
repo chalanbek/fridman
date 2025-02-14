@@ -1,0 +1,13 @@
+problems_with_Inequalities
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Задачи с неравенствами.]
+        (* <- lang_ru;; *);
+    [problems with Inequalities]
+        (* <- lang_en;; *);
+=> nrel_idtf:
+    [Задачи с неравенствами. Разбор случаев]
+        (* <- lang_ru;; *);;

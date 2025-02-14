@@ -1,0 +1,9 @@
+short_multiplication_formulas
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Формулы сокращенного умножения]
+        (* <- lang_ru;; *);
+    [short multiplication formulas]
+        (* <- lang_en;; *);;

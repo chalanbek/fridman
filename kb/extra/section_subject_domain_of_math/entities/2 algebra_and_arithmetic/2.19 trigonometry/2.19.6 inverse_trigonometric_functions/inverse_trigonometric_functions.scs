@@ -1,0 +1,10 @@
+inverse_trigonometric_functions
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Обратные тригонометрические функции]
+        (* <- lang_ru;; *);
+    [Inverse trigonometric functions]
+        (* <- lang_en;; *);;

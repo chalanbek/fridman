@@ -1,0 +1,10 @@
+euclid_algorithm
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Алгоритм Евклида]
+        (* <- lang_ru;; *);
+    [euclid algorithm]
+        (* <- lang_en;; *);;

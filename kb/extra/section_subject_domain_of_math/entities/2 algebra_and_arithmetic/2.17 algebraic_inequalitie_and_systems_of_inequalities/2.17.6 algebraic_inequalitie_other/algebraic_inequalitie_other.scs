@@ -1,0 +1,10 @@
+algebraic_inequalitie_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Алгебраические неравенства (прочее) ]
+        (* <- lang_ru;; *);
+    [algebraic inequalitie other]
+        (* <- lang_en;; *);;

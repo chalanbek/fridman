@@ -1,0 +1,10 @@
+rational_equations
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Рациональные уравнения]
+        (* <- lang_ru;; *);
+    [rational equations]
+        (* <- lang_en;; *);;

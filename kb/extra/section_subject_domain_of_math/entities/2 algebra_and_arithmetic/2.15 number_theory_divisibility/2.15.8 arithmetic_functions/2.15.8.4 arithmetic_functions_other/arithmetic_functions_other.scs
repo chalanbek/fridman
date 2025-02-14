@@ -1,0 +1,10 @@
+arithmetic_functions_other
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Арифметические функции (прочее)]
+        (* <- lang_ru;; *);
+    [arithmetic functions other]
+        (* <- lang_en;; *);;

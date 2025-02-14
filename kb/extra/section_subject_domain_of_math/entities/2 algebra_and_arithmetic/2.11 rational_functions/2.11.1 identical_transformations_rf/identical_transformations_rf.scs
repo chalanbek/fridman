@@ -1,0 +1,10 @@
+identical_transformations_rf
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Тождественные преобразования (Рациональные функции)]
+        (* <- lang_ru;; *);
+    [identical transformations (rational functions)]
+        (* <- lang_en;; *);;

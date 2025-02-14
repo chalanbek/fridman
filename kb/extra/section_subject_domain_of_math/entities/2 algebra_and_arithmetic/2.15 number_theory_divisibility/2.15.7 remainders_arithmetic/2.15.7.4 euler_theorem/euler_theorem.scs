@@ -1,0 +1,10 @@
+euler_theorem
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Теорема Эйлера]
+        (* <- lang_ru;; *);
+    [euler theorem]
+        (* <- lang_en;; *);;

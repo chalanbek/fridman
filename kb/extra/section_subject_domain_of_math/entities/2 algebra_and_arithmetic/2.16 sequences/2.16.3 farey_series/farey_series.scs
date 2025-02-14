@@ -1,0 +1,10 @@
+farey_series
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Ряд Фарея]
+        (* <- lang_ru;; *);
+    [farey series]
+        (* <- lang_en;; *);;

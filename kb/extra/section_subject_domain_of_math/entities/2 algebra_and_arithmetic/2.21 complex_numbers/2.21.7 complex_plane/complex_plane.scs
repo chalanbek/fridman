@@ -1,0 +1,9 @@
+complex_plane
+<- concept_wit_entity;
+<- concept_topic;
+
+=> nrel_main_idtf:
+    [Комплексная плоскость]
+        (* <- lang_ru;; *);
+    [Complex plane]
+        (* <- lang_en;; *);;

@@ -1,0 +1,10 @@
+multiplications_and_factorials
+<- concept_wit_entity;
+<- concept_topic;
+<- concept_math_topic;
+
+=> nrel_main_idtf:
+    [Произведения и факториалы]
+        (* <- lang_ru;; *);
+    [multiplications and factorials]
+        (* <- lang_en;; *);;
