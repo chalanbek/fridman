@@ -1,0 +1,43 @@
+nrel_suggested_problems
+<-sc_node_norole_relation;
+<-relation;
+<-binary_relation;
+<-oriented_relation;
+<-antireflexive_relation;
+<-antitransitive_relation;
+<-asymmetric_relation;
+=>nrel_main_idtf:
+	[предложенные задачи*]
+	(* <- lang_ru;; *);
+	[suggested problems*]
+	(* <- lang_en;; *);
+=>nrel_first_domain: concept_user;
+=>nrel_second_domain: sc_node_tuple;
+<-rrel_key_sc_element:
+	...
+	(*
+	=> nrel_main_idtf:
+		[Опр. (предложенные задачи* )]
+		(* <- lang_ru;; *);
+		[Def. (suggested problems* )]
+		(* <- lang_en;; *);;
+	<- definition;;
+	<= nrel_sc_text_translation:
+		...
+		(*
+		-> rrel_example:
+			[предложенные задачи* - отношение, связывающее учителя с предложенными им задачами.]
+			(* <- lang_ru;; *);;
+		*);
+		...
+		(*
+		-> rrel_example: 
+			[suggested problems* is a relationship, that connects user with suggested problems by himself.]
+			(* <- lang_en;; *);;
+		*);;
+	<= nrel_using_constants:
+		{
+		concept_user;
+		concept_attempts
+		};;
+	*);;
