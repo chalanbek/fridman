@@ -25,13 +25,13 @@
        <node type="node/const/perm/relation" idtf="nrel_city" shapeColor="0" id="154" parent="0" left="0" top="0" right="16.125" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman [Arial]" font_size="10" x="803" y="378" haveBus="false" idtf_pos="0">
            <content type="0" mime_type="" content_visibility="false" file_name=""/>
        </node>
-       <node type="node/const/perm/relation" idtf="nrel_score_for_the_level_of_solved_problems" shapeColor="0" id="161" parent="0" left="0" top="0" right="16.125" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman [Arial]" font_size="10" x="616" y="676" haveBus="false" idtf_pos="0">
+       <node type="node/const/perm/relation" idtf="nrel_rating" shapeColor="0" id="161" parent="0" left="0" top="0" right="16.125" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman [Arial]" font_size="10" x="616" y="676" haveBus="false" idtf_pos="0">
            <content type="0" mime_type="" content_visibility="false" file_name=""/>
        </node>
        <node type="node/const/perm/group" idtf="concept_rating" shapeColor="0" id="163" parent="0" left="0" top="0" right="16.125" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman [Arial]" font_size="10" x="667" y="559" haveBus="false" idtf_pos="0">
            <content type="0" mime_type="" content_visibility="false" file_name=""/>
        </node>
-       <node type="node/const/perm/relation" idtf="nrel_solution_scores" shapeColor="0" id="165" parent="0" left="0" top="0" right="16.125" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman [Arial]" font_size="10" x="698" y="646" haveBus="false" idtf_pos="0">
+       <node type="node/const/perm/relation" idtf="nrel_experience" shapeColor="0" id="165" parent="0" left="0" top="0" right="16.125" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman [Arial]" font_size="10" x="698" y="646" haveBus="false" idtf_pos="0">
            <content type="0" mime_type="" content_visibility="false" file_name=""/>
        </node>
        <node type="node/const/perm/group" idtf="concept_experience" shapeColor="0" id="167" parent="0" left="0" top="0" right="16.125" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman [Arial]" font_size="10" x="783" y="542" haveBus="false" idtf_pos="0">
