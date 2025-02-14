@@ -18,6 +18,7 @@ connect(url)
 NAME, SURNAME, PATRONYMIC, CLASS, CITY, LEVEL, FIRST, SECOND = range(8)
 
 TOPICS = ['Логика и теория множеств', 'Алгебра и арифметика', 'Геометрия', 'Комбинаторика','Вероятность и статистика', 'Математический анализ', 'Методы']
+FEEDBACK = ['1','2','3','отмена']
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     text ='''
@@ -249,8 +250,39 @@ async def get_catalog(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     message = await update.message.reply_text('Please choose:', reply_markup=reply_markup)
     context.user_data['bot_id'] = message.message_id
 
+async def feedback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    context.user_data['current_direction'] = -1
+    reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text, callback_data=text)] for text in FEEDBACK])
+    message = await update.message.reply_text('Please choose:', reply_markup=reply_markup)
+    context.user_data['bot_id'] = message.message_id
+
 async def onButton(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
+    if context.user_data['current_direction'] == -1:
+        if query.data not in ['отмена', 'Назад']:
+            context.user_data['feedback'] = query.data
+            await context.bot.edit_message_text(
+                chat_id=query.message.chat_id,
+                message_id=context.user_data['bot_id'],
+                text="Please choose:",
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Назад', callback_data='Назад')]])
+            )
+            return
+        elif query.data == 'Назад':
+            del context.user_data['feedback']
+            await context.bot.edit_message_text(
+                chat_id=query.message.chat_id,
+                message_id=context.user_data['bot_id'],
+                text="Please choose:",
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text, callback_data=text)] for text in FEEDBACK])
+            )
+            return
+        elif query.data == 'отмена':
+            await context.bot.delete_message(chat_id=query.message.chat_id,
+                message_id=context.user_data['bot_id'])
+            del context.user_data['current_direction']
+            del context.user_data['bot_id']
+            return
 
     if query.data not in ['Показать задачи', 'Показать теоремы', 'Назад', 'Вернуться в каталог']:
         if not query.data.isnumeric():
@@ -653,6 +685,7 @@ if __name__ == "__main__":
 
     application.add_handler(CommandHandler('profile', get_user_profile))
     application.add_handler(CommandHandler('catalog', get_catalog))
+    application.add_handler(CommandHandler('feedback', feedback))
     application.add_handler(CommandHandler('start', start))
     application.add_handler(CommandHandler('help', help))
     application.add_handler(CallbackQueryHandler(onButton))
