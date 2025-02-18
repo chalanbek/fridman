@@ -18,7 +18,7 @@ connect(url)
 NAME, SURNAME, PATRONYMIC, CLASS, CITY, LEVEL, FIRST, SECOND = range(8)
 
 TOPICS = ['Логика и теория множеств', 'Алгебра и арифметика', 'Геометрия', 'Комбинаторика','Вероятность и статистика', 'Математический анализ', 'Методы']
-FEEDBACK = ['1','2','3','отмена']
+FEEDBACK = ['жалоба','предложение по улучшению','сообщение об ошибке','отмена']
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     text ='''
@@ -243,6 +243,36 @@ async def get_user_profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     )
     await update.message.reply_text(profile_info, parse_mode='html')
 
+async def ask_feedback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    if 'feedback' in context.user_data and 'current_direction' in context.user_data and 'bot_id' in context.user_data:
+        return FIRST
+    else:
+        return ConversationHandler.END
+    
+async def get_feedback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    if 'feedback' in context.user_data and 'current_direction' in context.user_data and 'bot_id' in context.user_data:
+        construction = ScConstruction()
+        construction.create_link(sc_types.LINK_CONST, ScLinkContent(update.message.text, ScLinkContentType.STRING))
+        construction.create_link(sc_types.LINK_CONST, ScLinkContent(update.message.chat_id, ScLinkContentType.STRING))
+        ftype = {'жалоба':'concept_complaint', 'предложение по улучшению':'concept_improvement_suggestion', 'сообщение об ошибке':'concept_bug_report'}
+        construction.create_link(sc_types.LINK_CONST, ScLinkContent(ftype[context.user_data['feedback']], ScLinkContentType.STRING))
+        [arg1, arg2, arg3] = create_elements(construction)
+        
+        kwargs = dict(
+            arguments={arg1: False,
+                    arg2: False,
+                    arg3: False},
+            concepts=["question", 'action_receive_feedback'],
+        )
+
+        action, is_successfully = execute_agent(**kwargs, wait_time=3)  # ScAddr(...), bool
+        if is_successfully:
+            await update.message.reply_text("Спасибо, ваш отзыв принят и будет рассмотрен в ближайшее время!")
+        else:
+            await update.message.reply_text("Что-то не так...")
+    else:
+        return ConversationHandler.END
+
 async def get_catalog(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     context.user_data['current_direction'] = 0
     current_direction = context.user_data['current_direction']
@@ -267,6 +297,7 @@ async def onButton(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 text="Please choose:",
                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Назад', callback_data='Назад')]])
             )
+            await ask_feedback(update,context)
             return
         elif query.data == 'Назад':
             del context.user_data['feedback']
@@ -666,6 +697,14 @@ if __name__ == "__main__":
         fallbacks=[CommandHandler('cancel', cancel2)],
     )
 
+    conv_handler3 = ConversationHandler(
+        entry_points=[MessageHandler(filters.TEXT & ~filters.COMMAND, ask_feedback)],
+        states={
+            FIRST: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_feedback)],
+        },
+        fallbacks=[]
+    )
+
     application.add_handler(MessageHandler(filters.Regex('как решать задачу'), get_hint))
     application.add_handler(CommandHandler('hint', get_hint))
     application.add_handler(MessageHandler(filters.Regex('краткое решение задачи'), get_short_solution))
@@ -691,6 +730,7 @@ if __name__ == "__main__":
     application.add_handler(CallbackQueryHandler(onButton))
     application.add_handler(conv_handler)
     application.add_handler(conv_handler2)
+    application.add_handler(conv_handler3)
 
     # Run the bot until you send a signal with Ctrl-C
     application.run_polling()

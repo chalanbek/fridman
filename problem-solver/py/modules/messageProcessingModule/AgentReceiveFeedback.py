@@ -63,7 +63,10 @@ class AgentReceiveFeedback(ScAgentClassic):
                     break
             else:
                 raise
+
             concept_report_type = args[2]
+            concept_report_type = get_link_content_data(concept_report_type)
+            concept_report_type = ScKeynodes.resolve(str(concept_report_type), sc_types.NODE_CONST_CLASS)
 
             construction = ScConstruction()
             #creating relations between the user id and the feedback
@@ -85,6 +88,7 @@ class AgentReceiveFeedback(ScAgentClassic):
             addrs = create_elements(construction)
 
             if len(addrs) != 10:
+                self.logger.info("2")
                 raise
             
             return ScResult.OK
