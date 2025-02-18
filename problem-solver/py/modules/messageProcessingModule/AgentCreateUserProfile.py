@@ -104,12 +104,12 @@ class AgentCreateUserProfile(ScAgentClassic):
             for i, el in enumerate(link_data):
                 construction.create_edge(sc_types.EDGE_D_COMMON_CONST, 'user', el, f'{nrel_data_index[i]}_user')
                 
-            construction.create_link(sc_types.LINK_CONST, ScLinkContent(0, ScLinkContentType.INT), 'solution_scores')
+            construction.create_link(sc_types.LINK_CONST, ScLinkContent(0, ScLinkContentType.INT), 'nrel_experience')
             construction.create_link(sc_types.LINK_CONST, ScLinkContent(0, ScLinkContentType.INT), 'score_for_the_level_of_solved_problems_user')
-            construction.create_edge(sc_types.EDGE_D_COMMON_CONST, 'user', 'solution_scores', 'nrel_solution_scores_user')
+            construction.create_edge(sc_types.EDGE_D_COMMON_CONST, 'user', 'nrel_experience', 'nrel_experience_user')
             construction.create_edge(sc_types.EDGE_D_COMMON_CONST, 'user', 'score_for_the_level_of_solved_problems_user', 'nrel_rating_user')
             construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_rating'], 'score_for_the_level_of_solved_problems_user')
-            construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_experience'], 'solution_scores')
+            construction.create_edge(sc_types.EDGE_ACCESS_CONST_POS_PERM, concept_data['concept_experience'], 'nrel_experience')
             
             template = ScTemplate()
             template.triple(
