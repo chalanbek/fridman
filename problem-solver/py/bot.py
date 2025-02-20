@@ -228,8 +228,8 @@ async def get_user_profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         f"• Отчество: {result_text['patronymic']}\n"
         f"• Класс: {result_text['grade']}\n"
         f"• Город: {result_text['city']}\n"
-        f"• Рейтинг: {round(float(result_text['score_for_the_level_of_solved_problems']), 3)}\n"
-        f"• Опыт: {round(float(result_text['solution_scores']), 3)}\n"
+        f"• Рейтинг: {round(float(result_text['rating']), 3)}\n"
+        f"• Опыт: {round(float(result_text['experience']), 3)}\n"
         f"• Уровень знаний:\n"
         f"     » Логика и теория множеств: {round(float(result_text['knowledge_level']['logic and set theory']), 3)}\n"
         f"     » Алгебра и арифметика: {round(float(result_text['knowledge_level']['algebra and arithmetic']), 3)}\n"
@@ -242,14 +242,8 @@ async def get_user_profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         f"• Количество нерешенных задач: {result_text['not_solved_problems']}"
     )
     await update.message.reply_text(profile_info, parse_mode='html')
-
-async def ask_feedback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    if 'feedback' in context.user_data and 'current_direction' in context.user_data and 'bot_id' in context.user_data:
-        return FIRST
-    else:
-        return ConversationHandler.END
     
-async def get_feedback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+async def get_feedback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if 'feedback' in context.user_data and 'current_direction' in context.user_data and 'bot_id' in context.user_data:
         construction = ScConstruction()
         construction.create_link(sc_types.LINK_CONST, ScLinkContent(update.message.text, ScLinkContentType.STRING))
@@ -271,7 +265,7 @@ async def get_feedback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         else:
             await update.message.reply_text("Что-то не так...")
     else:
-        return ConversationHandler.END
+        return
 
 async def get_catalog(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     context.user_data['current_direction'] = 0
@@ -297,7 +291,6 @@ async def onButton(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 text="Please choose:",
                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Назад', callback_data='Назад')]])
             )
-            await ask_feedback(update,context)
             return
         elif query.data == 'Назад':
             del context.user_data['feedback']
@@ -697,14 +690,6 @@ if __name__ == "__main__":
         fallbacks=[CommandHandler('cancel', cancel2)],
     )
 
-    conv_handler3 = ConversationHandler(
-        entry_points=[MessageHandler(filters.TEXT & ~filters.COMMAND, ask_feedback)],
-        states={
-            FIRST: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_feedback)],
-        },
-        fallbacks=[]
-    )
-
     application.add_handler(MessageHandler(filters.Regex('как решать задачу'), get_hint))
     application.add_handler(CommandHandler('hint', get_hint))
     application.add_handler(MessageHandler(filters.Regex('краткое решение задачи'), get_short_solution))
@@ -730,7 +715,9 @@ if __name__ == "__main__":
     application.add_handler(CallbackQueryHandler(onButton))
     application.add_handler(conv_handler)
     application.add_handler(conv_handler2)
-    application.add_handler(conv_handler3)
+    
+    #must stay at the end!
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, get_feedback))
 
     # Run the bot until you send a signal with Ctrl-C
     application.run_polling()
